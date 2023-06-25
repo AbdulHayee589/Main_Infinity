@@ -2,6 +2,7 @@ import { createInertiaApp } from '@inertiajs/inertia-react'
 import { createRoot } from 'react-dom/client'
 import PublicLayout from './layouts/PublicLayout'
 import AuthLayout from './layouts/AuthLayout'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 createInertiaApp({
   resolve: name => {

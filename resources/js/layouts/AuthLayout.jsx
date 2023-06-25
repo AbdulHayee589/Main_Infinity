@@ -1,4 +1,5 @@
 import Button from "../components/ui/Button";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { v4 as uuidv4 } from "uuid";
 
 const authProviders = [
@@ -34,7 +35,7 @@ export default function AuthLayout({ children }) {
                 onClick={() => authClickHandler(provider.name)}
               >
                 <div className="h-6 w-6">
-                  <img
+                  <LazyLoadImage
                     src={`/logo/${provider.img}.svg`}
                     alt={provider.name}
                     width={48}
@@ -49,10 +50,11 @@ export default function AuthLayout({ children }) {
 
       <div className="-z-10 fixed top-0 left-0 right-0 bottom-0 bg-white hidden lg:block">
         <div className="max-h-screen">
-          <img
+          <LazyLoadImage
             src="/auth-banner.webp"
             alt="banner"
             width="100%"
+            effect="blur"
             className="min-h-screen object-cover"
           />
         </div>
