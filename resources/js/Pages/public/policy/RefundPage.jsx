@@ -1,7 +1,7 @@
 export default function RefundPolicyPage() {
     return (
-        <div class="container mx-auto text-gray-600 text px-4 py-16">
-            <h4 class="text-xl font-bold text-center pb-8">
+        <div className="container mx-auto text-gray-600 text px-4 py-16">
+            <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - REFUND POLICY
             </h4>
             <p>Last updated: April 2023</p>
@@ -26,7 +26,7 @@ export default function RefundPolicyPage() {
                     href="submit_issue.html"
                     rel="external nofollow noopener"
                     target="_blank"
-                    class="text-blue-400 hover:underline"
+                    className="text-blue-400 hover:underline"
                 >
                     Submit issue
                 </a>

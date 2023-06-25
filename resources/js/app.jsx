@@ -1,11 +1,23 @@
-import React from 'react'
-import {createRoot} from 'react-dom/client'
-import {createInertiaApp } from '@inertiajs/inertia-react'
-import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers'
+import { createInertiaApp } from '@inertiajs/inertia-react'
+import { createRoot } from 'react-dom/client'
+import PublicLayout from './layouts/PublicLayout'
+import AuthLayout from './layouts/AuthLayout'
+
 createInertiaApp({
-    // Below you can see that we are going to get all React components from resources/js/Pages folder
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`,import.meta.glob('./Pages/**/*.jsx')),
-    setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />)
-    },
+  resolve: name => {
+    const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+    let page = pages[`./Pages/${name}.jsx`]
+
+    if(name.startsWith('public/'))
+      page.default.layout = page => <PublicLayout children={page} />
+    else if(name.startsWith('auth/'))
+      page.default.layout = page => <AuthLayout children={page} />
+
+    // page.default.layout = name.startsWith('public/') ? page => <PublicLayout children={page} /> : undefined;
+    return page
+  },
+  setup({ el, App, props }) {
+    createRoot(el).render(<App {...props} />)
+},
+  // ...
 })

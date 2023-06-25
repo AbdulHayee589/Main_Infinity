@@ -16,7 +16,7 @@ export default ({ command }) => ({
     plugins: [
         react(), // React plugin that we installed for vite.js
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.jsx'],
+            input: ['resources/scss/app.scss', 'resources/js/app.jsx'],
             refresh: true,
         }),
         {

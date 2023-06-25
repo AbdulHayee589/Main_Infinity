@@ -1,15 +1,15 @@
 export default function TermsAndConditionsPage() {
     return (
-        <div class="container mx-auto text-gray-600 text px-4 py-16">
-            <h4 class="text-xl font-bold text-center pb-8">
+        <div className="container mx-auto text-gray-600 text px-4 py-16">
+            <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - TERMS AND CONDITIONS
             </h4>
             <p>Last updated: April 2023</p>
             <br />
-            <p class="font-semibold">
+            <p className="font-semibold">
                 These terms and conditions outline the rules and regulations for
                 the use of InfinityCustom’s Website, located at:
-                <a href="https://infinitycustom.net/" class="text-black">
+                <a href="https://infinitycustom.net/">
                     https://infinitycustom.net/.
                 </a>
             </p>
@@ -67,7 +67,7 @@ export default function TermsAndConditionsPage() {
                 use subjected to restrictions set in these terms and conditions.
             </p>
             <br />
-            <p class="font-semibold">You must not:</p>
+            <p className="font-semibold">You must not:</p>
             <ul>
                 <li>1. Republish material from InfinityCustom</li>
                 <li>
@@ -99,7 +99,7 @@ export default function TermsAndConditionsPage() {
             </p>
             <br />
 
-            <p class="font-semibold">You warrant and represent that:</p>
+            <p className="font-semibold">You warrant and represent that:</p>
             <ul>
                 <li>
                     1. You are entitled to post the Comments on our website and
@@ -137,7 +137,7 @@ export default function TermsAndConditionsPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 The following organizations may link to our Website without
                 prior written approval:
             </p>
@@ -170,7 +170,7 @@ export default function TermsAndConditionsPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 We may consider and approve other link requests from the
                 following types of organizations:
             </p>
@@ -224,7 +224,7 @@ export default function TermsAndConditionsPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 Approved organizations may hyperlink to our Website as follows:
             </p>
 
@@ -326,7 +326,7 @@ export default function TermsAndConditionsPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 To the maximum extent permitted by applicable law, we exclude
                 all representations, warranties and conditions relating to our
                 website and the use of this website. Nothing in this disclaimer

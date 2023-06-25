@@ -1,7 +1,7 @@
 export default function PrivacyPage() {
     return (
-        <div class="container mx-auto text-gray-600 text px-4 py-16">
-            <h4 class="text-xl font-bold text-center pb-8">
+        <div className="container mx-auto text-gray-600 text px-4 py-16">
+            <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - PRIVACY POLICY
             </h4>
             <p>Last updated: April 2023</p>
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h4 class="italic">(1) Interpretation</h4>
+            <h4 className="italic">(1) Interpretation</h4>
 
             <br />
 
@@ -35,11 +35,11 @@ export default function PrivacyPage() {
             </p>
             <br />
 
-            <h4 class="italic">(2) Definitions</h4>
+            <h4 className="italic">(2) Definitions</h4>
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 For the purposes of this Privacy Policy:
             </p>
             <ul>
@@ -158,12 +158,12 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="italic">Types of Data Collected</h2>
-            <h2 class="italic">Personal Data</h2>
+            <h2 className="italic">Types of Data Collected</h2>
+            <h2 className="italic">Personal Data</h2>
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 While using Our Service, We may ask You to provide Us with
                 certain personally identifiable information that can be used to
                 contact or identify You. Personally identifiable information may
@@ -227,7 +227,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 The Company allows You to create an account and log in to use
                 the Service through the following Third-party Social Media
                 Services:
@@ -605,7 +605,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="italic">Business Transactions</h2>
+            <h2 className="italic">Business Transactions</h2>
 
             <br />
             <p>
@@ -617,7 +617,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="italic">Law enforcement</h2>
+            <h2 className="italic">Law enforcement</h2>
 
             <br />
 
@@ -630,11 +630,11 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="italic">Other legal requirements</h2>
+            <h2 className="italic">Other legal requirements</h2>
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 The Company may disclose Your Personal Data in the good faith
                 belief that such action is necessary to:
             </p>
@@ -675,7 +675,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="font-bold">Children’s Privacy</h2>
+            <h2 className="font-bold">Children’s Privacy</h2>
 
             <br />
 
@@ -698,7 +698,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="font-bold">Links to Other Websites</h2>
+            <h2 className="font-bold">Links to Other Websites</h2>
 
             <br />
 
@@ -716,7 +716,7 @@ export default function PrivacyPage() {
 
             <br />
 
-            <h2 class="font-bold">Changes to this Privacy Policy</h2>
+            <h2 className="font-bold">Changes to this Privacy Policy</h2>
 
             <br />
 
@@ -744,13 +744,13 @@ export default function PrivacyPage() {
 
             <br />
 
-            <p class="font-semibold">
+            <p className="font-semibold">
                 If you have any questions about this Privacy Policy, You can{" "}
                 <a
                     href="contactus.html"
                     rel="external nofollow noopener"
                     target="_blank"
-                    class="text-blue-400 hover:underline"
+                    className="text-blue-400 hover:underline"
                 >
                     Contact us
                 </a>
