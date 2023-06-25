@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Test = () => {
     return (
-        <h1 className="bg-red-400">This is test component</h1>
+        <h1 className="text-red-500">This is test component</h1>
     )
 }
 

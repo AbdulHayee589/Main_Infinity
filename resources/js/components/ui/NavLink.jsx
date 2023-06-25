@@ -17,7 +17,7 @@ export default function NavLink({
           : size === "small"
             ? "text-sm"
             : "text-base",
-        hoverEffect && "transition-all hover:text-gold-main",
+        hoverEffect && "transition-all hover:text-gold-light",
         className
       )}
       {...restProps}

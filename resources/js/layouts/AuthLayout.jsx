@@ -31,15 +31,15 @@ export default function AuthLayout({ children }) {
               <Button
                 key={provider.id}
                 variant="outlined"
-                className="border-transparent grid items-center justify-center max-w-fit px-3.5 py-3.5"
+                className="border-transparent grid items-center justify-center max-w-fit px-2.5 py-2.5"
                 onClick={() => authClickHandler(provider.name)}
               >
-                <div className="h-6 w-6">
+                <div className="max-h-[28px] max-w-[28px]">
                   <LazyLoadImage
                     src={`/logo/${provider.img}.svg`}
                     alt={provider.name}
-                    width={48}
-                    height={48}
+                    width={64}
+                    height={64}
                   />
                 </div>
               </Button>

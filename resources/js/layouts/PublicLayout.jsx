@@ -6,7 +6,7 @@ export default function PublicLayout({ children }) {
     <>
       <HeaderNavigation />
 
-      <main className="">
+      <main className="min-h-[800px] bg-blue-50">
         {children}
       </main>
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import clsx from "clsx";
 import { headerNavLinks, testLinks } from "../../statics";
 import { Link } from "@inertiajs/inertia-react";
 

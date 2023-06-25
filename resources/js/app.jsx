@@ -13,8 +13,9 @@ createInertiaApp({
       page.default.layout = page => <PublicLayout children={page} />
     else if(name.startsWith('auth/'))
       page.default.layout = page => <AuthLayout children={page} />
+    // else if(name.startsWith('/dashboard'))
+    //   page.default.layout = page => <DashboardLayout children={page} />
 
-    // page.default.layout = name.startsWith('public/') ? page => <PublicLayout children={page} /> : undefined;
     return page
   },
   setup({ el, App, props }) {
