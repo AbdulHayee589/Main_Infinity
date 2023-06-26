@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/inertia-react";
 import clsx from "clsx";
 
 export default function NavLink({
-  size = "normal",
+  size = "base",
   hoverEffect = true,
   className,
   children,
@@ -11,13 +11,13 @@ export default function NavLink({
   return (
     <Link
       className={clsx(
-        "text-gray-500 w-fit",
-        size === "large"
+        "w-fit",
+        size === "lg"
           ? "text-lg"
-          : size === "small"
+          : size === "sm"
             ? "text-sm"
             : "text-base",
-        hoverEffect && "transition-all hover:text-gold-light",
+        hoverEffect && "hover:text-gold-main",
         className
       )}
       {...restProps}

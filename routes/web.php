@@ -11,6 +11,6 @@ Route::inertia('/sign-in', 'auth/SignInPage');
 Route::inertia('/sign-up', 'auth/SignUpPage');
 
 Route::inertia('/how-it-works', 'public/HowItWorksPage');
-Route::inertia('/policy/terms-and-conditions', 'public/policy/TermsAndConditionsPage');
-Route::inertia('/policy/refund', 'public/policy/RefundPage');
-Route::inertia('/policy/privacy', 'public/policy/PrivacyPage');
+Route::inertia('/policy/terms-and-conditions', 'policy/TermsAndConditionsPage');
+Route::inertia('/policy/refund', 'policy/RefundPage');
+Route::inertia('/policy/privacy', 'policy/PrivacyPage');

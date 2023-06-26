@@ -12,7 +12,9 @@ export default function SignUpForm() {
     error: "",
   });
 
-  const onFormSubmitHandler = async (values) => { setFormState({ ...formState, loading: true }) };
+  const onFormSubmitHandler = async (values) => {
+    setFormState({ ...formState, loading: true });
+  };
   // setFormState({ loading: true, error: "" });
   // const { email, password } = values;
   // await signIn("sign-in", {
@@ -105,22 +107,20 @@ export default function SignUpForm() {
           fullWidth
         />
 
-        <div className="w-full flex mt-1 space-x-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 space-x-2 text-sm text-gray-400">
           <span>Already have an account?</span>
           {!formState.loading ? (
             <NavLink
               href="/sign-in"
-              className="font-semibold"
-              size="small"
+              className="font-semibold text-gray-500"
+              size="sm"
+              title="Sign In"
               hoverEffect={false}
             >
               Sign In
             </NavLink>
           ) : (
-            <span
-              className="font-semibold cursor-wait"
-              size="small"
-            >
+            <span className="font-semibold cursor-wait text-sm">
               Sign In
             </span>
           )}

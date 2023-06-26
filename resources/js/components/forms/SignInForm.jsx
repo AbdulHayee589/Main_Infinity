@@ -12,7 +12,9 @@ export default function SignInForm() {
     error: "",
   });
 
-  const onFormSubmitHandler = async (values) => { setFormState({ ...formState, loading: true }) };
+  const onFormSubmitHandler = async (values) => {
+    setFormState({ ...formState, loading: true });
+  };
 
   return (
     <Formik
@@ -49,22 +51,20 @@ export default function SignInForm() {
           fullWidth
         />
 
-        <div className="w-full flex mt-1 space-x-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 space-x-2 text-sm text-gray-400">
           <span>Dont have an account?</span>
           {!formState.loading ? (
             <NavLink
               href="/sign-up"
-              className="font-semibold"
-              size="small"
+              className="font-semibold text-gray-500"
+              size="sm"
+              title="Sign Up"
               hoverEffect={false}
             >
               Sign Up
             </NavLink>
           ) : (
-            <span
-              className="font-semibold cursor-wait"
-              size="small"
-            >
+            <span className="font-semibold cursor-wait text-sm">
               Sign Up
             </span>
           )}
