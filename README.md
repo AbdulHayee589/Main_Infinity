@@ -13,6 +13,7 @@
 composer install
 ./vendor/bin/sail install
 ./vendor/bin/sail up
+./vendor/bin/sail php artisan migrate
 ```
 
 ```bash
