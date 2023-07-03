@@ -20,6 +20,22 @@ Route::inertia('/policy/refund', 'policy/RefundPage');
 Route::inertia('/policy/privacy', 'policy/PrivacyPage');
 
 
+//Shop
+Route::prefix('shop')->group(function() {
+    //Mockups
+    Route::post("/mockups", [\App\Http\Controllers\Orders\MockupsController::class, 'store']);
+
+    //Shopping Cart
+    Route::resource("cart", \App\Http\Controllers\Orders\ShoppingCartController::class);
+
+    //Products
+    Route::resource("products", \App\Http\Controllers\Blueprints\BlueprintsController::class);
+    Route::get("products/{id}/{provider}/variants", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "variants"]);
+    Route::get("products/{id}/providers", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "providers"]);
+
+
+});
+
 //Authentication
 Route::prefix('auth')->group(function () {
     Route::post("/login", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, "store"]);
