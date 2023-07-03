@@ -17,11 +17,16 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('dateOfBirth')->nullable();
             $table->string('email')->unique();
+            $table->unsignedBigInteger("shippingAddressId")->nullable();
+            $table->unsignedBigInteger("billingAddressId")->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->enum("oauth", ['facebook', 'google', 'discord', 'instagram'])->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('shippingAddressId')->references('id')->on('address_books');
+            $table->foreign('billingAddressId')->references('id')->on('address_books');
         });
     }
 
