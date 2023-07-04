@@ -84,8 +84,8 @@ class BlueprintsController extends Controller
             ]);
 
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
-            'blueprints' => Blueprint::all(),
+        return Inertia::render('public/Shop/ProductsDetailPage', [
+            'blueprints' => $bp,
             'providers' => $providers,
             'variants' => Inertia::lazy(fn () => $this->variants($id, $provider))
         ]);
