@@ -18,14 +18,17 @@ export default function DisclouseContainer({
           <Disclosure.Button
             className={clsx(
               "flex justify-between items-center font-semibold",
+              open && "text-gold-light",
               btnClassName
             )}
           >
             {title}
             <div
               className={clsx(
-                "transition-all text-lg text-gray-300",
-                open && "rotate-180 text-gold-light"
+                "transition-all text-lg",
+                open
+                  ? "rotate-180 text-gold-light"
+                  : "text-gray-300"
               )}
             >
               <FaChevronDown />

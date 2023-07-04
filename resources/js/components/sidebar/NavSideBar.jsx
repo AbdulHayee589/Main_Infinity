@@ -3,11 +3,12 @@ import { Inertia } from "@inertiajs/inertia";
 import { FaXmark, FaSearchengin } from "react-icons/fa6";
 import NavLink from "../ui/NavLink";
 import Brand from "../ui/Brand";
-import clsx from "clsx";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import Button from "../ui/Button";
+// import AccountDetails from "../AccountDetails";
+import clsx from "clsx";
 
-export default function MobileNavigation({
+export default function NavSideBar({
   navLinks = [],
   open,
   onNavLinkClick,
@@ -30,7 +31,7 @@ export default function MobileNavigation({
       <div
         onClick={onClose}
         className={clsx(
-          "z-50 transition-all fixed top-0 right-0 left-0 bottom-0 sm:backdrop-blur-sm sm:bg-black/40",
+          "z-50 transition-all fixed top-0 right-0 left-0 bottom-0 sm:backdrop-blur-sm sm:bg-black/20",
           open ? "block" : "hidden"
         )}
       ></div>
@@ -40,10 +41,10 @@ export default function MobileNavigation({
           open ? "translate-x-0 " : "translate-x-full"
         )}
       >
-        <div className="h-[90vh] overflow-auto">
-          <div className="py-4 grid gap-4">
-            <div className="px-6 flex items-center justify-between">
-              <Brand />
+        <div className="h-[85%] overflow-auto">
+          <div className="px-6 py-4 grid gap-4">
+            <div className="flex items-center justify-between">
+              <Brand onClick={onClose} />
 
               <button
                 aria-label="Close Menu"
@@ -54,30 +55,9 @@ export default function MobileNavigation({
               </button>
             </div>
 
-            {/* <div className="my-4 w-full group flex items-center border border-gray-200 hover:border-gray-300 rounded-lg overflow-hidden">
-              <div className="px-2.5 text-2xl text-gray-400">
-                <FaSearchengin />
-              </div>
-              <div className="relative w-full">
-                <form onSubmit={onSubmitHandler}>
-                  <input
-                    type="text"
-                    name="searchQuery"
-                    id="searchQuery"
-                    placeholder="Search something..."
-                    className={clsx(
-                      "p-2 w-full focus:outline-none bg-white"
-                    )}
-                    value={searchValue}
-                    onChange={onChangeHandler}
-                  />
-                </form>
-              </div>
-            </div> */}
+            {/* <AccountDetails /> */}
 
-            <div className="px-6 py-12 border-t border-b border-gray-200">Account Details</div>
-
-            <nav className="px-6 grid gap-4">
+            <nav className="grid gap-4">
               {navLinks.map(({ id, title, type, ...rest }) =>
                 type === "category" ? (
                   <DisclouseContainer key={id} title={title}>
@@ -87,7 +67,7 @@ export default function MobileNavigation({
                           key={id}
                           href={href}
                           title={title}
-                          onMouseDown={onClose}
+                          onClick={onClose}
                         >
                           {title}
                         </NavLink>
@@ -99,7 +79,7 @@ export default function MobileNavigation({
                     key={id}
                     href={rest?.href}
                     title={title}
-                    onMouseDown={onClose}
+                    onClick={onClose}
                     className="font-semibold"
                   >
                     {title}
@@ -109,10 +89,12 @@ export default function MobileNavigation({
             </nav>
           </div>
         </div>
-        <div className="p-4">
-        <Button fullWidth>Sign In</Button>
-        </div>
 
+        <div className="absolute bottom-0 py-4 px-6 bg-white w-full">
+          <NavLink href="/sign-in">
+          <Button fullWidth>Sign In</Button>
+          </NavLink>
+        </div>
       </div>
     </div>
   );

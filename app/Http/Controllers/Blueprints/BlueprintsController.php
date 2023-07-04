@@ -16,7 +16,7 @@ class BlueprintsController extends Controller
     public function index()
     {
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показват продуктите', [
+        return Inertia::render('public/shop/ProductsPage', [
             'blueprints' => Blueprint::all(), //категории по нататък
         ]);
     }
