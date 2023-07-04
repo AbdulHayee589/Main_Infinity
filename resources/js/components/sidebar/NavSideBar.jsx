@@ -41,8 +41,8 @@ export default function NavSideBar({
           open ? "translate-x-0 " : "translate-x-full"
         )}
       >
-        <div className="h-[85%] overflow-auto">
-          <div className="px-6 py-4 grid gap-4">
+        <div className="h-[100%] pb-24 overflow-auto">
+          <div className="relative px-6 py-4 grid gap-4">
             <div className="flex items-center justify-between">
               <Brand onClick={onClose} />
 
@@ -90,9 +90,9 @@ export default function NavSideBar({
           </div>
         </div>
 
-        <div className="absolute bottom-0 py-4 px-6 bg-white w-full">
+        <div className="absolute bg-white py-4 px-6 left-0 right-0 bottom-0">
           <NavLink href="/sign-in">
-          <Button fullWidth>Sign In</Button>
+            <Button fullWidth>Sign In</Button>
           </NavLink>
         </div>
       </div>

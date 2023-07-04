@@ -10,12 +10,11 @@ import NavLink from "../ui/NavLink";
 import Button from "../ui/Button";
 import { headerNavLinks } from "../../statics";
 import NavSideBar from "../sidebar/NavSideBar";
-import useOpenState from "../../hooks/useOpenState";
+import useOpenState from "../hooks/useOpenState";
 
 export default function HeaderNavigation({ }) {
-  const { open, setOpen } = useOpenState(false);
+  const { open, setOpen, toggleOpen } = useOpenState(false);
 
-  const toggleMobileMenu = () => setOpen(!open);
   const closeMobileMenu = () => setOpen(false);
 
   return (
@@ -24,7 +23,7 @@ export default function HeaderNavigation({ }) {
         navLinks={headerNavLinks}
         open={open}
         onNavLinkClick={closeMobileMenu}
-        onClose={toggleMobileMenu}
+        onClose={toggleOpen}
       />
       <header className="bg-white shadow flex justify-between items-center transition-all px-4 py-4 lg:py-2">
         <div className="container flex justify-between items-center">
@@ -73,21 +72,21 @@ export default function HeaderNavigation({ }) {
           <div className="flex text-2xl items-center gap-6">
             <button
               className="cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleMobileMenu}
+              onClick={toggleOpen}
             >
               <FaRegHeart />
             </button>
 
             <button
               className="cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleMobileMenu}
+              onClick={toggleOpen}
             >
               <FaCartShopping />
             </button>
 
             <button
               className="lg:hidden cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleMobileMenu}
+              onClick={toggleOpen}
             >
               <FaBarsStaggered />
             </button>

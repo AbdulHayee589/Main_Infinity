@@ -33,7 +33,7 @@ class BlueprintsController extends Controller
             $blueprints->where( 'category_id', $catId);
 
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показват продуктите', [
+        return Inertia::render('public/shop/ProductsPage', [
             'blueprints' => $blueprints->simplePaginate(25, ['*'], 'page', $page),
             'categories' => Category::all(),
             'filters' => BluePrint::filters(),
