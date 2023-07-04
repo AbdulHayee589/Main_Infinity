@@ -23,12 +23,12 @@ export default function FilterSideBar({
       ></div>
       <div
         className={clsx(
-          "px-6 bg-white z-50 fixed top-0 w-full sm:w-1/2 h-full transition-all ease-in-out duration-300",
+          "bg-white z-50 fixed top-0 w-full sm:w-1/2 h-full transition-all ease-in-out duration-300",
           open ? "left-0" : "-left-full"
         )}
       >
-        <div className="h-[90vh] overflow-auto">
-          <div className="py-4 grid gap-4">
+        <div className="h-[100%] pb-24 overflow-auto">
+          <div className="relative px-6 py-4 grid gap-4">
             <div className="flex items-center justify-between">
               <Brand onClick={onClose} />
 
@@ -74,7 +74,7 @@ export default function FilterSideBar({
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="absolute bg-white py-4 px-6 left-0 right-0 bottom-0">
           <Button onClick={onClose} fullWidth>
             Apply Filters
           </Button>

@@ -2,19 +2,20 @@ import { usePage } from "@inertiajs/inertia-react"
 import { useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import { FaFilter } from "react-icons/fa";
+import useOpenState from "../../../components/hooks/useOpenState";
 
 export default function ProductsPage() {
+  const { open, setOpen, toggleOpen} = useOpenState(false);
   const { props } = usePage();
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleFiltersSideBar = () => setIsOpen(!isOpen);
-  const closeFiltersSideBar = () => setIsOpen(false);
+  const toggleFiltersSideBar = () => toggleOpen();
+  const closeFiltersSideBar = () => setOpen(false);
 
   console.log(props.blueprints);
 
   return (
     <>
-      <FilterSideBar open={isOpen} onClose={closeFiltersSideBar} />
+      <FilterSideBar open={open} onClose={closeFiltersSideBar} />
 
       <div className="container grid gap-6 grid-cols-2 md:grid-cols-6 lg:grid-cols-6 py-8 px-6">
         <div className="flex gap-4 justify-between items-center col-span-6">

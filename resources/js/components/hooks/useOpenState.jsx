@@ -5,7 +5,13 @@ export default function useOpenState(initialState = false) {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    }
   }, [open]);
 
-  return { open, setOpen };
+  const toggleOpen = () => setOpen(!open);
+
+  return { open, setOpen, toggleOpen };
 }
