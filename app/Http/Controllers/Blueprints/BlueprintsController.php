@@ -61,9 +61,23 @@ class BlueprintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $bp = Blueprint::find($id);
+        $providers = $bp->getPrintProviders();
+
+        $provider = null;
+        if($request->query("provider")) {
+            $id = $request->query("provider");
+            $exists = array_filter($providers, function ($p) use ($id) {
+                if(strval($p['id']) === $id) return true;
+                return false;
+            });
+
+            if(count($exists) === 1)
+                $provider = $request->query("provider");
+        }
+
         if(!$bp)
             return back()->withErrors([
                 "errors" => trans("blueprints.not_found")
@@ -71,7 +85,9 @@ class BlueprintsController extends Controller
 
         # @ddimitrov1108
         return Inertia::render('тук сложи страницата където се показва самия продукт', [
-            'blueprints' => Blueprint::all(), //категории по нататък
+            'blueprints' => Blueprint::all(),
+            'providers' => $providers,
+            'variants' => Inertia::lazy(fn () => $this->variants($id, $provider))
         ]);
     }
 
@@ -79,7 +95,9 @@ class BlueprintsController extends Controller
      * Fetch variants by blueprint & provider
      */
 
-    public function variants(string $blueprintId, string $providerId) {
+    public function variants($blueprintId, $providerId) {
+        if($providerId === null) return null;
+
         $bp = Blueprint::find($blueprintId);
         if(!$bp)
             return back()->withErrors([
