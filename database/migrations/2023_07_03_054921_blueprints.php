@@ -16,11 +16,15 @@ return new class extends Migration
             $table->unsignedBigInteger('bp_id')->unique();
             $table->text("title");
             $table->text("description");
-            $table->string("brand");
-            $table->string("model");
-            $table->json("images");
+            $table->string("brand")->nullable();
+            $table->string("model")->nullable();
+            $table->unsignedBigInteger("category_id")->nullable();
+            $table->longText("images")->nullable();
+            $table->longText("filters")->nullable();
             $table->boolean("isActive")->default(false);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

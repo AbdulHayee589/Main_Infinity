@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Blueprints;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blueprint;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class BlueprintsController extends Controller
@@ -13,11 +15,28 @@ class BlueprintsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $validator = Validator::make($request->query(), [
+            'category' => 'nullable|integer|exists:categories,id',
+            'page' => 'nullable|integer',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+
+        $catId = $request->query('category');
+        $page = $request->query('page');
+
+        $blueprints = Blueprint::query();
+        if($catId !== null)
+            $blueprints->where( 'category_id', $catId);
+
         # @ddimitrov1108
-        return Inertia::render('public/shop/ProductsPage', [
-            'blueprints' => Blueprint::all(), //категории по нататък
+        return Inertia::render('тук сложи страницата където се показват продуктите', [
+            'blueprints' => $blueprints->simplePaginate(25, ['*'], 'page', $page),
+            'categories' => Category::all(),
+            'filters' => BluePrint::filters(),
         ]);
     }
 
@@ -34,7 +53,7 @@ class BlueprintsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -86,7 +105,7 @@ class BlueprintsController extends Controller
 
         # @ddimitrov1108
         return Inertia::render('тук сложи страницата където се показва самия продукт', [
-            'providers' => $bp->print_providers,
+            'providers' => $bp->getPrintProviders()
         ]);
     }
 
