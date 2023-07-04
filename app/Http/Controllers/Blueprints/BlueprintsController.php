@@ -32,9 +32,13 @@ class BlueprintsController extends Controller
         if($catId !== null)
             $blueprints->where( 'category_id', $catId);
 
+        $blueprints = $blueprints->paginate(25);
+
+
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показват продуктите', [
-            'blueprints' => $blueprints->simplePaginate(25, ['*'], 'page', $page),
+        return Inertia::render('public/shop/ProductsPage', [
+            'blueprints' => $blueprints,
+            'lastPage' => $blueprints->lastPage(),
             'categories' => Category::all(),
             'filters' => BluePrint::filters(),
         ]);
