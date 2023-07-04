@@ -28,6 +28,8 @@ Route::prefix('shop')->group(function() {
     //Shopping Cart
     Route::get("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'index']);
     Route::post("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'store']);
+    Route::post("/cart/update", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'update']);
+    Route::post("/cart/remove", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'destroy']);
 
     //Products
     Route::resource("products", \App\Http\Controllers\Blueprints\BlueprintsController::class);

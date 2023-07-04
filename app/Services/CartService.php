@@ -17,8 +17,7 @@ class CartService
         }
 
         self::saveCart($cart);
-
-        return true;
+        return $cart;
     }
 
     public static function removeFromCart($mockupId)
@@ -28,10 +27,10 @@ class CartService
         if (isset($cart[$mockupId])) {
             unset($cart[$mockupId]);
             self::saveCart($cart);
-            return true;
+            return $cart;
         }
 
-        return false;
+        return null;
     }
 
     public static function updateQuantity($mockupId, $quantity)
@@ -41,10 +40,10 @@ class CartService
         if (isset($cart[$mockupId])) {
             $cart[$mockupId] = $quantity;
             self::saveCart($cart);
-            return true;
+            return $cart;
         }
 
-        return false;
+        return null;
     }
 
     public static function getCart()

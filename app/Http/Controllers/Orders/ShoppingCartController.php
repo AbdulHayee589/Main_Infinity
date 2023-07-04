@@ -33,14 +33,6 @@ class ShoppingCartController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -55,25 +47,9 @@ class ShoppingCartController extends Controller
 
         $mockupId = $request->input('mockupId');
         $quantity = $request->input('quantity');
-        CartService::addToCart($mockupId, $quantity);
+        $cart = CartService::addToCart($mockupId, $quantity);
 
-        return response()->json(CartService::getCart());
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return response()->json($cart);
     }
 
     /**
@@ -88,13 +64,29 @@ class ShoppingCartController extends Controller
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator->errors())->withInput();
+
+        $mockupId = $request->input('mockupId');
+        $quantity = $request->input('quantity');
+        $cart = CartService::updateQuantity($mockupId, $quantity);
+
+        return response()->json($cart);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'mockupId' => 'required|exists:mockups,id',
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+
+        $mockupId = $request->input('mockupId');
+        $cart = CartService::removeFromCart($mockupId);
+
+        return response()->json($cart);
     }
 }
