@@ -16,17 +16,37 @@ class Blueprint extends Model
         'brand',
         'model',
         'images',
-    ];
-
-    protected $attributes = [
-        'print_providers' => null
+        'category_id',
+        'filters'
     ];
 
     protected $casts = [
-        'images' => 'json'
+        'images' => 'json',
+        'filters' => 'json'
     ];
 
-    public function getPrintProvidersAttribute() {
+    public static function filters() {
+        $bps = self::all();
+        $filters = [];
+        foreach($bps as $bp) {
+            $meta = $bp->filters;
+            if(!$meta) continue;
+
+            foreach(array_keys($meta) as $filter) {
+                if(!array_search($filter, $filters))
+                    $filters[] = $filter;
+            }
+        }
+
+        $translated = [];
+        foreach($filters as $filter) {
+            $translated[] = trans("filters.".$filter);
+        }
+
+        return $translated;
+    }
+
+    public function getPrintProviders() {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . env('PRINTIFY_APIKEY'),
         ])->get('https://api.printify.com//v1/catalog/blueprints/'.$this->bp_id.'/print_providers.json');
@@ -46,5 +66,9 @@ class Blueprint extends Model
             return $response->json();
 
         return null;
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }
