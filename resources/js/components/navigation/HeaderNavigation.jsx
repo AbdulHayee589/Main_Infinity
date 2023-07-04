@@ -1,27 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaBarsStaggered,
   FaCartShopping,
   FaRegHeart,
   FaRightToBracket,
 } from "react-icons/fa6";
-import MobileNavigation from "./MobileNavigation";
 import Brand from "../ui/Brand";
 import NavLink from "../ui/NavLink";
 import Button from "../ui/Button";
 import { headerNavLinks } from "../../statics";
+import NavSideBar from "../sidebar/NavSideBar";
+import useOpenState from "../../hooks/useOpenState";
 
 export default function HeaderNavigation({ }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { open, setOpen } = useOpenState(false);
 
-  const toggleMobileMenu = () => setIsOpen(!isOpen);
-  const closeMobileMenu = () => setIsOpen(false);
+  const toggleMobileMenu = () => setOpen(!open);
+  const closeMobileMenu = () => setOpen(false);
 
   return (
     <>
-      <MobileNavigation
+      <NavSideBar
         navLinks={headerNavLinks}
-        open={isOpen}
+        open={open}
         onNavLinkClick={closeMobileMenu}
         onClose={toggleMobileMenu}
       />
