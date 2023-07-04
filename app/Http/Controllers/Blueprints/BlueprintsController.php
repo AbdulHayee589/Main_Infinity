@@ -64,6 +64,12 @@ class BlueprintsController extends Controller
     public function show(Request $request, string $id)
     {
         $bp = Blueprint::find($id);
+        if(!$bp)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
+
+
         $providers = $bp->getPrintProviders();
 
         $provider = null;
@@ -77,11 +83,6 @@ class BlueprintsController extends Controller
             if(count($exists) === 1)
                 $provider = $request->query("provider");
         }
-
-        if(!$bp)
-            return back()->withErrors([
-                "errors" => trans("blueprints.not_found")
-            ]);
 
         # @ddimitrov1108
         return Inertia::render('public/Shop/ProductsDetailPage', [
