@@ -1,5 +1,5 @@
-import { Link, usePage } from "@inertiajs/inertia-react";
-import { useEffect } from "react";
+import { Link, usePage, router } from "@inertiajs/react";
+import {useEffect, useState} from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import { FaFilter } from "react-icons/fa";
 import useOpenState from "../../../components/hooks/useOpenState";
@@ -12,9 +12,20 @@ import {
 export default function ProductsPage() {
   const { open, setOpen, toggleOpen } = useOpenState(false);
   const { props } = usePage();
-
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
+
+  const handleSearch = (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set('search', event.target.value);
+      urlParams.delete('page');
+      const url = `${window.location.pathname}?${urlParams.toString()}`;
+
+      router.visit(url, {
+          only: ['blueprints'],
+          preserveState: true
+      })
+  };
 
   useEffect(() => {
     console.log(props);
@@ -40,6 +51,7 @@ export default function ProductsPage() {
               id="searchQuery"
               placeholder="Search something..."
               className="w-full border border-gray-200 rounded-lg px-4 py-2"
+              onChange={handleSearch}
             />
           </div>
         </div>

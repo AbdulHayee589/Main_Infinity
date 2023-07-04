@@ -20,7 +20,11 @@ class BlueprintsController extends Controller
         $validator = Validator::make($request->query(), [
             'category' => 'nullable|integer|exists:categories,id',
             'page' => 'nullable|integer',
+            'search' => 'nullable|string',
         ]);
+
+        $searchTerm = $request->query('search');
+
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator->errors())->withInput();
@@ -31,13 +35,18 @@ class BlueprintsController extends Controller
         if($catId !== null)
             $blueprints->where( 'category_id', $catId);
 
+        if ($searchTerm !== null) {
+            $blueprints->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
         $blueprints = $blueprints->paginate(25);
 
-        # @ddimitrov1108
         return Inertia::render('public/shop/ProductsPage', [
             'blueprints' => $blueprints,
             'lastPage' => $blueprints->lastPage(),
-            'categories' => Category::all(),
             'filters' => Blueprint::filters(),
         ]);
     }
@@ -69,9 +78,7 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
 
-
         $providers = $bp->getPrintProviders();
-
         $provider = null;
         if($request->query("provider")) {
             $id = $request->query("provider");
@@ -84,8 +91,7 @@ class BlueprintsController extends Controller
                 $provider = $request->query("provider");
         }
 
-        # @ddimitrov1108
-        return Inertia::render('public/Shop/ProductsDetailPage', [
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'blueprints' => $bp,
             'providers' => $providers,
             'variants' => Inertia::lazy(fn () => $this->variants($id, $provider))
@@ -96,6 +102,7 @@ class BlueprintsController extends Controller
      * Fetch variants by blueprint & provider
      */
 
+    // fallback if above doesnt work
     public function variants($blueprintId, $providerId) {
         if($providerId === null) return null;
 
@@ -107,8 +114,7 @@ class BlueprintsController extends Controller
 
         $variants = $bp->getVariantsOfProvider($providerId);
 
-        # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'variants' => $variants,
         ]);
     }
@@ -125,7 +131,7 @@ class BlueprintsController extends Controller
             ]);
 
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'providers' => $bp->getPrintProviders()
         ]);
     }
