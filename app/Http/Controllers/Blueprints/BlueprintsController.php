@@ -70,8 +70,9 @@ class BlueprintsController extends Controller
             ]);
 
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
+        return Inertia::render('public/shop/ProductsDetailsPage', [
             'blueprints' => Blueprint::all(), //категории по нататък
+            $bp
         ]);
     }
 

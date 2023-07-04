@@ -21,7 +21,7 @@ class Blueprint extends Model
     ];
 
     protected $casts = [
-        'images' => 'json',
+        'images' => 'array',
         'filters' => 'json'
     ];
 

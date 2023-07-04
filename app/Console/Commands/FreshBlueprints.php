@@ -47,7 +47,7 @@ class FreshBlueprints extends Command
                     'description' => $bp['description'],
                     'brand' => $bp['brand'],
                     'model' => $bp['model'],
-                    'images' => json_encode($bp['images']),
+                    'images' => $bp['images'],
                 ]);
             if (!$dbbp) {
                 $this->error("Couldn't fetch Blueprint #" . $bp['id']);
