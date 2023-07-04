@@ -11,17 +11,14 @@ import {
 
 export default function ProductsPage() {
   const { open, setOpen, toggleOpen } = useOpenState(false);
-  const { props } = usePage();
+  const { props, url} = usePage();
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
 
   const handleSearch = (event) => {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set('search', event.target.value);
-      urlParams.delete('page');
-      const url = `${window.location.pathname}?${urlParams.toString()}`;
-
-      router.visit(url, {
+      router.visit(url,
+          {
+          data: { search: event.target.value},
           only: ['blueprints'],
           preserveState: true
       })
