@@ -16,7 +16,6 @@ class Blueprint extends Model
         'brand',
         'model',
         'images',
-        'print_providers'
     ];
 
     protected $attributes = [

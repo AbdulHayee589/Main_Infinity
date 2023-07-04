@@ -11,6 +11,7 @@ class MockupsController extends Controller
     public function store(NewMockupRequest $request) {
         try {
             $mockup = $request->createMockup();
+            dd($mockup);
         } catch(\Exception $ex) {
             dd($ex);
         }

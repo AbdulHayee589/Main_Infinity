@@ -26,7 +26,8 @@ Route::prefix('shop')->group(function() {
     Route::post("/mockups", [\App\Http\Controllers\Orders\MockupsController::class, 'store']);
 
     //Shopping Cart
-    Route::resource("cart", \App\Http\Controllers\Orders\ShoppingCartController::class);
+    Route::get("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'index']);
+    Route::post("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'store']);
 
     //Products
     Route::resource("products", \App\Http\Controllers\Blueprints\BlueprintsController::class);

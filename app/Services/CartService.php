@@ -1,67 +1,64 @@
 <?php
+
 namespace App\Services;
 
-class CartService {
-    /**
-     * Add an item to the cart.
-     *
-     * @param int $blueprintId
-     * @param int $quantity
-     * @return void
-     */
-    public static function addItem($product, $quantity = 1)
-    {
-        $cart = CartService::getCart();
+use Illuminate\Support\Facades\Session;
 
-        for($i = 0; $i < sizeof($cart); $i++) {
-            if($cart[$i]['id'] == $product['id']) {
-                $cart[$i]['quantity'] = $quantity;
-                CartService::updateCart($cart);
-                return;
-            }
+class CartService
+{
+    public static function addToCart($mockupId, $quantity = 1)
+    {
+        $cart = self::getCart();
+
+        if (isset($cart[$mockupId])) {
+            $cart[$mockupId] += $quantity;
+        } else {
+            $cart[$mockupId] = $quantity;
         }
 
-        $product['quantity'] = $quantity;
-        $cart = array_push($cart, $product);
-        CartService::updateCart($cart);
+        self::saveCart($cart);
+
+        return true;
     }
 
-    /**
-     * Add an item to the cart.
-     *
-     * @param int $blueprintId
-     * @param int $quantity
-     * @return void
-     */
-    public static function rmItem($productId)
+    public static function removeFromCart($mockupId)
     {
-        $cart = CartService::getCart();
-        $cart = array_filter($cart, function ($item) use ($productId) {
-            return $item['id'] !== $productId;
-        });
+        $cart = self::getCart();
 
-        CartService::updateCart($cart);
+        if (isset($cart[$mockupId])) {
+            unset($cart[$mockupId]);
+            self::saveCart($cart);
+            return true;
+        }
+
+        return false;
     }
 
+    public static function updateQuantity($mockupId, $quantity)
+    {
+        $cart = self::getCart();
 
+        if (isset($cart[$mockupId])) {
+            $cart[$mockupId] = $quantity;
+            self::saveCart($cart);
+            return true;
+        }
 
-    /**
-     * Returns the cart
-     *
-     * @return array
-     */
-    public static function getCart() {
-        return session()->get('cart', []);
+        return false;
     }
 
-    /**
-     * Update the cart
-     *
-     * @param array cart
-     * @return array
-     */
-    public static function updateCart($cart) {
-         session()->put('cart', $cart);
-         return CartService::getCart();
+    public static function getCart()
+    {
+        return Session::get('cart', []);
+    }
+
+    public static function clearCart()
+    {
+        Session::forget('cart');
+    }
+
+    protected static function saveCart($cart)
+    {
+        Session::put('cart', $cart);
     }
 }
