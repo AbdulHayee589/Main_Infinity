@@ -26,7 +26,6 @@ class BlueprintsController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
 
         $catId = $request->query('category');
-        $page = $request->query('page');
 
         $blueprints = Blueprint::query();
         if($catId !== null)
@@ -34,13 +33,12 @@ class BlueprintsController extends Controller
 
         $blueprints = $blueprints->paginate(25);
 
-
         # @ddimitrov1108
         return Inertia::render('public/shop/ProductsPage', [
             'blueprints' => $blueprints,
             'lastPage' => $blueprints->lastPage(),
             'categories' => Category::all(),
-            'filters' => BluePrint::filters(),
+            'filters' => Blueprint::filters(),
         ]);
     }
 

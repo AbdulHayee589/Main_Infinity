@@ -27,20 +27,25 @@ class Blueprint extends Model
 
     public static function filters() {
         $bps = self::all();
-        $filters = [];
+        $filters_resolved = [];
         foreach($bps as $bp) {
-            $meta = $bp->filters;
-            if(!$meta) continue;
+            $filters = $bp->filters;
+            if(!$filters) continue;
 
-            foreach(array_keys($meta) as $filter) {
-                if(!array_search($filter, $filters))
-                    $filters[] = $filter;
+            foreach($filters as $key => $value) {
+                if(isset($filters_resolved[$key]) && gettype($filters_resolved[$key]) == 'array') {
+                    if(!in_array($value, $filters_resolved[$key])) {
+                        $filters_resolved[$key][] = $value;
+                    }
+                } else {
+                    $filters_resolved[$key][] = $value;
+                }
             }
         }
 
         $translated = [];
-        foreach($filters as $filter) {
-            $translated[] = trans("filters.".$filter);
+        foreach($filters_resolved as $key => $value) {
+            $translated[trans("filters.".$key)] = $value;
         }
 
         return $translated;
