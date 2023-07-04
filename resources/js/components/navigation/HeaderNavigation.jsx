@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   FaBarsStaggered,
   FaCartShopping,
@@ -7,7 +6,6 @@ import {
 } from "react-icons/fa6";
 import Brand from "../ui/Brand";
 import NavLink from "../ui/NavLink";
-import Button from "../ui/Button";
 import { headerNavLinks } from "../../statics";
 import NavSideBar from "../sidebar/NavSideBar";
 import useOpenState from "../hooks/useOpenState";
