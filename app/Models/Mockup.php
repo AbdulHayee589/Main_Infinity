@@ -25,6 +25,10 @@ class Mockup extends Model
         'isActive' => 'boolean'
     ];
 
+    public function user() {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
     public function blueprint() {
         return $this->belongsTo(Blueprint::class, 'bp_id');
     }
