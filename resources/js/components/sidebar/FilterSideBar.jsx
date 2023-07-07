@@ -15,6 +15,7 @@ export default function FilterSideBar({
 }) {
   const [aFilters, setAFilters] = useState([]);
 
+
   useEffect(() => {
     // //console.log(Object.keys(filters).map(f => ({name: Object.keys(filters[f]), v: filters[f].map(i => i)})));
     // const keys = Object.keys(filters);
@@ -56,7 +57,7 @@ export default function FilterSideBar({
 
             <nav className="grid gap-4">
               {Object.keys(filters).map((key) => (
-                <DisclouseContainer title={key}>
+                <DisclouseContainer btnClassName='capitalize' title={key}>
                   {filters[key].map((i) => (
                     <div className="flex items-center gap-2">
                       <input
@@ -64,7 +65,7 @@ export default function FilterSideBar({
                         name={`${key}_${i}`}
                         id={`${key}_${i}`}
                       />
-                      <label htmlFor={`${key}_${i}`}>
+                      <label htmlFor={`${key}_${i}`} className="capitalize">
                         {i}
                       </label>
 
