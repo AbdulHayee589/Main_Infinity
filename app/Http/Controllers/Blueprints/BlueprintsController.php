@@ -61,34 +61,15 @@ class BlueprintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(string $id)
     {
         $bp = Blueprint::find($id);
-        if(!$bp)
-            return back()->withErrors([
-                "errors" => trans("blueprints.not_found")
-            ]);
-
-
         $providers = $bp->getPrintProviders();
 
-        $provider = null;
-        if($request->query("provider")) {
-            $id = $request->query("provider");
-            $exists = array_filter($providers, function ($p) use ($id) {
-                if(strval($p['id']) === $id) return true;
-                return false;
-            });
-
-            if(count($exists) === 1)
-                $provider = $request->query("provider");
-        }
-
         # @ddimitrov1108
-        return Inertia::render('public/Shop/ProductsDetailPage', [
+        return Inertia::render('public/shop/ProductsDetailsPage', [
             'blueprints' => $bp,
             'providers' => $providers,
-            'variants' => Inertia::lazy(fn () => $this->variants($id, $provider))
         ]);
     }
 
