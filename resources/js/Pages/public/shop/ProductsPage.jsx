@@ -18,7 +18,7 @@ export default function ProductsPage() {
   const handleSearch = (event) => {
       router.visit(url,
           {
-          data: { search: event.target.value},
+          data: { з: event.target.value},
           only: ['blueprints'],
           preserveState: true
       })

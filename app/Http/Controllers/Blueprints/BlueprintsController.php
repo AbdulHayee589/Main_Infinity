@@ -21,10 +21,11 @@ class BlueprintsController extends Controller
             'category' => 'nullable|integer|exists:categories,id',
             'page' => 'nullable|integer',
             'search' => 'nullable|string',
+            'filters' => 'nullable|string',
         ]);
 
         $searchTerm = $request->query('search');
-
+        $filters = $request->query('filters');
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator->errors())->withInput();
@@ -41,6 +42,9 @@ class BlueprintsController extends Controller
                     ->orWhere('description', 'like', '%' . $searchTerm . '%');
             });
         }
+
+        //if($filters !== null)
+
 
         $blueprints = $blueprints->paginate(25);
 
