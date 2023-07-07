@@ -42,13 +42,7 @@ class Blueprint extends Model
                 }
             }
         }
-
-        $translated = [];
-        foreach($filters_resolved as $key => $value) {
-            $translated[trans("filters.".$key)] = $value;
-        }
-
-        return $translated;
+        return $filters_resolved;
     }
 
     public function getPrintProviders() {
