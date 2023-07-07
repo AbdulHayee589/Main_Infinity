@@ -20,7 +20,11 @@ class BlueprintsController extends Controller
         $validator = Validator::make($request->query(), [
             'category' => 'nullable|integer|exists:categories,id',
             'page' => 'nullable|integer',
+            'search' => 'nullable|string',
         ]);
+
+        $searchTerm = $request->query('search');
+
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator->errors())->withInput();
@@ -31,13 +35,18 @@ class BlueprintsController extends Controller
         if($catId !== null)
             $blueprints->where( 'category_id', $catId);
 
+        if ($searchTerm !== null) {
+            $blueprints->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
         $blueprints = $blueprints->paginate(25);
 
-        # @ddimitrov1108
         return Inertia::render('public/shop/ProductsPage', [
             'blueprints' => $blueprints,
             'lastPage' => $blueprints->lastPage(),
-            'categories' => Category::all(),
             'filters' => Blueprint::filters(),
         ]);
     }
@@ -64,10 +73,25 @@ class BlueprintsController extends Controller
     public function show(string $id)
     {
         $bp = Blueprint::find($id);
-        $providers = $bp->getPrintProviders();
+        if(!$bp)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
 
-        # @ddimitrov1108
-        return Inertia::render('public/shop/ProductsDetailsPage', [
+        $providers = $bp->getPrintProviders();
+        $provider = null;
+        if($request->query("provider")) {
+            $id = $request->query("provider");
+            $exists = array_filter($providers, function ($p) use ($id) {
+                if(strval($p['id']) === $id) return true;
+                return false;
+            });
+
+            if(count($exists) === 1)
+                $provider = $request->query("provider");
+        }
+
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'blueprints' => $bp,
             'providers' => $providers,
         ]);
@@ -77,6 +101,7 @@ class BlueprintsController extends Controller
      * Fetch variants by blueprint & provider
      */
 
+    // fallback if above doesnt work
     public function variants($blueprintId, $providerId) {
         if($providerId === null) return null;
 
@@ -88,8 +113,7 @@ class BlueprintsController extends Controller
 
         $variants = $bp->getVariantsOfProvider($providerId);
 
-        # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'variants' => $variants,
         ]);
     }
@@ -106,7 +130,7 @@ class BlueprintsController extends Controller
             ]);
 
         # @ddimitrov1108
-        return Inertia::render('тук сложи страницата където се показва самия продукт', [
+        return Inertia::render('public/shop/ProductsDetailPage', [
             'providers' => $bp->getPrintProviders()
         ]);
     }

@@ -1,4 +1,4 @@
-import { createInertiaApp } from '@inertiajs/inertia-react'
+import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import PublicLayout from './layouts/PublicLayout'
 import AuthLayout from './layouts/AuthLayout'

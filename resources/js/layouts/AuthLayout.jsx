@@ -1,17 +1,18 @@
 import Button from "../components/ui/Button";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { v4 as uuidv4 } from "uuid";
+import {router} from "@inertiajs/react";
 
 const authProviders = [
   { id: uuidv4(), name: "facebook", img: "facebook" },
   { id: uuidv4(), name: "google", img: "google" },
-  { id: uuidv4(), name: "apple", img: "apple" },
+  { id: uuidv4(), name: "instagram", img: "instagram" },
   { id: uuidv4(), name: "discord", img: "discord" },
 ];
 
 export default function AuthLayout({ children }) {
   const authClickHandler = (method) => {
-    alert(method);
+      window.location.href = `/oauth/make/${method}`
   };
 
   return (

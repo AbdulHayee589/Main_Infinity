@@ -46,6 +46,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function mockups() {
+        return $this->hasMany(Mockup::class);
+    }
+
     public function shippingAddress() {
         return $this->hasOne(ShippingBook::class, 'shippingAddressId');
     }

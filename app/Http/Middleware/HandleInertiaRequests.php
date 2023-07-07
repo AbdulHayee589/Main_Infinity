@@ -37,8 +37,11 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = Auth::user();
+        // @ddimitrov1108 - получаваш тези пропс във всяка страница
         return array_merge(parent::share($request), [
-            "user" => Auth::user()
+            "user" => $user,
+            "mockups" => $user->mockups
         ]);
     }
 }

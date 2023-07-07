@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText("images")->nullable();
             $table->longText("filters")->nullable();
             $table->boolean("isActive")->default(false);
+            $table->double("price")->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

@@ -23,7 +23,7 @@ Route::inertia('/policy/privacy', 'policy/PrivacyPage');
 //Shop
 Route::prefix('shop')->group(function() {
     //Mockups
-    Route::post("/mockups", [\App\Http\Controllers\Orders\MockupsController::class, 'store']);
+    Route::resource("/mockups", \App\Http\Controllers\Orders\MockupController::class);
 
     //Shopping Cart
     Route::get("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'index']);
