@@ -74,7 +74,7 @@ class BlueprintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(string $id)
     {
         $bp = Blueprint::find($id);
         if(!$bp)
@@ -98,7 +98,6 @@ class BlueprintsController extends Controller
         return Inertia::render('public/shop/ProductsDetailPage', [
             'blueprints' => $bp,
             'providers' => $providers,
-            'variants' => Inertia::lazy(fn () => $this->variants($id, $provider))
         ]);
     }
 
