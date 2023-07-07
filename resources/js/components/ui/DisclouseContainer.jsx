@@ -18,7 +18,6 @@ export default function DisclouseContainer({
           <Disclosure.Button
             className={clsx(
               "flex justify-between items-center font-semibold",
-              open && "text-gold-light",
               btnClassName
             )}
           >

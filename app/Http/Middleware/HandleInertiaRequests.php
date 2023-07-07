@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
         // @ddimitrov1108 - получаваш тези пропс във всяка страница
         return array_merge(parent::share($request), [
             "user" => $user,
-            "mockups" => $user->mockups
+            //"mockups" => $user->mockups
         ]);
     }
 }

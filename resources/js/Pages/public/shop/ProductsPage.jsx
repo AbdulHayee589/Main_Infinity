@@ -30,7 +30,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <FilterSideBar open={open} onClose={closeFiltersSideBar} />
+      <FilterSideBar filters={props.filters} open={open} onClose={closeFiltersSideBar} />
 
       <div className="container py-8 px-6 grid gap-6 grid-cols-2 md:grid-cols-6 lg:grid-cols-6">
         <div className="flex gap-4 justify-between items-center col-span-6">

@@ -5,6 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import NavLink from "../ui/NavLink";
 import Button from "../ui/Button";
+import { useEffect, useState } from "react";
 
 export default function FilterSideBar({
   filters,
@@ -12,6 +13,18 @@ export default function FilterSideBar({
   onClose,
   ...restProps
 }) {
+  const [aFilters, setAFilters] = useState([]);
+
+  useEffect(() => {
+    // //console.log(Object.keys(filters).map(f => ({name: Object.keys(filters[f]), v: filters[f].map(i => i)})));
+    // const keys = Object.keys(filters);
+    // console.log(keys.map(key => {
+    //   const value = filters[key].map(i => i);
+    //   return ({ name: key, filters,});
+    // }));
+    // Object.keys(filters).map(filter => )
+  }, []);
+
   return (
     <div className={clsx("xl:hidden z-50 w-full h-full")} {...restProps}>
       <div
@@ -42,34 +55,23 @@ export default function FilterSideBar({
             </div>
 
             <nav className="grid gap-4">
-              {navLinks.map(({ id, title, type, ...rest }) =>
-                type === "category" ? (
-                  <DisclouseContainer key={id} title={title}>
-                    {rest?.links.map(
-                      ({ id, title, href }) => (
-                        <NavLink
-                          key={id}
-                          href={href}
-                          title={title}
-                          onClick={onClose}
-                        >
-                          {title}
-                        </NavLink>
-                      )
-                    )}
-                  </DisclouseContainer>
-                ) : (
-                  <NavLink
-                    key={id}
-                    href={rest?.href}
-                    title={title}
-                    onClick={onClose}
-                    className="font-semibold"
-                  >
-                    {title}
-                  </NavLink>
-                )
-              )}
+              {Object.keys(filters).map((key) => (
+                <DisclouseContainer title={key}>
+                  {filters[key].map((i) => (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        name={`${key}_${i}`}
+                        id={`${key}_${i}`}
+                      />
+                      <label htmlFor={`${key}_${i}`}>
+                        {i}
+                      </label>
+
+                    </div>
+                  ))}
+                </DisclouseContainer>
+              ))}
             </nav>
           </div>
         </div>
