@@ -13,7 +13,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
     <div
       key={product.bp_id}
       className={clsx(
-        "relative group grid gap-2 w-full h-fit max-w-[120px] xs:max-w-[160px] lg:max-w-[170px] xl:max-w-[200px] rounded-lg overflow-hidden",
+        "relative grid gap-2 w-full h-fit max-w-[120px] xxs:max-w-[150px] xs:max-w-[170px] md:max-w-[180px] lg:max-w-[200px] rounded-lg overflow-hidden",
         className
       )}
       {...restProps}
@@ -28,8 +28,8 @@ export default function ProductShowcase({ product, className, ...restProps }) {
         {isFav ? <FaHeart /> : <FaRegHeart />}
       </button>
 
-      <Link href={`/shop/products/${product.id}`}>
-        <div className="relative w-[120px] xs:w-[160px] lg:w-[170px] xl:w-[200px] h-[120px] xs:h-[160px] lg:h-[170px] xl:h-[200px] overflow-hidden">
+      <Link href={`/shop/products/${product.id}`} className="group">
+        <div className="relative w-[120px] xxs:w-[150px] xs:w-[170px] md:w-[180px] lg:w-[200px] h-[120px] xxs:h-[150px] xs:h-[170px] md:h-[180px] lg:h-[200px] overflow-hidden">
           {product.images.length > 1 ? (
             <>
               <LazyLoadImage

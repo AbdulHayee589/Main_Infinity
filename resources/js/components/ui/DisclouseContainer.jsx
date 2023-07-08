@@ -13,7 +13,7 @@ export default function DisclouseContainer({
   ...restProps
 }) {
   return (
-    <Disclosure {...restProps}>
+    <Disclosure {...restProps} defaultOpen={open}>
       {({ open }) => (
         <>
           <Disclosure.Button

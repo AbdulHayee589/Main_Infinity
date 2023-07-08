@@ -11,7 +11,7 @@ import {
 
 export default function FooterNavigation() {
   return (
-    <footer className="container bg-white px-4 lg:px-8">
+    <footer className="container bg-white">
       <div className="grid space-y-12 pt-8 pb-16">
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {stockServices.map(({ id, title, description, img }) => (
@@ -37,7 +37,7 @@ export default function FooterNavigation() {
           ))}
         </div>
 
-        <div className="bg-gray-200 min-h-[2px] w-full rounded-full"></div>
+        <div className="bg-gray-200 min-h-[1px] w-full rounded-full"></div>
 
         <div className="w-full grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="grid gap-4 col-span-1 md:pl-16 lg:pl-0">
@@ -90,7 +90,7 @@ export default function FooterNavigation() {
           <div className="grid gap-6 w-full col-span-1 md:pl-16 lg:pl-0 xl:pl-20">
             <div className="grid gap-2">
               <h4 className="font-semibold h-fit">Follow us</h4>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-4">
                 {socials.map(({ id, title, href, icon }) => (
                   <a
                     key={id}
@@ -98,7 +98,7 @@ export default function FooterNavigation() {
                     title={title}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2.5 text-gray-500 hover:text-gold-main"
+                    className="text-gray-500 hover:text-gold-main"
                   >
                     {icon}
                   </a>
