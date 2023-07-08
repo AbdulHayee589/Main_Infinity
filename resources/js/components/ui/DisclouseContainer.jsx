@@ -9,6 +9,7 @@ export default function DisclouseContainer({
   panelClassName,
   onChildrenElementClick,
   children,
+  open = false,
   ...restProps
 }) {
   return (

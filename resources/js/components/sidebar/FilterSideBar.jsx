@@ -57,7 +57,7 @@ export default function FilterSideBar({
 
             <nav className="grid gap-4">
               {Object.keys(filters).map((key) => (
-                <DisclouseContainer btnClassName='capitalize' title={key}>
+                <DisclouseContainer btnClassName='capitalize' title={key} open={true}>
                   {filters[key].map((i) => (
                     <div className="flex items-center gap-2">
                       <input

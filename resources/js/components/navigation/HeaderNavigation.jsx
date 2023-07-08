@@ -27,7 +27,7 @@ export default function HeaderNavigation({ }) {
         <div className="container flex justify-between items-center">
           <Brand />
 
-          <div className="hidden lg:flex items-center text-black">
+          <div className="z-20 hidden lg:flex items-center text-black">
             {headerNavLinks.map(({ id, title, type, ...rest }) =>
               type === "category" ? (
                 <div

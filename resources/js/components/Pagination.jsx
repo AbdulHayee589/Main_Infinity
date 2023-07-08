@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
-import clsx from "clsx";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import clsx from "clsx";
 
 export default function Pagination({ links, className, ...restProps }) {
   return (
@@ -16,9 +16,9 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-50",
+                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
                 active &&
-                "bg-gold-light hover:bg-gold-light text-black hover:text-black font-semibold border-gold-light"
+                "bg-gray-200 hover:bg-gray-200 text-black hover:text-black font-semibold"
               )}
             >
               <FaChevronLeft />
@@ -29,9 +29,9 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-50",
+                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
                 active &&
-                "bg-gold-light hover:bg-gold-light text-black hover:text-black font-semibold border-gold-light"
+                "bg-gray-200 hover:bg-gray-200 text-black hover:text-black font-semibold"
               )}
             >
               <FaChevronRight />
@@ -42,9 +42,9 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-50",
+                "w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
                 active &&
-                "bg-gold-light hover:bg-gold-light text-black hover:text-black font-semibold border-gold-light"
+                "bg-gray-200 hover:bg-gray-200 text-black hover:text-black font-semibold"
               )}
             >
               {label}
