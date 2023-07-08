@@ -13,7 +13,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
     <div
       key={product.bp_id}
       className={clsx(
-        "relative group grid gap-2 w-full h-fit max-w-[120px] xs:max-w-[160px] lg:max-w-[170px] xl:max-w-[200px] rounded-lg hover:shadow-md",
+        "relative group grid gap-2 w-full h-fit max-w-[120px] xs:max-w-[160px] lg:max-w-[170px] xl:max-w-[200px] rounded-lg overflow-hidden",
         className
       )}
       {...restProps}
@@ -29,7 +29,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
       </button>
 
       <Link href={`/shop/products/${product.id}`}>
-        <div className="relative w-[120px] xs:w-[160px] lg:w-[170px] xl:w-[200px] h-[120px] xs:h-[160px] lg:h-[170px] xl:h-[200px] rounded-lg overflow-hidden">
+        <div className="relative w-[120px] xs:w-[160px] lg:w-[170px] xl:w-[200px] h-[120px] xs:h-[160px] lg:h-[170px] xl:h-[200px] overflow-hidden">
           {product.images.length > 1 ? (
             <>
               <LazyLoadImage

@@ -56,7 +56,7 @@ export default function ProductsPage() {
         <div className="hidden lg:block border border-blue-500 col-span-1 max-h-[400px]">
           Filters
         </div>
-        <div className="w-full border border-red-500 col-span-5 lg:col-span-4">
+        <div className="w-fullcol-span-5 lg:col-span-4">
           {props?.blueprints.data && (
             <>
               <div className="flex justify-center items-start flex-wrap gap-6">
