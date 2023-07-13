@@ -14,13 +14,27 @@ export default function ProductsPage() {
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
 
-  const handleSearch = (filters) => {
-    router.visit(url, {
-      data: { filters },
-      only: ["blueprints"],
-      preserveState: true,
-    });
-  };
+    const handleSearch = (e) => {
+        router.visit(url, {
+          data: { search: e.target.value },
+          only: ["blueprints"],
+          preserveState: true,
+        });
+    };
+
+    const handleFilters = (filters) => {
+        console.log("yes")
+        router.reload({
+            method: 'post',
+            data: { filters },
+            only: ["blueprints"],
+            preserveState: true,
+            preserveScroll: true,
+            onSuccess() {
+                console.log(props.blueprints);
+            },
+        });
+    };
 
   useEffect(() => {
     console.log(props);
@@ -32,12 +46,12 @@ export default function ProductsPage() {
         filters={props.filters}
         open={open}
         onClose={closeFiltersSideBar}
-        handleFilterSearch={handleSearch}
+        handleFilterSearch={handleFilters}
       />
 
       <div className="container py-8 flex items-start justify-between gap-8">
         <div className="hidden lg:block border border-blue-500 col-span-1 min-h-full max-h-[400px] w-full max-w-[320px]">
-          <Filters filters={props.filters} handleFilterSearch={handleSearch} />
+          <Filters filters={props.filters} handleFilterSearch={handleFilters} />
         </div>
 
         <div className="w-full flex flex-col gap-8">

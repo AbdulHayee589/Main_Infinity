@@ -21,11 +21,13 @@ class BlueprintsController extends Controller
             'category' => 'nullable|integer|exists:categories,id',
             'page' => 'nullable|integer',
             'search' => 'nullable|string',
-            'filters' => 'nullable|string',
+            'filters' => 'nullable|array',
+            'filters.*' => 'array',
+            'filters.*.*' => 'string',
         ]);
 
         $searchTerm = $request->query('search');
-        $filters = $request->query('filters');
+        $filters = $request->input('filters');
 
         if ($validator->fails())
             return redirect()->back()->withErrors($validator->errors())->withInput();
@@ -43,7 +45,15 @@ class BlueprintsController extends Controller
             });
         }
 
-        //if($filters !== null)
+        if (!empty($filters)) {
+            $blueprints->where(function ($query) use ($filters) {
+                foreach ($filters as $key => $filter) {
+                    foreach ($filter as $value) {
+                        $query->whereJsonContains('filters->' . $key, $value);
+                    }
+                }
+            });
+        }
 
 
         $blueprints = $blueprints->paginate(25);
@@ -63,12 +73,9 @@ class BlueprintsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request) //apply filters
     {
-
+        return $this->index($request);
     }
 
     /**
