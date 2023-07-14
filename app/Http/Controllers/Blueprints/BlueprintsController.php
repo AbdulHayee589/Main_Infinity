@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blueprint;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -35,8 +36,21 @@ class BlueprintsController extends Controller
         $catId = $request->query('category');
 
         $blueprints = Blueprint::query();
-        if($catId !== null)
-            $blueprints->where( 'category_id', $catId);
+        if ($catId !== null) {
+            $categoryIds = DB::table('categories')
+                ->where('id', $catId)
+                ->orWhereRaw('parent_id IN (
+            WITH RECURSIVE category_tree AS (
+                SELECT id, parent_id FROM categories WHERE id = ?
+                UNION ALL
+                SELECT c.id, c.parent_id FROM categories c JOIN category_tree ct ON c.parent_id = ct.id
+            )
+            SELECT id FROM category_tree
+        )', [$catId])
+                ->pluck('id');
+
+            $blueprints->whereIn('category_id', $categoryIds);
+        }
 
         if ($searchTerm !== null) {
             $blueprints->where(function ($query) use ($searchTerm) {
