@@ -72,7 +72,7 @@ class BlueprintsController extends Controller
 
         $blueprints = $blueprints->paginate(25);
 
-        return Inertia::render('public/shop/ProductsPage', [
+        return Inertia::render('app/shop/ProductsPage', [
             'blueprints' => $blueprints,
             'lastPage' => $blueprints->lastPage(),
             'filters' => Blueprint::filters(),
@@ -95,7 +95,7 @@ class BlueprintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $bp = Blueprint::find($id);
         if(!$bp)
@@ -116,7 +116,7 @@ class BlueprintsController extends Controller
                 $provider = $request->query("provider");
         }
 
-        return Inertia::render('public/shop/ProductsDetailPage', [
+        return Inertia::render('app/shop/ProductDetailsPage', [
             'blueprints' => $bp,
             'providers' => $providers,
         ]);
@@ -138,7 +138,7 @@ class BlueprintsController extends Controller
 
         $variants = $bp->getVariantsOfProvider($providerId);
 
-        return Inertia::render('public/shop/ProductsDetailPage', [
+        return Inertia::render('app/shop/ProductDetailsPage', [
             'variants' => $variants,
         ]);
     }
@@ -155,7 +155,7 @@ class BlueprintsController extends Controller
             ]);
 
         # @ddimitrov1108
-        return Inertia::render('public/shop/ProductsDetailPage', [
+        return Inertia::render('app/shop/ProductDetailsPage', [
             'providers' => $bp->getPrintProviders()
         ]);
     }

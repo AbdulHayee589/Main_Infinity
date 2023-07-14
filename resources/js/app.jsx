@@ -1,6 +1,6 @@
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
-import PublicLayout from "./layouts/PublicLayout";
+import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -17,8 +17,8 @@ createInertiaApp({
     const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
     let page = pages[`./Pages/${name}.jsx`];
 
-    if (name.startsWith("public/"))
-      page.default.layout = (page) => <PublicLayout children={page} />;
+    if (name.startsWith("app/"))
+      page.default.layout = (page) => <AppLayout children={page} />;
     else if (name.startsWith("auth/"))
       page.default.layout = (page) => <AuthLayout children={page} />;
     // else if(name.startsWith('/dashboard'))

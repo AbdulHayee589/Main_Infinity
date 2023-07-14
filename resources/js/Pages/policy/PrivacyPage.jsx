@@ -1,6 +1,6 @@
 export default function PrivacyPage() {
     return (
-        <div className="container mx-auto text-gray-600 text px-4 py-16">
+        <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - PRIVACY POLICY
             </h4>
@@ -756,6 +756,6 @@ export default function PrivacyPage() {
                 </a>
                 :
             </p>
-        </div>
+        </Container>
     );
 }

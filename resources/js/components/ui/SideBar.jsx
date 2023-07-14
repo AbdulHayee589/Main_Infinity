@@ -8,7 +8,7 @@ export default function SideBar({
   onClose,
   headerComponent = null,
   footerComponent = null,
-  showFrom = "right",
+  showFrom = "left",
   children,
   className,
   ...restProps
@@ -44,7 +44,7 @@ export default function SideBar({
 
                 <button
                   aria-label="Close Menu"
-                  className="text-2xl w-fit ml-auto text-gray-400 hover:text-gold-main transition-all"
+                  className="text-lg w-fit ml-auto text-black/80 hover:text-gold-main transition-all"
                   onClick={onClose}
                 >
                   <FaXmark />

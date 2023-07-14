@@ -1,7 +1,7 @@
 import { usePage } from "@inertiajs/react";
 import { useEffect } from "react";
 
-export default function ProductsDetailsPage() {
+export default function ProductDetailsPage() {
   const { props } = usePage();
 
   useEffect(() => {
@@ -9,6 +9,6 @@ export default function ProductsDetailsPage() {
   }, []);
 
   return (
-    <div>ProductsDetailsPage</div>
+    <div>ProductDetailsPage</div>
   )
 }

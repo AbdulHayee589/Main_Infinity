@@ -48,7 +48,7 @@ export default function SignUpForm() {
           <Alert variant="error">{formState.error}</Alert>
         )}
 
-        <div className="md:flex gap-2 justify-between">
+        <div className="md:flex gap-4 justify-between">
           <Field
             id="firstName"
             name="firstName"
@@ -107,7 +107,7 @@ export default function SignUpForm() {
           fullWidth
         />
 
-        <div className="w-full flex items-center mt-1 space-x-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 gap-2 text-sm text-gray-400">
           <span>Already have an account?</span>
           {!formState.loading ? (
             <NavLink

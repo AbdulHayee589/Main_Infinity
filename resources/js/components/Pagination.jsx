@@ -16,7 +16,7 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
+                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-sm border border-gray-100 hover:bg-gray-100",
                 active &&
                 "bg-gray-100 text-black hover:text-black font-semibold"
               )}
@@ -29,7 +29,7 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
+                "text-gray-400 w-10 h-10 grid items-center justify-center rounded-sm border border-gray-100 hover:bg-gray-100",
                 active &&
                 "bg-gray-100 text-black hover:text-black font-semibold"
               )}
@@ -42,7 +42,7 @@ export default function Pagination({ links, className, ...restProps }) {
               href={url}
               disabled={url === null}
               className={clsx(
-                "w-10 h-10 grid items-center justify-center rounded-md border border-gray-100 hover:bg-gray-100",
+                "w-10 h-10 grid items-center justify-center rounded-sm border border-gray-100 hover:bg-gray-100",
                 active &&
                 "bg-gray-100 text-black hover:text-black font-semibold"
               )}

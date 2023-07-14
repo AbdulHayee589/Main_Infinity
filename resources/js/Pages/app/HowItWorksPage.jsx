@@ -1,6 +1,7 @@
 import Button from "../../components/ui/Button";
 import { FaChevronRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+import Container from "../../components/ui/Container";
 
 const steps = [
   {
@@ -47,7 +48,7 @@ export default function HowItWorksPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-16 flex justify-between items-center flex-col-reverse gap-y-12 text-center lg:flex-row lg:text-left lg:gap-x-12">
+      <Container className="px-4 md:px-6 py-16 flex justify-between items-center flex-col-reverse gap-y-12 text-center lg:flex-row lg:text-left lg:gap-x-12">
         <div className="max-w-4xl">
           <div className="grid justify-center lg:justify-start gap-3 mb-10">
             <h1 className="text-3xl font-bold capitalize text-center">
@@ -86,9 +87,9 @@ export default function HowItWorksPage() {
             alt="quality-shield.webp"
           />
         </div>
-      </div>
+      </Container>
 
-      <div className="container mx-auto px-4 py-16">
+      <Container className="px-4 py-16">
         <div className="grid justify-center gap-3 mb-10 lg:mb-16">
           <h1 className="text-3xl font-bold capitalize text-center">
             Our steps for you
@@ -125,7 +126,7 @@ export default function HowItWorksPage() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

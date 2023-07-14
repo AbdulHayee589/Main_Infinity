@@ -31,7 +31,7 @@ module.exports = {
                     dark: "#7F8C9F",
                 },
                 //temp
-                black: "#181a20",
+                black: "#17262B",
                 gold: {
                     light: "#FCD535",
                     main: "#F2BC07",
