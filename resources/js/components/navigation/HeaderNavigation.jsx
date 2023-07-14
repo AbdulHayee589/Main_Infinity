@@ -1,14 +1,11 @@
-import {
-  FaBarsStaggered,
-  FaCartShopping,
-  FaRegHeart,
-  FaRightToBracket,
-} from "react-icons/fa6";
 import Brand from "../ui/Brand";
 import NavLink from "../ui/NavLink";
 import { headerNavLinks } from "../../statics";
 import NavSideBar from "../sidebar/NavSideBar";
 import useOpenState from "../hooks/useOpenState";
+import Container from "../ui/Container";
+import Button from "../ui/Button";
+import { FaBarsStaggered, FaCartShopping, FaRegHeart } from "react-icons/fa6";
 
 export default function HeaderNavigation({ }) {
   const { open, setOpen, toggleOpen } = useOpenState(false);
@@ -23,9 +20,18 @@ export default function HeaderNavigation({ }) {
         onNavLinkClick={closeMobileMenu}
         onClose={toggleOpen}
       />
-      <header className="bg-white shadow flex justify-between items-center transition-all px-4 py-4 lg:py-2">
-        <div className="container flex justify-between items-center">
-          <Brand />
+      <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
+        <Container className="flex justify-between items-center">
+          <div className="flex gap-4 items-center">
+            <button
+              className="lg:hidden text-2xl cursor-pointer text-gray-500 hover:text-gold-main"
+              onClick={toggleOpen}
+            >
+              <FaBarsStaggered />
+            </button>
+
+            <Brand />
+          </div>
 
           <div className="z-20 hidden lg:flex items-center text-black">
             {headerNavLinks.map(({ id, title, type, ...rest }) =>
@@ -67,7 +73,7 @@ export default function HeaderNavigation({ }) {
             )}
           </div>
 
-          <div className="flex text-2xl items-center gap-6">
+          <div className="flex text-2xl items-center gap-4">
             <button
               className="cursor-pointer text-gray-500 hover:text-gold-main"
               onClick={toggleOpen}
@@ -75,31 +81,21 @@ export default function HeaderNavigation({ }) {
               <FaRegHeart />
             </button>
 
-            <button
+            <NavLink
               className="cursor-pointer text-gray-500 hover:text-gold-main"
               onClick={toggleOpen}
             >
               <FaCartShopping />
-            </button>
-
-            <button
-              className="lg:hidden cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleOpen}
-            >
-              <FaBarsStaggered />
-            </button>
+            </NavLink>
 
             <NavLink
               href="/sign-in"
-              className="hidden lg:flex gap-2 items-center text-gray-500"
+              className="flex gap-2 items-center text-gray-500"
             >
-              <div className="text-xl ">
-                <FaRightToBracket />
-              </div>
-              Sign In
+              <Button variant="outlined" className="px-6">Sign In</Button>
             </NavLink>
           </div>
-        </div>
+        </Container>
       </header>
     </>
   );

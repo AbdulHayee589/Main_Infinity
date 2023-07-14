@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import NavLink from "../ui/NavLink";
 import DisclouseContainer from "../ui/DisclouseContainer";
-import Button from "../ui/Button";
 import SideBar from "../ui/SideBar";
 
 export default function NavSideBar({
@@ -27,14 +26,6 @@ export default function NavSideBar({
     <SideBar
       open={open}
       onClose={onClose}
-      showFrom="right"
-      footerComponent={
-        <div className="absolute bg-white py-4 px-6 left-0 right-0 bottom-0">
-          <NavLink href="/sign-in">
-            <Button fullWidth>Sign In</Button>
-          </NavLink>
-        </div>
-      }
       {...restProps}
     >
       <nav className="grid gap-3">

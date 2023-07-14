@@ -42,11 +42,12 @@ export default function Filters({ filters, className, handleFilterSearch, ...res
   //useEffect(() => setActiveFilters(), []);
 
   return (
-    <div className={clsx("grid gap-3", className)} {...restProps}>
+    <div className={clsx("grid gap-2", className)} {...restProps}>
       {Object.keys(filters).map((key) => (
         <DisclouseContainer
           key={key}
           btnClassName="capitalize"
+          className="border-b border-b-red-500"
           title={key}
           open={true}
         >

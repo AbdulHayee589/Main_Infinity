@@ -13,7 +13,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
     <div
       key={product.bp_id}
       className={clsx(
-        "relative grid gap-2 w-full h-fit max-w-[120px] xxs:max-w-[150px] xs:max-w-[170px] md:max-w-[180px] lg:max-w-[200px] rounded-lg overflow-hidden",
+        "relative grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-sm overflow-hidden",
         className
       )}
       {...restProps}
@@ -21,7 +21,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
       <button
         onClick={onFavBtnClick}
         className={clsx(
-          "absolute top-2 right-2 z-10 text-xl grid items-center p-1.5 bg-white shadow-md rounded-lg",
+          "absolute top-2 right-2 z-10 text-xl grid items-center p-1.5 bg-white shadow-md rounded-sm",
           isFav ? "text-error-main" : "text-gray-300"
         )}
       >
@@ -29,43 +29,50 @@ export default function ProductShowcase({ product, className, ...restProps }) {
       </button>
 
       <Link href={`/shop/products/${product.id}`} className="group">
-        <div className="relative w-[120px] xxs:w-[150px] xs:w-[170px] md:w-[180px] lg:w-[200px] h-[120px] xxs:h-[150px] xs:h-[170px] md:h-[180px] lg:h-[200px] overflow-hidden">
+        <div className="relative overflow-hidden h-[256px] lg:h-[200px] xl:h-[256px]">
           {product.images.length > 1 ? (
             <>
               <LazyLoadImage
                 src={product.images[0]}
                 alt={product.images[0]}
-                width={220}
-                height={220}
-                className="absolute top-0 left-0 bottom-0 right-0 transition-all group-hover:opacity-0 group-hover:-z-10 group-hover:scale-110"
+                width={256}
+                height={256}
+                className="absolute top-0 left-0 z-0 transition-all duration-300 group-hover:scale-110 w-full"
               />
               <LazyLoadImage
                 src={product.images[1]}
                 alt={product.images[1]}
-                width={220}
-                height={220}
-                className="absolute top-0 left-0 bottom-0 right-0 transition-all -z-10 group-hover:opacity-1 group-hover:z-0 group-hover:scale-110"
+                width={256}
+                height={256}
+                className="absolute top-0 left-0 z-0 opacity-0 transition-all  duration-300 group-hover:opacity-100 group-hover:scale-110 w-full"
               />
             </>
           ) : (
             <LazyLoadImage
               src={product.images[0]}
               alt={product.images[0]}
-              width={220}
-              height={220}
-              className="absolute top-0 left-0 bottom-0 right-0 transition-all group-hover:scale-110"
+              width={256}
+              height={256}
+              className="absolute top-0 left-0 transition-all group-hover:scale-110 w-full"
             />
           )}
         </div>
 
-        <div className="grid gap-1 w-full px-4 py-2 text-sm sm:text-base group-hover:bg-[#f7f6f6]">
+        <div className="grid gap-2 w-full px-4 py-2 text-sm sm:text-base group-hover:bg-[#f7f6f6]">
           <div>
             <p title={product.title} className="w-full break-words">
               {product.title}
             </p>
-            <span className="w-full break-words text-sm text-gray-400">
+            <span className="w-full break-words text-sm text-gray-500">
               By {product.brand}
             </span>
+          </div>
+
+          <div>
+            <p className="w-full break-words">From USD 8.85</p>
+            <p className="w-full break-words text-sm text-gold-main">
+              From USD 8.97 with Printify Premium
+            </p>
           </div>
         </div>
       </Link>

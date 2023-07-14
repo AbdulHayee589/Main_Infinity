@@ -6,6 +6,7 @@ import useOpenState from "../../../components/hooks/useOpenState";
 import Pagination from "../../../components/Pagination";
 import ProductShowcase from "../../../components/ProductShowcase";
 import Filters from "../../../components/Filters";
+import Container from "../../../components/ui/Container";
 
 export default function ProductsPage() {
   const { open, setOpen, toggleOpen } = useOpenState(false);
@@ -49,35 +50,16 @@ export default function ProductsPage() {
         handleFilterSearch={handleFilters}
       />
 
-      <div className="container py-8 flex items-start justify-between gap-8">
+      <Container className="py-8 flex items-start justify-between gap-8">
         <div className="hidden lg:block border border-blue-500 col-span-1 min-h-full max-h-[400px] w-full max-w-[320px]">
           <Filters filters={props.filters} handleFilterSearch={handleFilters} />
         </div>
 
-        <div className="w-full flex flex-col gap-8">
-          <div className="flex gap-4 justify-between items-center col-span-5">
-            <div
-              className="lg:hidden text-xl text-gray-400"
-              onClick={toggleFiltersSideBar}
-            >
-              <FaFilter />
-            </div>
-
-            <div className="w-full">
-              <input
-                type="text"
-                name="searchQuery"
-                id="searchQuery"
-                placeholder="Search something..."
-                className="w-full border border-gray-200 rounded-lg px-4 py-2"
-                onChange={handleSearch}
-              />
-            </div>
-          </div>
+        <div className="w-full flex flex-col gap-8 border border-red-500">
 
           {props?.blueprints.data && (
             <>
-              <div className="flex justify-between items-start flex-wrap gap-6">
+              <div className="w-full grid items-start grid-cols-1 md:grid-cols-3 gap-8">
                 {props?.blueprints.data.map((blueprint) => (
                   <ProductShowcase
                     key={blueprint.bp_id}
@@ -92,7 +74,7 @@ export default function ProductsPage() {
             </>
           )}
         </div>
-      </div>
+      </Container>
     </>
   );
 }

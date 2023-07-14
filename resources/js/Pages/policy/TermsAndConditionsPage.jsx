@@ -1,6 +1,8 @@
+import Container from "../../components/ui/Container";
+
 export default function TermsAndConditionsPage() {
     return (
-        <div className="container mx-auto text-gray-600 text px-4 py-16">
+        <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - TERMS AND CONDITIONS
             </h4>
@@ -363,6 +365,6 @@ export default function TermsAndConditionsPage() {
                 free of charge, we will not be liable for any loss or damage of
                 any nature.
             </p>
-        </div>
+        </Container>
     );
 }

@@ -21,11 +21,11 @@ export default function TextField({
         disabled={disabled}
         type={type || "text"}
         className={clsx(
-          "px-4 py-2.5 border rounded-lg w-full",
+          "px-4 py-2.5 border rounded-sm w-full",
           className,
           errors[field.name] && touched[field.name]
-          ? " border-error-main focus:outline-error-main"
-          : "border-gray-200 hover:border-gray-300 focus:outline-gold-main"
+            ? " border-error-main focus:outline-error-main"
+            : "border-gray-200 hover:border-gray-300 focus:outline-gold-main"
         )}
         {...field}
         {...restProps}

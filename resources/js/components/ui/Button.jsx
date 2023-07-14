@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { rounded } from "./cvaStatics";
+import { rounded } from "../../cvaStatics";
 import clsx from "clsx";
 import Spinner from "./Spinner";
 
@@ -13,9 +13,9 @@ const button = cva("button", {
       ],
       outlined: [
         "bg-white",
-        "text-black",
+        "text-black/80",
         "border-gray-200",
-        "hover:border-gold-main",
+        "hover:text-gold-light",
       ],
     },
     size: {
@@ -28,7 +28,7 @@ const button = cva("button", {
   defaultVariants: {
     intent: "primary",
     size: "md",
-    rounded: "lg",
+    rounded: "sm",
   },
 });
 

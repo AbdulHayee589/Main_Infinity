@@ -1,6 +1,8 @@
+import Container from "../../components/ui/Container";
+
 export default function RefundPolicyPage() {
     return (
-        <div className="container mx-auto text-gray-600 text px-4 py-16">
+        <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
                 INFINITY CUSTOMS - REFUND POLICY
             </h4>
@@ -46,6 +48,6 @@ export default function RefundPolicyPage() {
                 orders the wrong size or color. In case of an unsuccessful
                 delivery, a partial refund will be issued.
             </p>
-        </div>
+        </Container>
     );
 }

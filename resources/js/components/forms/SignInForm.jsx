@@ -51,7 +51,7 @@ export default function SignInForm() {
           fullWidth
         />
 
-        <div className="w-full flex items-center mt-1 space-x-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 gap-2 text-sm text-gray-400">
           <span>Dont have an account?</span>
           {!formState.loading ? (
             <NavLink

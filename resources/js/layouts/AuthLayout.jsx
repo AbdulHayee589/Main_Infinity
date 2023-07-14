@@ -32,7 +32,7 @@ export default function AuthLayout({ children }) {
               <Button
                 key={provider.id}
                 variant="outlined"
-                className="border-transparent grid items-center justify-center max-w-fit px-2.5 py-2.5"
+                className="border-transparent grid items-center justify-center max-w-fit"
                 onClick={() => authClickHandler(provider.name)}
               >
                 <div className="max-h-[28px] max-w-[28px]">
