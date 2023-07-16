@@ -32,7 +32,7 @@ export default function SearchField({ handleSearch, className, ...restProps }) {
       onFocus={onFocusHandler}
       onBlur={onBlurHandler}
       className={clsx(
-        "cursor-pointer w-full group px-4 py-3 rounded-full transition-all flex items-center gap-3 border border-gray-300 bg-gray-50 focus-within:border-blue-500 group-hover:bg-white focus-within:bg-white",
+        "cursor-pointer w-full group px-4 py-3 rounded-full transition-all flex items-center gap-3 border border-gray-300 bg-gray-100 focus-within:border-blue-500 group-hover:bg-white focus-within:bg-white",
         className
       )}
     >
