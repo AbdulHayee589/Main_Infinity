@@ -9,8 +9,17 @@ export default function FilterSideBar({
   ...restProps
 }) {
   return (
-    <SideBar open={open} onClose={onClose} showFrom="left" {...restProps}>
-      <Filters filters={filters} handleFilterSearch={handleFilterSearch} />
+    <SideBar
+      headerComponent={<h1 className="font-semibold text-xl">Filters</h1>}
+      open={open}
+      onClose={onClose}
+      showFrom="left"
+      {...restProps}
+    >
+      <Filters
+        filters={filters}
+        handleFilterSearch={handleFilterSearch}
+      />
     </SideBar>
   );
 }

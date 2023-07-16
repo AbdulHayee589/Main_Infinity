@@ -58,3 +58,7 @@ Route::prefix('oauth')->group(function () {
     //Handle oauth login requests && redirect them to provider
     Route::get("/make/{oauth}", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'oauth_redirect']);
 });
+
+Route::fallback(function () {
+    return Inertia::render('NotFound');
+});

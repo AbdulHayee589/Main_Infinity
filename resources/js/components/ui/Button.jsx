@@ -13,7 +13,7 @@ const button = cva("button", {
       ],
       outlined: [
         "bg-white",
-        "text-black/80",
+        "text-gray-500",
         "border-gray-200",
         "hover:text-gold-light",
       ],

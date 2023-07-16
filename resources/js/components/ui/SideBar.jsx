@@ -1,6 +1,6 @@
-import clsx from "clsx";
 import Brand from "./Brand";
-import { FaXmark } from "react-icons/fa6";
+import { HiXMark } from "react-icons/hi2";
+import clsx from "clsx";
 
 export default function SideBar({
   title,
@@ -35,22 +35,21 @@ export default function SideBar({
         )}
       >
         <div className="h-[100%] pb-24 overflow-auto">
-          <div className="relative px-6 py-4 grid gap-4">
-            {headerComponent ? (
-              headerComponent
-            ) : (
-              <div className="flex items-center justify-between">
-                {title ? title : <Brand onClick={onClose} />}
-
-                <button
-                  aria-label="Close Menu"
-                  className="text-lg w-fit ml-auto text-black/80 hover:text-gold-main transition-all"
-                  onClick={onClose}
-                >
-                  <FaXmark />
-                </button>
-              </div>
-            )}
+          <div className="relative px-4 py-4 grid gap-4">
+            <div className="flex items-center justify-between">
+              {headerComponent ? (
+                headerComponent
+              ) : (
+                title ? title : <Brand onClick={onClose} />
+              )}
+              <button
+                aria-label="Close Menu"
+                className="text-2xl w-fit ml-auto text-black/80 hover:text-gold-main transition-all"
+                onClick={onClose}
+              >
+                <HiXMark />
+              </button>
+            </div>
 
             {children}
           </div>

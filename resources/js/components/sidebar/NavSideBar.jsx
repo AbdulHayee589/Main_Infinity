@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
 import NavLink from "../ui/NavLink";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import SideBar from "../ui/SideBar";
@@ -11,24 +9,9 @@ export default function NavSideBar({
   onClose,
   ...restProps
 }) {
-  const [searchValue, setSearchValue] = useState("");
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    Inertia.visit(`/how-it-works?test=${searchValue}`);
-    setSearchValue("");
-    onClose();
-  };
-
-  const onChangeHandler = (e) => setSearchValue(e.target.value);
-
   return (
-    <SideBar
-      open={open}
-      onClose={onClose}
-      {...restProps}
-    >
-      <nav className="grid gap-3">
+    <SideBar open={open} onClose={onClose} {...restProps}>
+      <nav className="grid">
         {navLinks.map(({ id, title, type, ...rest }) =>
           type === "category" ? (
             <DisclouseContainer key={id} title={title}>
@@ -38,6 +21,7 @@ export default function NavSideBar({
                   href={href}
                   title={title}
                   onClick={onClose}
+
                 >
                   {title}
                 </NavLink>
@@ -49,7 +33,7 @@ export default function NavSideBar({
               href={rest?.href}
               title={title}
               onClick={onClose}
-              className="font-semibold"
+              className="font-semibold px-2"
             >
               {title}
             </NavLink>

@@ -1,12 +1,14 @@
-import clsx from "clsx";
 import DisclouseContainer from "./ui/DisclouseContainer";
 import { useRemember } from "@inertiajs/react";
 import { useEffect } from "react";
+import useDebounce from "./hooks/useDebounce";
+import clsx from "clsx";
 
 export default function Filters({ filters, className, handleFilterSearch, ...restProps }) {
   const [activeFilters, setActiveFilters] = useRemember({}, 'ProductsPage');
+  const debounceState = useDebounce(activeFilters, 500);
 
-  const onFilterClick = (event) => {
+  const onChangeHandler = (event) => {
     const getPair = event.target.id.split("_");
     const pair = { key: getPair[0], value: getPair[1] };
     let modState = { ...activeFilters };
@@ -37,17 +39,16 @@ export default function Filters({ filters, className, handleFilterSearch, ...res
   useEffect(() => {
     console.log({ ...activeFilters });
     handleFilterSearch(activeFilters);
-  }, [activeFilters]);
-
-  //useEffect(() => setActiveFilters(), []);
+  }, [debounceState]);
 
   return (
-    <div className={clsx("grid gap-2", className)} {...restProps}>
+    <div className={clsx("grid", className)} {...restProps}>
       {Object.keys(filters).map((key) => (
         <DisclouseContainer
           key={key}
+          boxHoverEffect={true}
           btnClassName="capitalize"
-          className="border-b border-b-red-500"
+          panelClassName="border-b border-b-gray-200"
           title={key}
           open={true}
         >
@@ -60,7 +61,8 @@ export default function Filters({ filters, className, handleFilterSearch, ...res
                 type="checkbox"
                 name={`${key}_${value}`}
                 id={`${key}_${value}`}
-                onClick={onFilterClick}
+                onChange={onChangeHandler}
+                className="w-5 h-5 outline-none border border-red-500"
               />
               <label
                 htmlFor={`${key}_${value}`}

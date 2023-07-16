@@ -1,10 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import { HiChevronDown } from "react-icons/hi2";
 import clsx from "clsx";
-import { FaChevronDown } from "react-icons/fa6";
 
 export default function DisclouseContainer({
   title = "",
+  boxHoverEffect = false,
   className,
   btnClassName,
   panelClassName,
@@ -19,24 +19,26 @@ export default function DisclouseContainer({
         <>
           <Disclosure.Button
             className={clsx(
-              "group flex justify-between items-center font-semibold transition-all hover:text-gold-main",
+              "p-2 group flex justify-between items-center font-semibold transition-all",
+              boxHoverEffect ? "hover:bg-gray-100" : "hover:text-gold-main",
               btnClassName
             )}
           >
             {title}
             <div
               className={clsx(
-                "text-sm transition-all text-black/80 group-hover:text-gold-main",
+                "transition-all text-black",
+                !boxHoverEffect && "group-hover:text-gold-main",
                 open && "rotate-180"
               )}
             >
-              <FaChevronDown />
+              <HiChevronDown />
             </div>
           </Disclosure.Button>
 
           <Disclosure.Panel
             className={clsx(
-              "grid gap-2 text-gray-500 transition-all",
+              "grid gap-2 p-2 text-black transition-all",
               panelClassName
             )}
           >

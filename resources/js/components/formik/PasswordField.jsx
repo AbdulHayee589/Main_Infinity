@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
+import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import clsx from "clsx";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 export default function PasswordField({
   label = "",
@@ -67,10 +67,10 @@ export default function PasswordField({
           tabIndex={-1}
           type="button"
           disabled={disabled}
-          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-secondary-dark cursor-pointer rounded-sm select-none"
+          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-secondary-dark cursor-pointer rounded-md select-none"
           onClick={PasswordIconClickHandler}
         >
-          {isVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+          {isVisible ? <HiOutlineEyeSlash /> : <HiOutlineEye />}
         </button>
 
         <input
@@ -78,7 +78,7 @@ export default function PasswordField({
           disabled={disabled}
           type={isVisible && !disabled ? "text" : "password"}
           className={clsx(
-            "px-4 py-2.5 border rounded-sm w-full",
+            "px-4 py-2.5 border rounded-md w-full",
             className,
             errors[field.name] && touched[field.name]
               ? " border-error-main focus:outline-error-main"

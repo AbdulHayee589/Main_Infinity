@@ -5,7 +5,11 @@ import NavSideBar from "../sidebar/NavSideBar";
 import useOpenState from "../hooks/useOpenState";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
-import { FaBarsStaggered, FaCartShopping, FaRegHeart } from "react-icons/fa6";
+import {
+  HiBars3CenterLeft,
+  HiOutlineHeart,
+  HiShoppingCart,
+} from "react-icons/hi2";
 
 export default function HeaderNavigation({ }) {
   const { open, setOpen, toggleOpen } = useOpenState(false);
@@ -24,10 +28,10 @@ export default function HeaderNavigation({ }) {
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
             <button
-              className="lg:hidden text-2xl cursor-pointer text-gray-500 hover:text-gold-main"
+              className="lg:hidden text-3xl cursor-pointer text-gray-500 hover:text-gold-main"
               onClick={toggleOpen}
             >
-              <FaBarsStaggered />
+              <HiBars3CenterLeft />
             </button>
 
             <Brand />
@@ -78,21 +82,24 @@ export default function HeaderNavigation({ }) {
               className="cursor-pointer text-gray-500 hover:text-gold-main"
               onClick={toggleOpen}
             >
-              <FaRegHeart />
+              <HiOutlineHeart />
             </button>
 
             <NavLink
+              href="/shop/cart"
               className="cursor-pointer text-gray-500 hover:text-gold-main"
               onClick={toggleOpen}
             >
-              <FaCartShopping />
+              <HiShoppingCart />
             </NavLink>
 
             <NavLink
               href="/sign-in"
               className="flex gap-2 items-center text-gray-500"
             >
-              <Button variant="outlined" className="px-6">Sign In</Button>
+              <Button variant="outlined" className="px-6">
+                Sign In
+              </Button>
             </NavLink>
           </div>
         </Container>

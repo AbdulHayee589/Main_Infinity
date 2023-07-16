@@ -19,7 +19,7 @@ export const headerNavLinks = [
     title: "Men",
     type: "category",
     links: [
-      { id: uuidv4(), title: "T-Shirt", href: "/shop/products" },
+      { id: uuidv4(), title: "T-Shirt", href: "/shop/products?category=1" },
       { id: uuidv4(), title: "Hoodies", href: "/shop/products" },
       { id: uuidv4(), title: "Sweatshirts", href: "/shop/products" },
       { id: uuidv4(), title: "Long Sleeves", href: "/shop/products" },
@@ -79,7 +79,11 @@ export const headerNavLinks = [
       { id: uuidv4(), title: "Baby Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Mouse Pads", href: "/shop/products" },
       { id: uuidv4(), title: "Pets", href: "/shop/products" },
-      { id: uuidv4(), title: "Kitchen Accessories", href: "/shop/products" },
+      {
+        id: uuidv4(),
+        title: "Kitchen Accessories",
+        href: "/shop/products",
+      },
       { id: uuidv4(), title: "Cat Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Tech Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Travel", href: "/shop/products" },
@@ -101,7 +105,11 @@ export const headerNavLinks = [
       { id: uuidv4(), title: "Baby Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Mouse Pads", href: "/shop/products" },
       { id: uuidv4(), title: "Pets", href: "/shop/products" },
-      { id: uuidv4(), title: "Kitchen Accessories", href: "/shop/products" },
+      {
+        id: uuidv4(),
+        title: "Kitchen Accessories",
+        href: "/shop/products",
+      },
       { id: uuidv4(), title: "Cat Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Tech Accessories", href: "/shop/products" },
       { id: uuidv4(), title: "Travel", href: "/shop/products" },
@@ -115,7 +123,11 @@ export const headerNavLinks = [
     type: "category",
     links: [
       { id: uuidv4(), title: "Anime", href: "/shop/products" },
-      { id: uuidv4(), title: "Movies & TV Series", href: "/shop/products" },
+      {
+        id: uuidv4(),
+        title: "Movies & TV Series",
+        href: "/shop/products",
+      },
       { id: uuidv4(), title: "Cartoons", href: "/shop/products" },
       { id: uuidv4(), title: "Sports", href: "/shop/products" },
       { id: uuidv4(), title: "Video Games", href: "/shop/products" },
