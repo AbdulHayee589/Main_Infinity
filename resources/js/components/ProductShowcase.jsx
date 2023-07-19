@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import clsx from "clsx";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
-import { useState } from "react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
+import clsx from "clsx";
 
 export default function ProductShowcase({ product, className, ...restProps }) {
   const [isFav, setIsFav] = useState(false);
