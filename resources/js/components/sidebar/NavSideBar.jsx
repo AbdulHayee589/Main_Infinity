@@ -21,7 +21,6 @@ export default function NavSideBar({
                   href={href}
                   title={title}
                   onClick={onClose}
-
                 >
                   {title}
                 </NavLink>

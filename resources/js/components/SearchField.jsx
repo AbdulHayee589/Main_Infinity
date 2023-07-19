@@ -8,7 +8,7 @@ export default function SearchField({ handleSearch, className, ...restProps }) {
   const [focus, setFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [prevSearchValue, setPrevSearchValue] = useState(null);
-  const debounceState = useDebounce(searchValue, 500);
+  const debounceState = useDebounce(searchValue, 1000);
 
   const onFocusHandler = () => setFocus(true);
   const onBlurHandler = () => setFocus(false);

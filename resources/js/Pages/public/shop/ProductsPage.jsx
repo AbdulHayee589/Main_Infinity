@@ -1,7 +1,6 @@
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
-import { FaFilter } from "react-icons/fa";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Pagination from "../../../components/Pagination";
 import ProductShowcase from "../../../components/ProductShowcase";
@@ -24,7 +23,7 @@ const sortBy = [
 export default function ProductsPage() {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
-  const { props, url } = usePage();
+  const { props } = usePage();
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
@@ -45,7 +44,6 @@ export default function ProductsPage() {
   };
 
   const handleFilters = (filters) => {
-    console.log("yes");
     router.reload({
       method: "post",
       data: { filters },
@@ -92,7 +90,7 @@ export default function ProductsPage() {
                   {sortBy.map(({ id, sortId, name }) => (
                     <Menu.Item key={id}>
                       <button
-                        className="hover:bg-gray-100 w-full flex items-center justify-start gap-2 px-4 py-2"
+                        className="hover:bg-gray-100 w-full flex items-center justify-start gap-2 p-2"
                         onClick={(e) => {
                           handleSort(sortId);
                         }}
@@ -107,12 +105,12 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <div className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500">
               Hoodies are in-demand all year round without any
               sign of dropping in popularity. Choose between
               various styles, like pullover, zip-up, or cropped,
               and sell them worldwide.
-            </div>
+            </p>
           </div>
         </div>
 

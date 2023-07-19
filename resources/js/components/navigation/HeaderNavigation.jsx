@@ -24,6 +24,7 @@ export default function HeaderNavigation({ }) {
         onNavLinkClick={closeMobileMenu}
         onClose={toggleOpen}
       />
+      
       <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
@@ -78,17 +79,13 @@ export default function HeaderNavigation({ }) {
           </div>
 
           <div className="flex text-2xl items-center gap-4">
-            <button
-              className="cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleOpen}
-            >
+            <NavLink className="text-gray-500 hover:text-gold-main">
               <HiOutlineHeart />
-            </button>
+            </NavLink>
 
             <NavLink
               href="/shop/cart"
-              className="cursor-pointer text-gray-500 hover:text-gold-main"
-              onClick={toggleOpen}
+              className="text-gray-500 hover:text-gold-main"
             >
               <HiShoppingCart />
             </NavLink>
@@ -97,7 +94,7 @@ export default function HeaderNavigation({ }) {
               href="/sign-in"
               className="flex gap-2 items-center text-gray-500"
             >
-              <Button variant="outlined" className="px-6">
+              <Button size="sm" variant="outlined" className="px-6">
                 Sign In
               </Button>
             </NavLink>

@@ -14,20 +14,20 @@ export default function ProductShowcase({ product, className, ...restProps }) {
     <div
       key={product.bp_id}
       className={clsx(
-        "relative grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-md overflow-hidden",
+        "relative group grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-md overflow-hidden",
         className
       )}
       {...restProps}
     >
-      {/* <button
+      <button
         onClick={onFavBtnClick}
         className={clsx(
-          "absolute top-2 right-2 z-10 text-xl grid items-center p-1.5 bg-white shadow-md rounded-md",
+          "hidden group-hover:grid absolute top-2 right-2 z-10 text-xl items-center p-1.5 bg-white shadow-md rounded-md transition-all",
           isFav ? "text-error-main" : "text-gray-300"
         )}
       >
         {isFav ? <HiHeart /> : <HiOutlineHeart />}
-      </button> */}
+      </button>
 
       <Link href={`/shop/products/${product.id}`} className="group">
         <div className="relative overflow-hidden h-[256px] xxs:h-[325px] xs:h-[350px] sm:h-[280px] md:h-[210px] lg:h-[190px] xl:h-[256px]">
@@ -59,22 +59,13 @@ export default function ProductShowcase({ product, className, ...restProps }) {
           )}
         </div>
 
-        <div className="grid gap-2 w-full px-4 py-2 text-sm sm:text-base group-hover:bg-[#f7f6f6]">
-          <div>
-            <p title={product.title} className="w-full break-words">
-              {product.title}
-            </p>
-            <span className="w-full break-words text-sm text-gray-500">
-              By {product.brand}
-            </span>
-          </div>
-
-          <div>
-            <p className="w-full break-words">From USD 8.85</p>
-            <p className="w-full break-words text-sm text-gray-500">
-              From USD 8.97 with Printify Premium
-            </p>
-          </div>
+        <div className="w-full px-4 py-2 text-sm sm:text-base group-hover:bg-[#f7f6f6]">
+          <p title={product.title} className="w-full break-words">
+            {product.title}
+          </p>
+          <span className="w-full break-words text-sm text-gray-500">
+            By {product.brand}
+          </span>
         </div>
       </Link>
     </div>

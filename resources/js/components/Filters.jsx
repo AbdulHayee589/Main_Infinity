@@ -4,22 +4,25 @@ import { useEffect } from "react";
 import useDebounce from "./hooks/useDebounce";
 import clsx from "clsx";
 
-export default function Filters({ filters, className, handleFilterSearch, ...restProps }) {
-  const [activeFilters, setActiveFilters] = useRemember({}, 'ProductsPage');
-  const debounceState = useDebounce(activeFilters, 500);
+export default function Filters({
+  filters,
+  className,
+  handleFilterSearch,
+  ...restProps
+}) {
+  const [activeFilters, setActiveFilters] = useRemember({}, "active-filters");
+  const debounceState = useDebounce(activeFilters, 1000);
 
   const onChangeHandler = (event) => {
     const getPair = event.target.id.split("_");
     const pair = { key: getPair[0], value: getPair[1] };
     let modState = { ...activeFilters };
-    console.log(pair);
 
     if (event.target.checked) {
       if (modState[pair.key]) {
-        if(modState[pair.key].indexOf(pair.value) === -1)
+        if (modState[pair.key].indexOf(pair.value) === -1)
           modState[pair.key] = [...modState[pair.key], pair.value];
-      }
-      else modState[pair.key] = [pair.value];
+      } else modState[pair.key] = [pair.value];
 
       setActiveFilters(modState);
     } else {
@@ -37,9 +40,17 @@ export default function Filters({ filters, className, handleFilterSearch, ...res
   };
 
   useEffect(() => {
-    console.log({ ...activeFilters });
     handleFilterSearch(activeFilters);
   }, [debounceState]);
+
+  useEffect(() => {
+    console.log(activeFilters);
+    handleFilterSearch(activeFilters);
+  }, []);
+
+  const isFilterChecked = (key, value) =>
+    Object.keys(activeFilters).includes(key) &&
+    activeFilters[key].includes(value);
 
   return (
     <div className={clsx("grid", className)} {...restProps}>
@@ -63,6 +74,7 @@ export default function Filters({ filters, className, handleFilterSearch, ...res
                 id={`${key}_${value}`}
                 onChange={onChangeHandler}
                 className="w-5 h-5 outline-none border border-red-500"
+                checked={isFilterChecked(key, value)}
               />
               <label
                 htmlFor={`${key}_${value}`}
