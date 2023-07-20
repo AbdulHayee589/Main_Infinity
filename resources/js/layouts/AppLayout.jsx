@@ -6,7 +6,7 @@ export default function AppLayout({ children }) {
     <>
       <HeaderNavigation />
 
-      <main className="min-h-[800px]">
+      <main>
         {children}
       </main>
       <FooterNavigation />

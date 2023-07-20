@@ -10,7 +10,7 @@ export default function Filters({
   handleFilterSearch,
   ...restProps
 }) {
-  const [activeFilters, setActiveFilters] = useRemember({}, "active-filters");
+  const [activeFilters, setActiveFilters] = useRemember({}, "ProductsPage");
   const debounceState = useDebounce(activeFilters, 1000);
 
   const onChangeHandler = (event) => {
