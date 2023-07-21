@@ -70,9 +70,13 @@ export default function ProductsPage() {
       />
 
       <Container className="flex flex-col gap-8 py-6">
-
         <div className="flex items-center justify-between gap-2 w-full">
-          <button className="lg:hidden p-1 outline-none text-2xl text-gray-500" onClick={toggleFiltersSideBar}><HiFunnel/></button>
+          <button
+            className="lg:hidden p-1 outline-none text-2xl text-gray-500"
+            onClick={toggleFiltersSideBar}
+          >
+            <HiFunnel />
+          </button>
           <SearchField className="grow" handleSearch={handleSearch} />
         </div>
 
@@ -85,7 +89,9 @@ export default function ProductsPage() {
                 Hoodies
               </h1>
               <div className="flex items-center gap-2">
-                <span className="min-w-fit text-sm">Sort by</span>
+                <span className="min-w-fit text-sm">
+                  Sort by
+                </span>
                 <Dropdown title={activeSort.name}>
                   {sortBy.map(({ id, sortId, name }) => (
                     <Menu.Item key={id}>
@@ -95,8 +101,15 @@ export default function ProductsPage() {
                           handleSort(sortId);
                         }}
                       >
-                        <HiCheck className={clsx("text-2xl text-gold-main", activeSort.sortId ===
-                          sortId ? "opacity-100" : "opacity-0")} />
+                        <HiCheck
+                          className={clsx(
+                            "text-2xl text-gold-main",
+                            activeSort.sortId ===
+                              sortId
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
                         {name}
                       </button>
                     </Menu.Item>
@@ -125,7 +138,7 @@ export default function ProductsPage() {
           <div className="w-full flex flex-col gap-8">
             {props?.blueprints.data && (
               <>
-                <div className="w-full grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="w-full grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {props?.blueprints.data.map((blueprint) => (
                     <ProductShowcase
                       key={blueprint.bp_id}
