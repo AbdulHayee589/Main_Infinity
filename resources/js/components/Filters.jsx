@@ -1,7 +1,6 @@
 import DisclouseContainer from "./ui/DisclouseContainer";
 import { useRemember } from "@inertiajs/react";
 import { useEffect } from "react";
-import useDebounce from "./hooks/useDebounce";
 import clsx from "clsx";
 
 export default function Filters({
@@ -11,7 +10,6 @@ export default function Filters({
   ...restProps
 }) {
   const [activeFilters, setActiveFilters] = useRemember({}, "ProductsPage");
-  const debounceState = useDebounce(activeFilters, 1000);
 
   const onChangeHandler = (event) => {
     const getPair = event.target.id.split("_");
@@ -41,7 +39,7 @@ export default function Filters({
 
   useEffect(() => {
     handleFilterSearch(activeFilters);
-  }, [debounceState]);
+  }, [activeFilters]);
 
   useEffect(() => {
     console.log(activeFilters);
