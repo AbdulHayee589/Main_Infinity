@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Stevebauman\Location\Facades\Location;
 
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -37,6 +38,9 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function getUserIpAddr(){ $ipaddress = ''; if (isset($_SERVER['HTTP_CLIENT_IP'])) $ipaddress = $_SERVER['HTTP_CLIENT_IP']; else if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR']; else if(isset($_SERVER['HTTP_X_FORWARDED'])) $ipaddress = $_SERVER['HTTP_X_FORWARDED']; else if(isset($_SERVER['HTTP_FORWARDED_FOR'])) $ipaddress = $_SERVER['HTTP_FORWARDED_FOR']; else if(isset($_SERVER['HTTP_FORWARDED'])) $ipaddress = $_SERVER['HTTP_FORWARDED']; else if(isset($_SERVER['REMOTE_ADDR'])) $ipaddress = $_SERVER['REMOTE_ADDR']; else $ipaddress = 'UNKNOWN';     return $ipaddress; }
+
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -57,16 +61,13 @@ class LoginRequest extends FormRequest
         }
 
         $user = Auth::user();
-        $ip = $this->ip();
+        $ip = $this->getUserIpAddr();
 
-        //resolve the country only in prod
-        $position = "debug";
-        if(!env("APP_DEBUG")) {
-            if ($position = Location::get()) {
-                $position = $position->countryName;
-            } else {
-                $position = "unknown";
-            }
+        $position = Location::get($ip);
+        if ($position) {
+            $position = $position->countryName;
+        } else {
+            $position = "unknown";
         }
 
         $user = Auth::user();

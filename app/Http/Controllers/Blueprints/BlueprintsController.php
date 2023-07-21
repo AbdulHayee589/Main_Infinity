@@ -97,14 +97,17 @@ class BlueprintsController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $bp = Blueprint::find($id);
+        $bp = Blueprint::where('id', $id)->first();
+
         if(!$bp)
             return back()->withErrors([
                 "errors" => trans("blueprints.not_found")
             ]);
 
-        $providers = $bp->getPrintProviders();
+        $providers = $bp->print_providers;
         $provider = null;
+        $variants = null;
+
         if($request->query("provider")) {
             $id = $request->query("provider");
             $exists = array_filter($providers, function ($p) use ($id) {
@@ -112,13 +115,21 @@ class BlueprintsController extends Controller
                 return false;
             });
 
-            if(count($exists) === 1)
+            if(count($exists) === 1) {
                 $provider = $request->query("provider");
+
+                $variants = $bp->getVariantsOfProvider($provider);
+            } else {
+                return back()->withErrors([
+                    "errors" => trans("blueprints.not_found")
+                ]);
+            }
         }
 
         return Inertia::render('public/shop/ProductDetailsPage', [
             'blueprints' => $bp,
-            'providers' => $providers,
+            'providers' => $bp->print_providers,
+            'variants' => $variants
         ]);
     }
 
