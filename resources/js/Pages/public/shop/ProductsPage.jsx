@@ -2,11 +2,11 @@ import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
-import Pagination from "../../../components/Pagination";
-import ProductShowcase from "../../../components/ProductShowcase";
-import Filters from "../../../components/Filters";
 import Container from "../../../components/ui/Container";
-import SearchField from "../../../components/SearchField";
+import Filters from "../../../components/product/Filters";
+import SearchField from "../../../components/product/SearchField";
+import Pagination from "../../../components/product/Pagination";
+import ProductShowcase from "../../../components/product/ProductShowcase";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
@@ -127,8 +127,8 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        <div className="flex items-start justify-between gap-10">
-          <div className="hidden lg:block col-span-1 min-h-full max-h-[400px] w-full max-w-[320px]">
+        <div className="flex items-start justify-between">
+          <div className="hidden lg:block col-span-1 w-full max-w-[320px]">
             <Filters
               filters={props.filters}
               handleFilterSearch={handleFilters}
@@ -138,7 +138,7 @@ export default function ProductsPage() {
           <div className="w-full flex flex-col gap-8">
             {props?.blueprints.data && (
               <>
-                <div className="w-full grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {props?.blueprints.data.map((blueprint) => (
                     <ProductShowcase
                       key={blueprint.bp_id}

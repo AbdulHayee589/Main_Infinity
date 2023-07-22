@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
-import useDebounce from "./hooks/useDebounce";
+import useDebounce from "../hooks/useDebounce";
 import clsx from "clsx";
 
 export default function SearchField({ handleSearch, className, ...restProps }) {
@@ -8,7 +8,7 @@ export default function SearchField({ handleSearch, className, ...restProps }) {
   const [focus, setFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [prevSearchValue, setPrevSearchValue] = useState(null);
-  const debounceState = useDebounce(searchValue, 1000);
+  const debounceState = useDebounce(searchValue);
 
   const onFocusHandler = () => setFocus(true);
   const onBlurHandler = () => setFocus(false);
