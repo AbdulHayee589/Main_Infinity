@@ -24,7 +24,7 @@ export default function HeaderNavigation({ }) {
         onNavLinkClick={closeMobileMenu}
         onClose={toggleOpen}
       />
-      
+
       <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">

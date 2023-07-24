@@ -1,4 +1,4 @@
-import DisclouseContainer from "./ui/DisclouseContainer";
+import DisclouseContainer from "../ui/DisclouseContainer";
 import { useRemember } from "@inertiajs/react";
 import { useEffect } from "react";
 import clsx from "clsx";

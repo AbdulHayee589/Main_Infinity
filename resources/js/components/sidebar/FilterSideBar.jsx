@@ -1,5 +1,5 @@
 import SideBar from "../ui/SideBar";
-import Filters from "../Filters";
+import Filters from "../product/Filters";
 
 export default function FilterSideBar({
   filters,
