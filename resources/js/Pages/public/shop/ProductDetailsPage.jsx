@@ -5,29 +5,32 @@ import ImagesDisplayContainer from "../../../components/product/ImagesDisplayCon
 import Modal from "../../../components/ui/Modal";
 import Button from "../../../components/ui/Button";
 
+const details = [
+  "100% Airlume combed and ringspun cotton (fiber content may vary for different colors)",
+  "Light fabric (4.2 oz/yd² (142 g/m²))",
+  "Retail fit",
+  "Tear away label",
+  "Runs true to size",
+];
+
 export default function ProductDetailsPage() {
   const { props } = usePage();
   const bp = props.blueprints;
   const [modalOpen, setModalOpen] = useState(false);
-
-  const getProviderVariants = (id) => {
-    router.reload({
-      method: "post",
-      only: ["variants"],
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess() {
-        console.log(props.blueprints);
-      },
-    });
-  };
+  const [providerTitle, setProviderTitle] = useState("");
+  const [variants, setVariants] = useState([]);
 
   useEffect(() => {
     console.log(props);
   }, []);
 
   useEffect(() => {
-    setModalOpen(!!props?.variants.variants.length);
+    setModalOpen(props.variants != null);
+
+    if (props.variants != null) {
+      setProviderTitle(props.variants.title);
+      setVariants(props.variants.variants);
+    }
   }, [props]);
 
   return (
@@ -35,28 +38,40 @@ export default function ProductDetailsPage() {
       <Modal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        title={`${props?.variants.title}'s variants`}
+        title={`${providerTitle}'s variants`}
       >
         <div className="overflow-auto h-96">
-        <pre>{JSON.stringify(props?.variants.variants, null, 4) || []}</pre>
+          <pre>{JSON.stringify(variants, null, 4)}</pre>
         </div>
       </Modal>
 
-      <Container className="flex flex-col gap-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-12">
-          <ImagesDisplayContainer />
-          <div className="grid gap-4 border border-red-500">
+      <Container className="flex flex-col gap-8 py-16">
+        <div className="flex flex-col lg:flex-row items-center gap-y-6 gap-x-24">
+          <ImagesDisplayContainer className="" images={bp.images} />
+          <div className="grid gap-4">
             <div>
-              <h1 className="text-xl font-semibold">
+              <span className="text-gray-400 text-sm">
+                t-shirt
+              </span>
+              <h1 className="text-2xl md:text-3xl font-semibold">
                 {bp.title}
               </h1>
-              <span className="text-sm text-gray-500">
-                By{" "}
-                <Link href="/" className="hover:text-gold-main">
-                  {bp.brand} {bp.model}
-                </Link>
-              </span>
             </div>
+
+            <Link href="/" className="hover:text-gold-main">
+              {bp.brand} {bp.model}
+            </Link>
+
+            <div className="grid">
+              {details.map((detail) => (
+                <div key={detail} className="flex gap-2">
+                  <span className="h-full">&#x2022;</span>
+                  <span>{detail}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link href="/" className="text-gray-500">Read more</Link>
           </div>
         </div>
 
@@ -64,7 +79,10 @@ export default function ProductDetailsPage() {
           {props.providers.map((el) => (
             <div key={el.id} className="flex gap-6">
               <span>{el.title}</span>
-              <Link href={`/shop/products/${bp.id}?provider=${el.id}`} only={['variants']}>
+              <Link
+                href={`/shop/products/${bp.id}?provider=${el.id}`}
+                only={["variants"]}
+              >
                 <Button size="sm">Get Variants</Button>
               </Link>
             </div>
