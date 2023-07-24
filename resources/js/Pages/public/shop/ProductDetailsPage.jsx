@@ -1,4 +1,4 @@
-import { Link, router, usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import Container from "../../../components/ui/Container";
 import ImagesDisplayContainer from "../../../components/product/ImagesDisplayContainer";
