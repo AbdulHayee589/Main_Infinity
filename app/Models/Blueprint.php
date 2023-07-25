@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Psr7\Request;
 
 class Blueprint extends Model
 {
@@ -31,6 +32,10 @@ class Blueprint extends Model
         'print_providers' => 'json'
     ];
 
+    public function getPrintProvidersAttribute() {
+        return $this->hasMany(Provider::class, 'blueprint_id');
+    }
+
     public static function filters() {
         $bps = self::all();
         $filters_resolved = [];
@@ -49,29 +54,6 @@ class Blueprint extends Model
             }
         }
         return $filters_resolved;
-    }
-
-
-    public function getPrintProvidersAttribute() {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('PRINTIFY_APIKEY'),
-        ])->get('https://api.printify.com//v1/catalog/blueprints/'.$this->bp_id.'/print_providers.json');
-
-        if(!$response->successful())
-            return false;
-
-        return $response->json();
-    }
-
-    public function getVariantsOfProvider($provider) {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('PRINTIFY_APIKEY'),
-        ])->get('https://api.printify.com//v1/catalog/blueprints/'.$this->bp_id.'/print_providers/'.$provider.'/variants.json');
-
-        if($response->successful())
-            return $response->json();
-
-        return null;
     }
 
     public function category() {
