@@ -46,7 +46,7 @@ class FreshProviders extends Command
         $this->info("Starting at: ". Carbon::now());
 
         foreach ($blueprints as $bp) {
-            $providers = $bp->print_providers->get();
+            $providers = $bp->fetchProviders();
             $sentRequests++;
 
             foreach ($providers as $p) {

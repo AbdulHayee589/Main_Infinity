@@ -32,8 +32,19 @@ class Blueprint extends Model
         'print_providers' => 'json'
     ];
 
-    public function getPrintProvidersAttribute() {
+    public function getPrintProvidersAttribute() { //internal
         return $this->hasMany(Provider::class, 'blueprint_id');
+    }
+
+    public function fetchProviders() { //external
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('PRINTIFY_APIKEY'),
+        ])->get('https://api.printify.com/v1/catalog/blueprints/' . $this->bp_id . '/print_providers.json');
+
+        if($response->successful())
+            return $response->json();
+
+        return false;
     }
 
     public static function filters() {
