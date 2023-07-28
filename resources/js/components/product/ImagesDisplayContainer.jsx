@@ -57,8 +57,8 @@ export default function ImagesDisplayContainer({
             <swiper-slide key={img}>
               <img
                 src={img}
-                width={440}
-                height={440}
+                width={460}
+                height={460}
                 alt={img}
                 className=""
               />
@@ -68,25 +68,25 @@ export default function ImagesDisplayContainer({
       </div>
       <div
         className={clsx(
-          "hidden lg:flex gap-4 max-h-[440px]",
+          "hidden lg:flex gap-4 max-h-[460px]",
           className
         )}
         {...restProps}
       >
         <div className="grid-cols-1 flex flex-col gap-2">
-          <div className="flex items-center justify-center text-lg">
+          <div className="flex items-center justify-center text-lg text-gray-400">
             <HiChevronUp />
           </div>
 
-          <div className="h-full max-h-[440px] overflow-auto overflow-x-hidden">
+          <div className="h-full max-h-[460px] overflow-auto overflow-x-hidden">
             <div className="flex flex-col gap-2 w-[80px]">
               {images.map((img) => (
                 <img
                   key={img}
                   onClick={() => onClickHandler(img)}
                   src={img}
-                  width={440}
-                  height={440}
+                  width={460}
+                  height={460}
                   alt={img}
                   className={clsx(
                     "cursor-pointer",
@@ -98,17 +98,17 @@ export default function ImagesDisplayContainer({
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-lg">
+          <div className="flex items-center justify-center text-lg text-gray-400">
             <HiChevronDown />
           </div>
         </div>
 
         <img
           src={activeImg}
-          width={440}
-          height={440}
+          width={460}
+          height={460}
           alt={activeImg}
-          className="max-h-[440px] max-w-[440px] object-cover"
+          className="max-h-[460px] max-w-[460px] object-cover"
         />
       </div>
     </>

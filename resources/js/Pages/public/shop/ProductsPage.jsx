@@ -1,5 +1,5 @@
 import { router, usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
@@ -23,24 +23,13 @@ const sortBy = [
 export default function ProductsPage() {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
-  const { props } = usePage();
+  const { props, url } = usePage();
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
 
   const handleSort = (sortId) => {
     setActiveSort(sortBy[sortId]);
-  };
-
-  const handleSearch = (searchValue) => {
-    console.log(searchValue);
-
-    router.reload({
-      method: "get",
-      data: { search: searchValue },
-      only: ["blueprints"],
-      preserveState: true,
-    });
   };
 
   const handleFilters = (filters) => {
@@ -55,10 +44,6 @@ export default function ProductsPage() {
       },
     });
   };
-
-  useEffect(() => {
-    console.log(props);
-  }, []);
 
   return (
     <>
@@ -77,7 +62,7 @@ export default function ProductsPage() {
           >
             <HiFunnel />
           </button>
-          <SearchField className="grow" handleSearch={handleSearch} />
+          <SearchField className="grow" />
         </div>
 
         <div className="">

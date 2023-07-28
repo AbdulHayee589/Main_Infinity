@@ -14,6 +14,7 @@ export default function FilterSideBar({
       open={open}
       onClose={onClose}
       showFrom="left"
+      className="p-4"
       {...restProps}
     >
       <Filters

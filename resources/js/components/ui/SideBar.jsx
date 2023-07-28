@@ -31,11 +31,12 @@ export default function SideBar({
               ? "translate-x-0 "
               : "translate-x-full"
             : "right-0",
-          showFrom === "left" ? (open ? "left-0" : "-left-full") : ""
+          showFrom === "left" ? (open ? "left-0" : "-left-full") : "",
+          className
         )}
       >
         <div className="h-[100%] pb-24 overflow-auto">
-          <div className="relative px-4 py-4 grid gap-4">
+          <div className="relative grid gap-4">
             <div className="flex items-center justify-between">
               {headerComponent ? (
                 headerComponent

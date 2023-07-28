@@ -15,10 +15,11 @@ const details = [
 
 export default function ProductDetailsPage() {
   const { props } = usePage();
-  const bp = props.blueprints;
   const [modalOpen, setModalOpen] = useState(false);
   const [providerTitle, setProviderTitle] = useState("");
   const [variants, setVariants] = useState([]);
+
+  const bp = props.blueprints;
 
   useEffect(() => {
     console.log(props);

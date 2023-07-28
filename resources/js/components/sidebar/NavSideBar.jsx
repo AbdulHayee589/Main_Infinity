@@ -10,7 +10,7 @@ export default function NavSideBar({
   ...restProps
 }) {
   return (
-    <SideBar open={open} onClose={onClose} {...restProps}>
+    <SideBar open={open} onClose={onClose} className="p-4" {...restProps}>
       <nav className="grid">
         {navLinks.map(({ id, title, type, ...rest }) =>
           type === "category" ? (
