@@ -40,12 +40,13 @@ class FreshProviders extends Command
     {
         $blueprints = Blueprint::all();
         $promises = [];
+        $totalReq = 0;
         $sentRequests = 0;
 
         $this->info("Starting at: ". Carbon::now());
 
         foreach ($blueprints as $bp) {
-            $providers = $bp->print_providers;
+            $providers = $bp->fetchProviders();
             $sentRequests++;
 
             foreach ($providers as $p) {
@@ -54,7 +55,7 @@ class FreshProviders extends Command
                 ])->async()->get('https://api.printify.com/v1/catalog/blueprints/' . $bp->bp_id . '/print_providers/' . $p['id'] . '/variants.json');
                 $sentRequests++;
 
-                $promises[] = $promise->then(function ($response) use ($bp, $p, $sentRequests) {
+                $promises[] = $promise->then(function ($response) use ($bp, $p, $sentRequests, $totalReq) {
                     if ($response->successful()) {
                         $variants = $response->json();
                         $provider = Provider::updateOrCreate([
@@ -67,7 +68,7 @@ class FreshProviders extends Command
                         if (!$provider) {
                             $this->error("Couldn't fetch Provider #" . $p['id']);
                         } else {
-                            $this->info("Currently at request: ".$sentRequests);
+                            $this->info("Currently at request: ".$sentRequests + $totalReq);
                             $provider->save();
                         }
                     } else {
@@ -80,7 +81,9 @@ class FreshProviders extends Command
                 });
             }
 
-            if($sentRequests % 300 == 0) {
+            if($sentRequests > 300) {
+                $totalReq += $sentRequests;
+                $sentRequests = 0;
                 $this->info("Reached rate limit. Waiting 40 sec.");
                 sleep(40);
             }
@@ -89,6 +92,6 @@ class FreshProviders extends Command
         }
 
         $this->info("Finished at: ". Carbon::now());
-        $this->info("Fetched " . $sentRequests . " providers.");
+        $this->info("Fetched " . $sentRequests + $totalReq . " providers.");
     }
 }
