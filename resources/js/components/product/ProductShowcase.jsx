@@ -13,7 +13,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
     <div
       key={product.bp_id}
       className={clsx(
-        "relative group grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-md overflow-hidden",
+        "relative group grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-sm overflow-hidden",
         className
       )}
       {...restProps}
@@ -21,7 +21,7 @@ export default function ProductShowcase({ product, className, ...restProps }) {
       <button
         onClick={onFavBtnClick}
         className={clsx(
-          "hidden group-hover:grid absolute top-2 right-2 z-10 text-xl items-center p-1.5 bg-white shadow-md rounded-md transition-all",
+          "hidden group-hover:grid absolute top-2 right-2 z-10 text-xl items-center p-1.5 bg-white shadow-md rounded-sm transition-all",
           isFav ? "text-error-main" : "text-gray-300"
         )}
       >

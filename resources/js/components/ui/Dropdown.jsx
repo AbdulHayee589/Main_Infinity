@@ -18,7 +18,7 @@ export default function Dropdown({
           <div>
             <Menu.Button
               className={clsx(
-                "rounded-md border border-gray-200 px-4 py-2 w-full items-center flex justify-between gap-6 outline-none",
+                "rounded-sm border border-gray-200 px-4 py-2 w-full items-center flex justify-between gap-6 outline-none",
                 menuBtnClassName
               )}
             >
@@ -45,7 +45,7 @@ export default function Dropdown({
           >
             <Menu.Items
               className={clsx(
-                "z-30 absolute right-0 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-secondary-light focus:outline-none outline-none select-none",
+                "z-30 absolute right-0 mt-2 w-52 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-secondary-light focus:outline-none outline-none select-none",
                 menuItemsClassName
               )}
             >

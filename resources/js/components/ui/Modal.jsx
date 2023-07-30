@@ -48,7 +48,7 @@ export default function Modal({
             >
               <Dialog.Panel
                 className={clsx(
-                  "max-w-5xl w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md"
+                  "max-w-5xl w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-sm"
                 )}
               >
                 <Dialog.Title className="flex justify-between">
