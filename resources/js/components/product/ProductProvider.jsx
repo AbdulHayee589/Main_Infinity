@@ -40,7 +40,9 @@ const ProductProvider = ({ provider = null }) => {
           {provider.title}
         </h1>
         <div className="flex gap-4">
-          <Button variant="outline">More details</Button>
+          <Button variant="outline" className="bg-white">
+            More details
+          </Button>
           <Button>Start designing</Button>
         </div>
       </div>
@@ -72,16 +74,14 @@ const ProductProvider = ({ provider = null }) => {
           </span>
           <span>2.13 business days</span>
         </div>
-        <div className="grow grid gap-2">
+        <div className="grow grid gap-2 max-w-[200px]">
           <span className="text-sm text-gray-500">
             Print areas • {printAreas.length}
           </span>
           <div className="grid">
-            {[...printAreas]?.map((print) => (
-              <span key={print} className="capitalize">
-                {print} side
-              </span>
-            ))}
+            <span key={print} className="">
+              {printAreas.map(str => `${str.charAt(0).toUpperCase() + str.slice(1)} side`).join(", ")}
+            </span>
           </div>
         </div>
         <div className="grow grid gap-2">
@@ -92,18 +92,22 @@ const ProductProvider = ({ provider = null }) => {
             {sizes[0]} - {sizes[sizes.length - 1]}
           </span>
         </div>
-        <div className="grow grid gap-2 min-w-[200px] max-w-[200px]">
-          <span className="text-sm text-gray-500">Colors</span>
-          <div className="flex justify-start flex-wrap gap-2">
-            {colors.map((color) => (
-              <div
-                key={color}
-                className="w-4 h-4 rounded-full border border-gray-200"
-                style={{ backgroundColor: colorsJson[color] }}
-              ></div>
-            ))}
+        {colors && (
+          <div className="grow grid gap-2 max-w-[200px]">
+            <span className="text-sm text-gray-500">Colors</span>
+            <div className="flex justify-start flex-wrap gap-2">
+              {colors.map((color) => (
+                <div
+                  key={color}
+                  className="w-4 h-4 rounded-full border border-gray-200"
+                  style={{
+                    backgroundColor: colorsJson[color],
+                  }}
+                ></div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
