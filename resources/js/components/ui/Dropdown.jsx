@@ -3,14 +3,14 @@ import { Fragment } from "react";
 import { HiChevronDown } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function Dropdown({
+const Dropdown = ({
   title = "Dropdown",
   className,
   menuBtnClassName,
   menuItemsClassName,
   chevronDown = true,
   children,
-}) {
+}) => {
   return (
     <Menu as="div" className={clsx("relative", className)}>
       {({ open }) => (
@@ -56,4 +56,5 @@ export default function Dropdown({
       )}
     </Menu>
   );
-}
+};
+export default Dropdown;

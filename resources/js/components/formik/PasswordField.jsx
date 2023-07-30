@@ -4,7 +4,7 @@ import ErrorMessage from "./ErrorMessage";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function PasswordField({
+const PasswordField = ({
   label = "",
   sublabel = "",
   fullWidth = false,
@@ -14,7 +14,7 @@ export default function PasswordField({
   disabled,
   form: { errors, touched },
   ...restProps
-}) {
+}) => {
   const inputRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -94,4 +94,5 @@ export default function PasswordField({
       </div>
     </div>
   );
-}
+};
+export default PasswordField;

@@ -2,7 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import { HiChevronDown } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function DisclouseContainer({
+const DisclouseContainer = ({
   title = "",
   boxHoverEffect = false,
   className,
@@ -12,15 +12,21 @@ export default function DisclouseContainer({
   children,
   open = false,
   ...restProps
-}) {
+}) => {
   return (
-    <Disclosure className={clsx("", className)} {...restProps} defaultOpen={open}>
+    <Disclosure
+      className={clsx("", className)}
+      {...restProps}
+      defaultOpen={open}
+    >
       {({ open }) => (
         <>
           <Disclosure.Button
             className={clsx(
               "p-2 group flex justify-between items-center font-semibold transition-all",
-              boxHoverEffect ? "hover:bg-gray-100" : "hover:text-gold-main",
+              boxHoverEffect
+                ? "hover:bg-gray-100"
+                : "hover:text-gold-main",
               btnClassName
             )}
           >
@@ -48,4 +54,5 @@ export default function DisclouseContainer({
       )}
     </Disclosure>
   );
-}
+};
+export default DisclouseContainer;

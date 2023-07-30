@@ -1,6 +1,6 @@
 import Container from "../../components/ui/Container";
 
-export default function RefundPolicyPage() {
+const RefundPage = () => {
     return (
         <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
@@ -50,4 +50,5 @@ export default function RefundPolicyPage() {
             </p>
         </Container>
     );
-}
+};
+export default RefundPage;

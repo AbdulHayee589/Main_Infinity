@@ -10,7 +10,7 @@ import {
 } from "../../statics";
 import Container from "../ui/Container";
 
-export default function FooterNavigation() {
+const FooterNavigation = () => {
   return (
     <footer className="bg-white">
       <Container>
@@ -143,4 +143,5 @@ export default function FooterNavigation() {
       </Container>
     </footer>
   );
-}
+};
+export default FooterNavigation;

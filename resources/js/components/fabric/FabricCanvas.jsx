@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { fabric } from "fabric";
 
-export default function FabricCanvas() {
+const FabricCanvas = () => {
   useEffect(() => {
     const canvas = new fabric.Canvas("fabric-canvas");
     // Configure the canvas and add objects, event listeners, etc.
@@ -13,4 +13,5 @@ export default function FabricCanvas() {
       <canvas className="" id="fabric-canvas" />
     </div>
   );
-}
+};
+export default FabricCanvas;

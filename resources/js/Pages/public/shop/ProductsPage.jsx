@@ -20,7 +20,7 @@ const sortBy = [
   { id: uuidv4(), sortId: 3, name: "Highest price" },
 ];
 
-export default function ProductsPage() {
+const ProductsPage = () => {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
   const { props, url } = usePage();
@@ -142,4 +142,5 @@ export default function ProductsPage() {
       </Container>
     </>
   );
-}
+};
+export default ProductsPage;

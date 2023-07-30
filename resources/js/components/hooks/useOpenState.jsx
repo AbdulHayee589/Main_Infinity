@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 
-export default function useOpenState(initialState = false) {
-  const [open, setOpen] = useState(initialState);
-  const toggleOpen = () => setOpen(!open);
-  
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "auto";
+const useOpenState = (initialState = false) => {
+    const [open, setOpen] = useState(initialState);
+    const toggleOpen = () => setOpen(!open);
 
-    return () => {
-      document.body.style.overflow = "auto";
-    }
-  }, [open]);
+    useEffect(() => {
+        document.body.style.overflow = open ? "hidden" : "auto";
 
-  return { open, setOpen, toggleOpen };
-}
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [open]);
+
+    return { open, setOpen, toggleOpen };
+};
+export default useOpenState;

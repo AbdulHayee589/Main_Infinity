@@ -3,14 +3,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FaTimes } from "react-icons/fa";
 import clsx from "clsx";
 
-export default function Modal({
+const Modal = ({
   modalOpen,
   setModalOpen,
   closeBtn = true,
   title = "",
   children,
   ...restProps
-}) {
+}) => {
   const modalCloseBtnClickHandler = () => {
     setModalOpen(false);
   };
@@ -21,7 +21,7 @@ export default function Modal({
         as="div"
         className="relative z-50"
         open={modalOpen}
-        onClose={() => {}}
+        onClose={() => { }}
       >
         <Transition.Child
           as={Fragment}
@@ -52,7 +52,9 @@ export default function Modal({
                 )}
               >
                 <Dialog.Title className="flex justify-between">
-                  <span className="font-semibold">{title}</span>
+                  <span className="font-semibold">
+                    {title}
+                  </span>
                   {closeBtn && (
                     <FaTimes
                       tabIndex={0}
@@ -69,4 +71,5 @@ export default function Modal({
       </Dialog>
     </Transition>
   );
-}
+};
+export default Modal;

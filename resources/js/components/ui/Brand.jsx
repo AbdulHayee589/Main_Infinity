@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function Brand({ className, ...restProps }) {
+const Brand = ({ className, ...restProps }) => {
   return (
     <div className={className} {...restProps}>
       <Link href="/" className="max-w-[32px]">
@@ -13,4 +13,5 @@ export default function Brand({ className, ...restProps }) {
       </Link>
     </div>
   );
-}
+};
+export default Brand;

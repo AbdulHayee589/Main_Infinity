@@ -6,11 +6,7 @@ import Spinner from "./Spinner";
 const button = cva("button", {
   variants: {
     intent: {
-      primary: [
-        "bg-gold-light",
-        "text-black",
-        "border-transparent",
-      ],
+      primary: ["bg-gold-light", "text-black", "border-transparent"],
       outlined: [
         "bg-white",
         "text-black/80",
@@ -32,7 +28,7 @@ const button = cva("button", {
   },
 });
 
-export default function Button({
+const Button = ({
   variant,
   size,
   className,
@@ -40,7 +36,7 @@ export default function Button({
   children,
   loading,
   ...restProps
-}) {
+}) => {
   return (
     <button
       className={clsx(
@@ -51,7 +47,12 @@ export default function Button({
       )}
       {...restProps}
     >
-      {loading ? <Spinner className="w-fit h-fit mx-auto text-black" /> : children}
+      {loading ? (
+        <Spinner className="w-fit h-fit mx-auto text-black" />
+      ) : (
+        children
+      )}
     </button>
   );
-}
+};
+export default Button;

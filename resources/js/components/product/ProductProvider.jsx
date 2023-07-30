@@ -40,7 +40,7 @@ const ProductProvider = ({ provider = null }) => {
           {provider.title}
         </h1>
         <div className="flex gap-4">
-          <Button variant="outline" className="bg-white">
+          <Button variant="outlined">
             More details
           </Button>
           <Button>Start designing</Button>
@@ -94,7 +94,7 @@ const ProductProvider = ({ provider = null }) => {
         </div>
         {colors && (
           <div className="grow grid gap-2 max-w-[200px]">
-            <span className="text-sm text-gray-500">Colors</span>
+            <span className="text-sm text-gray-500">Colors • {colors.length}</span>
             <div className="flex justify-start flex-wrap gap-2">
               {colors.map((color) => (
                 <div

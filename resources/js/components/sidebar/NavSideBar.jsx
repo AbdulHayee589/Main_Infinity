@@ -2,13 +2,13 @@ import NavLink from "../ui/NavLink";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import SideBar from "../ui/SideBar";
 
-export default function NavSideBar({
+const NavSideBar = ({
   navLinks = [],
   open,
   onNavLinkClick,
   onClose,
   ...restProps
-}) {
+}) => {
   return (
     <SideBar open={open} onClose={onClose} className="p-4" {...restProps}>
       <nav className="grid">
@@ -41,4 +41,5 @@ export default function NavSideBar({
       </nav>
     </SideBar>
   );
-}
+};
+export default NavSideBar;

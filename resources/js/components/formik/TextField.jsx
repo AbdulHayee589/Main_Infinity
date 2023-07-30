@@ -2,7 +2,7 @@ import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import clsx from "clsx";
 
-export default function TextField({
+const TextField = ({
   label = "",
   sublabel = "",
   fullWidth = false,
@@ -12,7 +12,7 @@ export default function TextField({
   disabled,
   form: { errors, touched },
   ...restProps
-}) {
+}) => {
   return (
     <div className={clsx("mb-4", fullWidth ? "w-full" : "w-fit")}>
       <Label label={label} sublabel={sublabel} />
@@ -36,4 +36,5 @@ export default function TextField({
       )}
     </div>
   );
-}
+};
+export default TextField;

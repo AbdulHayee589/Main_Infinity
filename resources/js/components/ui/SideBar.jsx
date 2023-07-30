@@ -2,7 +2,7 @@ import Brand from "./Brand";
 import { HiXMark } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function SideBar({
+const SideBar = ({
   title,
   open,
   onClose,
@@ -12,7 +12,7 @@ export default function SideBar({
   children,
   className,
   ...restProps
-}) {
+}) => {
   return (
     <div className={clsx("lg:hidden z-50 w-full h-full")} {...restProps}>
       <div
@@ -40,8 +40,10 @@ export default function SideBar({
             <div className="flex items-center justify-between">
               {headerComponent ? (
                 headerComponent
+              ) : title ? (
+                title
               ) : (
-                title ? title : <Brand onClick={onClose} />
+                <Brand onClick={onClose} />
               )}
               <button
                 aria-label="Close Menu"
@@ -60,4 +62,5 @@ export default function SideBar({
       </div>
     </div>
   );
-}
+};
+export default SideBar;

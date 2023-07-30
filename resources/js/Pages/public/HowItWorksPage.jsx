@@ -24,7 +24,7 @@ const steps = [
   },
 ];
 
-export default function HowItWorksPage() {
+const HowItWorksPage = () => {
   return (
     <div className="bg-blue-50">
       <div className="bg-gray-900 px-4 py-16">
@@ -129,4 +129,5 @@ export default function HowItWorksPage() {
       </Container>
     </div>
   );
-}
+};
+export default HowItWorksPage;

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-export default function ErrorMessage({ msg, className, ...restProps }) {
+const ErrorMessage = ({ msg, className, ...restProps }) => {
   return (
     <div
       className={clsx(
@@ -12,4 +12,5 @@ export default function ErrorMessage({ msg, className, ...restProps }) {
       {msg}
     </div>
   );
-}
+};
+export default ErrorMessage;

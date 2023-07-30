@@ -56,7 +56,7 @@ const ProductDetailsPage = () => {
           <h1 className="text-2xl font-bold my-6">
             Available print providers
           </h1>
-          <div className="grid gap-5">
+          <div className="grid gap-6">
             {props.providers.length > 0 &&
               props.providers.map((el) => (
                 <ProductProvider key={el.id} provider={el} />

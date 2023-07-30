@@ -1,4 +1,6 @@
-export default function PrivacyPage() {
+import Container from "../../components/ui/Container";
+
+const PrivacyPage = () => {
     return (
         <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
@@ -758,4 +760,5 @@ export default function PrivacyPage() {
             </p>
         </Container>
     );
-}
+};
+export default PrivacyPage;

@@ -4,7 +4,7 @@ import { router } from "@inertiajs/react";
 import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function SearchField({ value = null, className, ...restProps }) {
+const SearchField = ({ value = null, className, ...restProps }) => {
   const searchFieldRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [searchValue, setSearchValue] = useState(value || "");
@@ -62,4 +62,5 @@ export default function SearchField({ value = null, className, ...restProps }) {
       )}
     </div>
   );
-}
+};
+export default SearchField;

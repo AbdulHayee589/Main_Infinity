@@ -1,6 +1,6 @@
 import Container from "../../components/ui/Container";
 
-export default function TermsAndConditionsPage() {
+const TermsAndConditionsPage = () => {
     return (
         <Container className="text-gray-600 text px-4 py-16">
             <h4 className="text-xl font-bold text-center pb-8">
@@ -367,4 +367,5 @@ export default function TermsAndConditionsPage() {
             </p>
         </Container>
     );
-}
+};
+export default TermsAndConditionsPage;
