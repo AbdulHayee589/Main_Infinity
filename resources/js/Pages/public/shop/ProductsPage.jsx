@@ -57,7 +57,7 @@ const ProductsPage = () => {
       <Container className="flex flex-col gap-8 py-6">
         <div className="flex items-center justify-between gap-2 w-full">
           <button
-            className="lg:hidden p-1 outline-none text-2xl text-gray-500"
+            className="lg:hidden border border-gray-200 p-1 outline-none text-2xl text-gray-500"
             onClick={toggleFiltersSideBar}
           >
             <HiFunnel />

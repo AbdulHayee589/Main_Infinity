@@ -96,7 +96,7 @@ const HeaderNavigation = () => {
               <Button
                 size="sm"
                 variant="outlined"
-                className="px-6"
+                className="px-6 text-base text-black/80"
               >
                 Sign In
               </Button>

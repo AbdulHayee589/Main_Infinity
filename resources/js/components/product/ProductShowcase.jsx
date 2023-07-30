@@ -38,7 +38,7 @@ const ProductShowcase = ({ product, className, ...restProps }) => {
           />
         </div>
 
-        <div className="w-full px-4 py-2 text-sm sm:text-base group-hover:bg-[#f7f6f6]">
+        <div className="w-full px-4 py-2 text-base group-hover:bg-[#f7f6f6]">
           <p title={product.title} className="w-full break-words">
             {product.title}
           </p>
