@@ -30,8 +30,6 @@ const ProductProvider = ({ provider = null }) => {
       setPrintAreas([...pa]);
       setSizes([...sz]);
       setColors([...col]);
-
-      console.log(colors);
     }, 100);
   }, []);
 

@@ -13,15 +13,16 @@ const ProductDetailsPage = () => {
   const [variants, setVariants] = useState([]);
 
   useEffect(() => {
-    props.providers.forEach(
-      (el) => (el.variants = JSON.parse(el.variants))
-    );
+    try {
+      props.providers.forEach(
+        (el) => (el.variants = JSON.parse(el.variants))
+      );
+    } catch (err) { }
+
     console.log(props);
   }, []);
 
   useEffect(() => {
-
-
     setModalOpen(props.variants != null);
 
     if (props.variants != null) {
@@ -51,10 +52,16 @@ const ProductDetailsPage = () => {
           <ProductInformation blueprint={props.blueprints} />
         </div>
 
-        <div className="grid gap-4">
-          {props.providers.length > 0 && props.providers.map((el) => (
-            <ProductProvider key={el.id} provider={el} />
-          ))}
+        <div>
+          <h1 className="text-2xl font-bold my-6">
+            Available print providers
+          </h1>
+          <div className="grid gap-5">
+            {props.providers.length > 0 &&
+              props.providers.map((el) => (
+                <ProductProvider key={el.id} provider={el} />
+              ))}
+          </div>
         </div>
       </Container>
     </>
