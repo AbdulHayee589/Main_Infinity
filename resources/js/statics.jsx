@@ -19,7 +19,11 @@ export const headerNavLinks = [
     title: "Men",
     type: "category",
     links: [
-      { id: uuidv4(), title: "T-Shirt", href: "/shop/products?category=1" },
+      {
+        id: uuidv4(),
+        title: "T-Shirt",
+        href: "/shop/products?category=1",
+      },
       { id: uuidv4(), title: "Hoodies", href: "/shop/products" },
       { id: uuidv4(), title: "Sweatshirts", href: "/shop/products" },
       { id: uuidv4(), title: "Long Sleeves", href: "/shop/products" },
@@ -188,7 +192,7 @@ export const stockServices = [
     id: uuidv4(),
     title: "Customer Help Center",
     description:
-      "Our customer help center is dedicated to providing exceptional support to our valued customers. Our knowledgeable and friendly team is ready to assist you with any inquiries or concerns you may have, ensuring a seamless shopping experience.",
+      "Our customer help center offers exceptional support with a friendly team ready to assist you, ensuring a seamless shopping experience.",
     img: "online-chat.webp",
   },
   {

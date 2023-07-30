@@ -40,9 +40,7 @@ const ProductProvider = ({ provider = null }) => {
           {provider.title}
         </h1>
         <div className="flex gap-4">
-          <Button variant="outlined">
-            More details
-          </Button>
+          <Button variant="outlined">More details</Button>
           <Button>Start designing</Button>
         </div>
       </div>
@@ -50,10 +48,13 @@ const ProductProvider = ({ provider = null }) => {
       <div className="py-4 px-6 flex flex-wrap items-start gap-x-2">
         <div className="grow grid gap-2">
           <span className="text-sm text-gray-500">Location</span>
-          <img
-            src="https://hatscripts.github.io/circle-flags/flags/br.svg"
-            width="24"
-          />
+
+          <div className="flex flex-wrap gap-2 max-w-[110px]">
+            <img
+              src="https://hatscripts.github.io/circle-flags/flags/br.svg"
+              width="24"
+            />
+          </div>
         </div>
         <div className="grow grid gap-2">
           <span className="text-sm text-gray-500">Price</span>
@@ -80,7 +81,14 @@ const ProductProvider = ({ provider = null }) => {
           </span>
           <div className="grid">
             <span key={print} className="">
-              {printAreas.map(str => `${str.charAt(0).toUpperCase() + str.slice(1)} side`).join(", ")}
+              {printAreas
+                .map(
+                  (str) =>
+                    `${str.charAt(0).toUpperCase() +
+                    str.slice(1)
+                    } side`
+                )
+                .join(", ")}
             </span>
           </div>
         </div>
@@ -93,8 +101,10 @@ const ProductProvider = ({ provider = null }) => {
           </span>
         </div>
         {colors && (
-          <div className="grow grid gap-2 max-w-[200px]">
-            <span className="text-sm text-gray-500">Colors • {colors.length}</span>
+          <div className="grow grid gap-2 min-w-[200px] max-w-[200px]">
+            <span className="text-sm text-gray-500">
+              Colors • {colors.length}
+            </span>
             <div className="flex justify-start flex-wrap gap-2">
               {colors.map((color) => (
                 <div
