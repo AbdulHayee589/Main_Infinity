@@ -35,17 +35,14 @@ const ProductProvider = ({ provider = null }) => {
 
   return (
     <div className="bg-gray-50 border border-gray-200">
-      <div className="flex items-center justify-between py-3 px-6 border-b border-gray-200">
-        <h1 className="text-lg font-bold max-w-[340px] truncate ... ">
-          {provider.title}
-        </h1>
-        <div className="flex gap-4">
-          <Button variant="outlined">More details</Button>
-          <Button>Start designing</Button>
-        </div>
+      <div className="flex justify-end gap-4 items-center py-3 px-6 border-b border-gray-200">
+        <Button size="sm" variant="outlined">
+          More details
+        </Button>
+        <Button size="sm">Start designing</Button>
       </div>
 
-      <div className="py-4 px-6 flex flex-wrap items-start gap-x-2">
+      <div className="py-4 px-6 flex flex-wrap items-start gap-x-4">
         <div className="grow grid gap-2">
           <span className="text-sm text-gray-500">Location</span>
 
@@ -56,14 +53,9 @@ const ProductProvider = ({ provider = null }) => {
             />
           </div>
         </div>
-        <div className="grow grid gap-2">
+        <div className="grow grid gap-2 max-w-[140px]">
           <span className="text-sm text-gray-500">Price</span>
-          <div className="grid text-sm max-w-[110px]">
-            <span>From USD 9.33</span>
-            <span className="text-sm text-gray-500">
-              From USD 7.46 with Printify Premium
-            </span>
-          </div>
+          <span>From USD 999.33</span>
         </div>
         <div className="grow grid gap-2">
           <span className="text-sm text-gray-500">Shipping</span>
