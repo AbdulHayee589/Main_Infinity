@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Blueprints;
 use App\Http\Controllers\Controller;
 use App\Models\Blueprint;
 use App\Models\Category;
+use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -95,9 +97,9 @@ class BlueprintsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(string $id)
     {
-        $bp = Blueprint::where('id', $id)->first();
+        $bp = Blueprint::where('id', $id)->with("ratings")->first();
 
         if(!$bp)
             return back()->withErrors([
@@ -105,6 +107,7 @@ class BlueprintsController extends Controller
             ]);
 
         $providers = $bp->print_providers->get();
+
 
         return Inertia::render('public/shop/ProductDetailsPage', [
             'blueprints' => $bp,
@@ -144,10 +147,57 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
 
-        # @ddimitrov1108
         return Inertia::render('public/shop/ProductDetailsPage', [
             'providers' => $bp->getPrintProviders()
         ]);
+    }
+
+    public function rate(string $id, Request $request) {
+        //TODO uncomment after frontend part is done
+//        $user = Auth::user();
+//        if(!$user)
+//            return back()->withErrors([
+//                "errors" => trans("blueprints.rating_guest")
+//            ]);
+
+        $bp = Blueprint::find($id);
+        if(!$bp)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
+
+        //TODO uncomment after frontend part is done
+//        $user_rating = Rating::where('bp_id', $bp->id)
+//            ->where('by_id', $user->id)
+//            ->exists();
+//
+//        if($user_rating)
+//            return back()->withErrors([
+//                "errors" => trans("blueprints.rating_exists")
+//            ]);
+
+        $rating = $request->get("rating");
+        if(!$rating || is_nan($rating) || $rating < 1 || $rating > 5)
+            return back()->withErrors([
+                "errors" => trans("blueprints.rating_invalid")
+            ]);
+
+        $rating_msg = $request->get("message");
+        if(strlen($rating_msg) > 100)
+            return back()->withErrors([
+                "errors" => trans("blueprints.rating_toolong")
+            ]);
+
+        $rating = Rating::create([
+            "isMockup" => false,
+            "bp_id" => $bp->id,
+            "by_id" => 1, //TODO replace with $user->id after frontend part is done
+            "star_rating" => $rating,
+            "message" => $rating_msg
+        ]);
+
+        $rating->save();
+        return $this->show($id);
     }
 
 

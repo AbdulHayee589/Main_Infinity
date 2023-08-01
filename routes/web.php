@@ -35,8 +35,7 @@ Route::prefix('shop')->group(function() {
     Route::resource("products", \App\Http\Controllers\Blueprints\BlueprintsController::class);
     Route::get("products/{id}/{provider}/variants", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "variants"]);
     Route::get("products/{id}/providers", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "providers"]);
-
-
+    Route::post("products/{id}/rate", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "rate"]);
 });
 
 //Authentication

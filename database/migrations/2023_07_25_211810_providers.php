@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('internal_id');
             $table->text("title");
             $table->json("variants");
+            $table->float("price")->default(0);
             $table->boolean("isActive")->default(false);
             $table->timestamps();
             $table->foreign('blueprint_id')->references('id')->on('blueprints');

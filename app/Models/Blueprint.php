@@ -32,6 +32,18 @@ class Blueprint extends Model
         'print_providers' => 'json'
     ];
 
+    protected $appends = [
+        "rating"
+    ];
+
+    public function ratings() {
+        return $this->hasMany(Rating::class, "bp_id");
+    }
+
+    public function getRatingAttribute() {
+        return $this->ratings()->where("isApproved", true)->avg("star_rating");
+    }
+
     public function getPrintProvidersAttribute() { //internal
         return $this->hasMany(Provider::class, 'blueprint_id');
     }

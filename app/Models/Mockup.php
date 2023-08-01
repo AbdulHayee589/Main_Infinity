@@ -25,6 +25,10 @@ class Mockup extends Model
         'isActive' => 'boolean'
     ];
 
+    protected $appends = [
+        "rating"
+    ];
+
     public function user() {
         return $this->belongsTo(User::class, "user_id");
     }
@@ -35,6 +39,14 @@ class Mockup extends Model
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function ratings() {
+        return $this->hasMany(Rating::class, "mc_id");
+    }
+
+    public function getRatingAttribute() {
+        return $this->ratings()->where("isApproved", true)->avg("star_rating");
     }
 
 
