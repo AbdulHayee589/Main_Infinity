@@ -1,6 +1,6 @@
 import { usePage } from "@inertiajs/react";
 
-export default function CartPage() {
+const CartPage = () => {
   const { props } = usePage();
 
   return (
@@ -8,4 +8,5 @@ export default function CartPage() {
       <pre>{JSON.stringify(props, null, 4)}</pre>
     </div>
   );
-}
+};
+export default CartPage;

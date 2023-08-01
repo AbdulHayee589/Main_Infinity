@@ -11,9 +11,8 @@ import {
   HiShoppingCart,
 } from "react-icons/hi2";
 
-export default function HeaderNavigation({ }) {
+const HeaderNavigation = () => {
   const { open, setOpen, toggleOpen } = useOpenState(false);
-
   const closeMobileMenu = () => setOpen(false);
 
   return (
@@ -94,7 +93,11 @@ export default function HeaderNavigation({ }) {
               href="/sign-in"
               className="flex gap-2 items-center text-gray-500"
             >
-              <Button size="sm" variant="outlined" className="px-6">
+              <Button
+                size="sm"
+                variant="outlined"
+                className="px-6 text-base text-black/80"
+              >
                 Sign In
               </Button>
             </NavLink>
@@ -103,4 +106,5 @@ export default function HeaderNavigation({ }) {
       </header>
     </>
   );
-}
+};
+export default HeaderNavigation;

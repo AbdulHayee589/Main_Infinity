@@ -1,7 +1,7 @@
 import Button from "../components/ui/Button";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { v4 as uuidv4 } from "uuid";
-import {router} from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 
 const authProviders = [
   { id: uuidv4(), name: "facebook", img: "facebook" },
@@ -10,9 +10,9 @@ const authProviders = [
   { id: uuidv4(), name: "discord", img: "discord" },
 ];
 
-export default function AuthLayout({ children }) {
+const AuthLayout = ({ children }) => {
   const authClickHandler = (method) => {
-      window.location.href = `/oauth/make/${method}`
+    window.location.href = `/oauth/make/${method}`;
   };
 
   return (
@@ -62,4 +62,5 @@ export default function AuthLayout({ children }) {
       </div>
     </div>
   );
-}
+};
+export default AuthLayout;

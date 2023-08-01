@@ -1,14 +1,9 @@
-import DisclouseContainer from "../ui/DisclouseContainer";
-import { useRemember } from "@inertiajs/react";
 import { useEffect } from "react";
+import { useRemember } from "@inertiajs/react";
+import DisclouseContainer from "../ui/DisclouseContainer";
 import clsx from "clsx";
 
-export default function Filters({
-  filters,
-  className,
-  handleFilterSearch,
-  ...restProps
-}) {
+const Filters = ({ filters, className, handleFilterSearch, ...restProps }) => {
   const [activeFilters, setActiveFilters] = useRemember({}, "ProductsPage");
 
   const onChangeHandler = (event) => {
@@ -86,4 +81,6 @@ export default function Filters({
       ))}
     </div>
   );
-}
+};
+
+export default Filters;

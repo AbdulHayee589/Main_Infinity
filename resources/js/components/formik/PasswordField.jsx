@@ -4,7 +4,7 @@ import ErrorMessage from "./ErrorMessage";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function PasswordField({
+const PasswordField = ({
   label = "",
   sublabel = "",
   fullWidth = false,
@@ -14,7 +14,7 @@ export default function PasswordField({
   disabled,
   form: { errors, touched },
   ...restProps
-}) {
+}) => {
   const inputRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -67,7 +67,7 @@ export default function PasswordField({
           tabIndex={-1}
           type="button"
           disabled={disabled}
-          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-secondary-dark cursor-pointer rounded-md select-none"
+          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-secondary-dark cursor-pointer rounded-sm select-none"
           onClick={PasswordIconClickHandler}
         >
           {isVisible ? <HiOutlineEyeSlash /> : <HiOutlineEye />}
@@ -78,7 +78,7 @@ export default function PasswordField({
           disabled={disabled}
           type={isVisible && !disabled ? "text" : "password"}
           className={clsx(
-            "px-4 py-2.5 border rounded-md w-full",
+            "px-4 py-2.5 border rounded-sm w-full",
             className,
             errors[field.name] && touched[field.name]
               ? " border-error-main focus:outline-error-main"
@@ -94,4 +94,5 @@ export default function PasswordField({
       </div>
     </div>
   );
-}
+};
+export default PasswordField;

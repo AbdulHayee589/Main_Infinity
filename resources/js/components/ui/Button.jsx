@@ -6,22 +6,18 @@ import Spinner from "./Spinner";
 const button = cva("button", {
   variants: {
     intent: {
-      primary: [
-        "bg-gold-light",
-        "text-black",
-        "border-transparent",
-      ],
+      primary: ["bg-gold-light", "text-black", "border-transparent"],
       outlined: [
         "bg-white",
-        "text-black/80",
-        "border-gray-200",
+        "text-black",
+        "border-gray-300",
         "hover:text-gold-main",
       ],
     },
     size: {
-      sm: ["text-sm", "py-2", "px-3"],
-      md: ["text-base", "py-2.5", "px-4"],
-      lg: ["text-lg", "py-3", "py-5"],
+      sm: ["py-2", "px-4"],
+      md: ["py-2.5", "px-4"],
+      lg: ["py-3", "px-4"],
     },
     rounded: rounded,
   },
@@ -32,7 +28,7 @@ const button = cva("button", {
   },
 });
 
-export default function Button({
+const Button = ({
   variant,
   size,
   className,
@@ -40,7 +36,7 @@ export default function Button({
   children,
   loading,
   ...restProps
-}) {
+}) => {
   return (
     <button
       className={clsx(
@@ -51,7 +47,12 @@ export default function Button({
       )}
       {...restProps}
     >
-      {loading ? <Spinner className="w-fit h-fit mx-auto text-black" /> : children}
+      {loading ? (
+        <Spinner className="w-fit h-fit mx-auto text-black" />
+      ) : (
+        children
+      )}
     </button>
   );
-}
+};
+export default Button;

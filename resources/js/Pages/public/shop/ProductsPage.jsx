@@ -1,5 +1,5 @@
 import { router, usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
@@ -20,27 +20,16 @@ const sortBy = [
   { id: uuidv4(), sortId: 3, name: "Highest price" },
 ];
 
-export default function ProductsPage() {
+const ProductsPage = () => {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
-  const { props } = usePage();
+  const { props, url } = usePage();
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
 
   const handleSort = (sortId) => {
     setActiveSort(sortBy[sortId]);
-  };
-
-  const handleSearch = (searchValue) => {
-    console.log(searchValue);
-
-    router.reload({
-      method: "get",
-      data: { search: searchValue },
-      only: ["blueprints"],
-      preserveState: true,
-    });
   };
 
   const handleFilters = (filters) => {
@@ -56,10 +45,6 @@ export default function ProductsPage() {
     });
   };
 
-  useEffect(() => {
-    console.log(props);
-  }, []);
-
   return (
     <>
       <FilterSideBar
@@ -72,12 +57,12 @@ export default function ProductsPage() {
       <Container className="flex flex-col gap-8 py-6">
         <div className="flex items-center justify-between gap-2 w-full">
           <button
-            className="lg:hidden p-1 outline-none text-2xl text-gray-500"
+            className="lg:hidden border border-gray-200 p-1 outline-none text-2xl text-gray-500"
             onClick={toggleFiltersSideBar}
           >
             <HiFunnel />
           </button>
-          <SearchField className="grow" handleSearch={handleSearch} />
+          <SearchField className="grow" />
         </div>
 
         <div className="">
@@ -157,4 +142,5 @@ export default function ProductsPage() {
       </Container>
     </>
   );
-}
+};
+export default ProductsPage;

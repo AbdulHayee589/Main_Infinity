@@ -29,11 +29,7 @@ const params = {
   loop: false,
 };
 
-export default function ImagesDisplayContainer({
-  images,
-  className,
-  ...restProps
-}) {
+const ImagesDisplayContainer = ({ images, className, ...restProps }) => {
   const swiperRef = useRef(null);
   const [activeImg, setActiveImg] = useState(images[0]);
   const onClickHandler = (img) => setActiveImg(img);
@@ -68,18 +64,18 @@ export default function ImagesDisplayContainer({
       </div>
       <div
         className={clsx(
-          "hidden lg:flex gap-4 max-h-[440px]",
+          "hidden lg:flex gap-8 max-h-[440px]",
           className
         )}
         {...restProps}
       >
         <div className="grid-cols-1 flex flex-col gap-2">
-          <div className="flex items-center justify-center text-lg">
+          <div className="flex items-center justify-center text-lg text-gray-400">
             <HiChevronUp />
           </div>
 
           <div className="h-full max-h-[440px] overflow-auto overflow-x-hidden">
-            <div className="flex flex-col gap-2 w-[80px]">
+            <div className="flex flex-col gap-2 w-[72px]">
               {images.map((img) => (
                 <img
                   key={img}
@@ -98,7 +94,7 @@ export default function ImagesDisplayContainer({
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-lg">
+          <div className="flex items-center justify-center text-lg text-gray-400">
             <HiChevronDown />
           </div>
         </div>
@@ -113,4 +109,5 @@ export default function ImagesDisplayContainer({
       </div>
     </>
   );
-}
+};
+export default ImagesDisplayContainer;

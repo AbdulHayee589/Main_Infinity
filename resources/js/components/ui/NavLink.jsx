@@ -1,14 +1,14 @@
 import { Link } from "@inertiajs/react";
 import clsx from "clsx";
 
-export default function NavLink({
+const NavLink = ({
   href = "/",
   size = "base",
   hoverEffect = true,
   className,
   children,
   ...restProps
-}) {
+}) => {
   return (
     <Link
       href={href}
@@ -23,4 +23,5 @@ export default function NavLink({
       {children}
     </Link>
   );
-}
+};
+export default NavLink;

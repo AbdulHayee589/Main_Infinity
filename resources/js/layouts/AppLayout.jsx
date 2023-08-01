@@ -1,15 +1,14 @@
 import HeaderNavigation from "../components/navigation/HeaderNavigation";
 import FooterNavigation from "../components/navigation/FooterNavigation";
 
-export default function AppLayout({ children }) {
+const AppLayout = ({ children }) => {
   return (
     <>
       <HeaderNavigation />
 
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
       <FooterNavigation />
     </>
-  )
-}
+  );
+};
+export default AppLayout;

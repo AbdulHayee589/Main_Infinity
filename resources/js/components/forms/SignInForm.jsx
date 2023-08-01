@@ -6,7 +6,7 @@ import TextField from "../formik/TextField";
 import PasswordField from "../formik/PasswordField";
 import Button from "../ui/Button";
 
-export default function SignInForm() {
+const SignInForm = () => {
   const [formState, setFormState] = useState({
     loading: false,
     error: "",
@@ -82,4 +82,6 @@ export default function SignInForm() {
       </Form>
     </Formik>
   );
-}
+};
+
+export default SignInForm;

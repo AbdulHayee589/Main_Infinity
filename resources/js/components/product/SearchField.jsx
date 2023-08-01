@@ -1,29 +1,34 @@
 import { useEffect, useRef, useState } from "react";
-import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
 import useDebounce from "../hooks/useDebounce";
+import { router } from "@inertiajs/react";
+import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
 import clsx from "clsx";
 
-export default function SearchField({ handleSearch, className, ...restProps }) {
+const SearchField = ({ value = null, className, ...restProps }) => {
   const searchFieldRef = useRef(null);
   const [focus, setFocus] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(value || "");
   const [prevSearchValue, setPrevSearchValue] = useState(null);
-  const debounceState = useDebounce(searchValue);
+  const debounceState = useDebounce(searchValue, 250);
 
+  const onContainerClickHandler = () => searchFieldRef.current.focus();
   const onFocusHandler = () => setFocus(true);
   const onBlurHandler = () => setFocus(false);
   const onMouseDownHandler = () => setSearchValue("");
   const onChangeHandler = (e) => {
     setPrevSearchValue(searchValue);
-    setSearchValue(e.target.value); 
-  }
-  const onContainerClickHandler = () => searchFieldRef.current.focus();
+    setSearchValue(e.target.value);
+  };
 
   useEffect(() => {
-    if(searchValue === prevSearchValue)
-      return;
-      
-    handleSearch(searchValue);
+    if (searchValue === prevSearchValue) return;
+
+    router.reload({
+      method: "get",
+      data: { search: searchValue },
+      only: ["blueprints"],
+      preserveState: true,
+    });
   }, [debounceState]);
 
   return (
@@ -46,6 +51,7 @@ export default function SearchField({ handleSearch, className, ...restProps }) {
         name="searchValue"
         id="searchValue"
         placeholder="Search for products, brands, categories, and print providers"
+        {...restProps}
       />
 
       {focus && (
@@ -56,4 +62,5 @@ export default function SearchField({ handleSearch, className, ...restProps }) {
       )}
     </div>
   );
-}
+};
+export default SearchField;
