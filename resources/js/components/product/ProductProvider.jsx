@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import Button from "../ui/Button";
-import colorsJson from "../../colors.json";
+import colorsJson from "../../utils/colors.json";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const ProductProvider = ({ provider = null }) => {
+const ProductProvider = ({
+  onMoreDetailsClickHandler = () => { },
+  provider = null,
+}) => {
   const [printAreas, setPrintAreas] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
+
+  const onClickHandler = (provider) => onMoreDetailsClickHandler(provider);
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,26 +40,34 @@ const ProductProvider = ({ provider = null }) => {
   }, [provider]);
 
   return (
-    <div className="bg-gray-50 border border-gray-200">
-      <div className="flex justify-end gap-4 items-center py-3 px-6 border-b border-gray-200">
-        <Button size="sm" variant="outlined">
+    <div className="flex flex-col-reverse lg:flex-col bg-slate-50 border border-slate-200">
+      <div className="flex flex-col lg:flex-row justify-end gap-4 items-center py-3 px-4 md:px-6 lg:border-b border-slate-200">
+        <Button
+          onClick={() => onClickHandler(provider)}
+          size="sm"
+          variant="outlined"
+          className="w-full lg:w-fit"
+        >
           More details
         </Button>
-        <Button size="sm">Start designing</Button>
+        <Button size="sm" className="w-full lg:w-fit">
+          Start designing
+        </Button>
       </div>
 
-      <div className="py-4 px-6 flex flex-wrap items-start gap-x-4">
+      <div className="py-4 px-4 md:px-6 flex flex-col lg:flex-row items-start gap-4">
         <div className="grow grid gap-2">
           <span className="text-sm text-slate-500">Location</span>
 
-          <div className="flex flex-wrap gap-2 max-w-[110px]">
-            <img
-              src="https://hatscripts.github.io/circle-flags/flags/br.svg"
+          <div className="flex flex-wrap gap-2 lg:max-w-[110px]">
+            <LazyLoadImage
+              src="https://hatscripts.github.io/circle-flags/flags/bg.svg"
               width="24"
+              effect="blur"
             />
           </div>
         </div>
-        <div className="grow grid gap-2 max-w-[140px]">
+        <div className="grow grid gap-2 lg:max-w-[140px]">
           <span className="text-sm text-slate-500">Price</span>
           <span>From USD 999.33</span>
         </div>
@@ -67,7 +81,7 @@ const ProductProvider = ({ provider = null }) => {
           </span>
           <span>2.13 business days</span>
         </div>
-        <div className="grow grid gap-2 max-w-[200px]">
+        <div className="grow grid gap-2 lg:max-w-[200px]">
           <span className="text-sm text-slate-500">
             Print areas • {printAreas.length}
           </span>
@@ -93,7 +107,7 @@ const ProductProvider = ({ provider = null }) => {
           </span>
         </div>
         {colors && (
-          <div className="grow grid gap-2 min-w-[200px] max-w-[200px]">
+          <div className="grow grid gap-2 lg:w-full lg:max-w-[200px]">
             <span className="text-sm text-slate-500">
               Colors • {colors.length}
             </span>
@@ -101,7 +115,7 @@ const ProductProvider = ({ provider = null }) => {
               {colors.map((color) => (
                 <div
                   key={color}
-                  className="w-4 h-4 rounded-full border border-gray-200"
+                  className="w-4 h-4 rounded-full border border-slate-200"
                   style={{
                     backgroundColor: colorsJson[color],
                   }}

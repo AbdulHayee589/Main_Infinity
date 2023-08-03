@@ -52,7 +52,7 @@ const Filters = ({ filters, className, handleFilterSearch, ...restProps }) => {
           key={key}
           boxHoverEffect={true}
           btnClassName="capitalize"
-          panelClassName="border-b border-b-gray-200"
+          panelClassName="border-b border-b-slate-200"
           title={key}
           open={true}
         >

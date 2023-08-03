@@ -8,7 +8,7 @@ const Label = ({ label = "", sublabel = "", className, ...restProps }) => {
       )}
 
       {sublabel && (
-        <div className="min-w-fit text-sm text-gray-400">
+        <div className="min-w-fit text-sm text-slate-400">
           {sublabel}
         </div>
       )}

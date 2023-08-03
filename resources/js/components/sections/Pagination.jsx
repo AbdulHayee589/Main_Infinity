@@ -4,32 +4,32 @@ import { Link } from "@inertiajs/react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import clsx from "clsx";
 
-const Pagination = ({ links, className, ...restProps }) => {
-  const [pages, setPages] = useState([]);
+const Pagination = ({ pages = [], className, ...restProps }) => {
+  const [pagination, setPagination] = useState([]);
   const { searchParams } = useSearchParams();
 
-  const prevPage = links[0];
-  const nextPage = links[links.length - 1];
+  const prevPage = pages[0];
+  const nextPage = pages[pages.length - 1];
 
   useEffect(() => {
-    const strippedPages = links
-      .slice(1, links.length - 1)
+    const strippedPages = pages
+      .slice(1, pages.length - 1)
       .filter((el) => el.label != "...");
 
     const activeIndex = strippedPages.findIndex((l) => l.active);
 
     if (strippedPages.length > 5) {
-      if (activeIndex === 0) setPages(strippedPages.slice(0, 5));
+      if (activeIndex === 0) setPagination(strippedPages.slice(0, 5));
       else if (activeIndex === strippedPages.length - 1)
-        setPages(strippedPages.slice(activeIndex - 4, activeIndex + 1));
+        setPagination(strippedPages.slice(activeIndex - 4, activeIndex + 1));
       else if (activeIndex === strippedPages.length - 2)
-        setPages(strippedPages.slice(activeIndex - 3, activeIndex + 2));
+        setPagination(strippedPages.slice(activeIndex - 3, activeIndex + 2));
       else
-        setPages(strippedPages.slice(activeIndex - 2, activeIndex + 3));
+        setPagination(strippedPages.slice(activeIndex - 2, activeIndex + 3));
     } else {
-      setPages(strippedPages);
+      setPagination(strippedPages);
     }
-  }, [links]);
+  }, [pages]);
 
   return (
     <div
@@ -47,13 +47,13 @@ const Pagination = ({ links, className, ...restProps }) => {
               ? `${prevPage?.url}&search=${searchParams["search"]}`
               : prevPage?.url
           }
-          className="w-9 h-9 grid items-center justify-center rounded-sm font-semibold text-gray-400"
+          className="w-9 h-9 grid items-center justify-center rounded-sm text-slate-400"
         >
           <HiChevronLeft />
         </Link>
       )}
 
-      {pages.map(({ active, label, url }) => (
+      {pagination.map(({ active, label, url }) => (
         <Link
           key={label}
           href={
@@ -63,7 +63,7 @@ const Pagination = ({ links, className, ...restProps }) => {
           }
           className={clsx(
             "w-9 h-9 grid items-center justify-center rounded-sm font-semibold",
-            active ? "bg-gold-light text-white" : "hover:bg-gray-100"
+            active ? "bg-gold-main text-white" : "hover:bg-slate-100"
           )}
         >
           {label}
@@ -78,7 +78,7 @@ const Pagination = ({ links, className, ...restProps }) => {
               ? `${nextPage?.url}&search=${searchParams["search"]}`
               : nextPage?.url
           }
-          className="w-9 h-9 grid items-center justify-center rounded-sm font-semibold text-gray-400"
+          className="w-9 h-9 grid items-center justify-center rounded-sm text-slate-400"
         >
           <HiChevronRight />
         </Link>

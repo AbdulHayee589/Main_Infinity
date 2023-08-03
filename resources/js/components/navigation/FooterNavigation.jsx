@@ -7,7 +7,7 @@ import {
   stockServices,
   userServices,
   websiteRoadmap,
-} from "../../statics";
+} from "../../utils/statics";
 import Container from "../ui/Container";
 
 const FooterNavigation = () => {
@@ -29,6 +29,7 @@ const FooterNavigation = () => {
                     height="64px"
                     className="min-w-fit min-h-fit max-w-[48px] max-h-[48px] lg:max-w-[64px] lg:max-h-[64px]"
                     alt={img}
+                    effect="blur"
                   />
                   <div className="grid gap-2">
                     <h4 className="font-semibold">
@@ -43,7 +44,7 @@ const FooterNavigation = () => {
             )}
           </div>
 
-          <div className="bg-gray-200 min-h-[1px] w-full rounded-full"></div>
+          <div className="bg-slate-200 min-h-[1px] w-full rounded-full"></div>
 
           <div className="w-full grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="grid gap-4 col-span-1 md:pl-16 lg:pl-0">
@@ -128,6 +129,7 @@ const FooterNavigation = () => {
                       width="32px"
                       height="32px"
                       alt={img}
+                      effect="blur"
                     />
                   ))}
                 </div>

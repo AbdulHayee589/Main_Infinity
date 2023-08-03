@@ -2,6 +2,7 @@ import Button from "../../components/ui/Button";
 import { FaChevronRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import Container from "../../components/ui/Container";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const steps = [
   {
@@ -27,7 +28,7 @@ const steps = [
 const HowItWorksPage = () => {
   return (
     <div className="bg-blue-50">
-      <div className="bg-gray-900 px-4 py-16">
+      <div className="bg-slate-900 px-4 py-16">
         <div className="mx-auto w-fit text-white text-center grid gap-6">
           <h1 className="font-bold text-xl md:text-2xl capitalize">
             How customizing works?
@@ -80,11 +81,12 @@ const HowItWorksPage = () => {
           </div>
         </div>
         <div className="hidden lg:block w-full max-w-[96px] xs:max-w-[128px] md:max-w-[164px] lg:max-w-[240px] mx-auto">
-          <img
+          <LazyLoadImage
             src="/checked.webp"
             width={512}
             height={512}
             alt="quality-shield.webp"
+            effect="blur"
           />
         </div>
       </Container>
@@ -108,11 +110,12 @@ const HowItWorksPage = () => {
               className="w-full xl:max-w-md flex items-start justify-center gap-6"
             >
               <div className="max-w-[64px] xl:max-w-[96px]">
-                <img
+                <LazyLoadImage
                   src={`/${img}`}
                   width={512}
                   height={512}
                   alt={img}
+                  effect="blur"
                 />
               </div>
               <div>

@@ -3,24 +3,17 @@ import { Dialog, Transition } from "@headlessui/react";
 import { FaTimes } from "react-icons/fa";
 import clsx from "clsx";
 
-const Modal = ({
-  modalOpen,
-  setModalOpen,
-  closeBtn = true,
-  title = "",
-  children,
-  ...restProps
-}) => {
+const Modal = ({ open, setIsOpen, closeBtn = true, title = "", children }) => {
   const modalCloseBtnClickHandler = () => {
-    setModalOpen(false);
+    setIsOpen(false);
   };
 
   return (
-    <Transition appear show={modalOpen} as={Fragment}>
+    <Transition appear show={open} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-50"
-        open={modalOpen}
+        open={open}
         onClose={() => { }}
       >
         <Transition.Child

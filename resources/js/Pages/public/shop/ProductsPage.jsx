@@ -5,11 +5,11 @@ import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
 import Filters from "../../../components/product/Filters";
 import SearchField from "../../../components/product/SearchField";
-import Pagination from "../../../components/product/Pagination";
-import ProductShowcase from "../../../components/product/ProductShowcase";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
+import ProductsListing from "../../../components/sections/ProductsListing";
+import Pagination from "../../../components/sections/Pagination";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
 
@@ -24,6 +24,7 @@ const ProductsPage = () => {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
   const { props } = usePage();
+  console.log(props);
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
@@ -41,7 +42,6 @@ const ProductsPage = () => {
       preserveScroll: true,
       onSuccess() {
         console.log(1);
-        console.log(props.blueprints);
       },
     });
   };
@@ -55,10 +55,10 @@ const ProductsPage = () => {
         handleFilterSearch={handleFilters}
       />
 
-      <Container className="flex flex-col gap-8 py-6">
+      <Container className="flex flex-col gap-8 py-6 pb-24">
         <div className="flex items-center justify-between gap-2 w-full">
           <button
-            className="lg:hidden border border-gray-200 p-1 outline-none text-2xl text-slate-500"
+            className="lg:hidden p-2 outline-none text-2xl text-slate-500"
             onClick={toggleFiltersSideBar}
           >
             <HiFunnel />
@@ -70,7 +70,7 @@ const ProductsPage = () => {
           <div className="flex gap-2"></div>
 
           <div className="flex flex-col gap-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col gap-y-2 xxs:flex-row justify-between xxs:items-center">
               <h1 className="font-semibold text-2xl truncate ...">
                 Hoodies
               </h1>
@@ -82,7 +82,7 @@ const ProductsPage = () => {
                   {sortBy.map(({ id, sortId, name }) => (
                     <Menu.Item key={id}>
                       <button
-                        className="hover:bg-gray-100 w-full flex items-center justify-start gap-2 p-2"
+                        className="hover:bg-slate-100 w-full flex items-center justify-start gap-2 p-2"
                         onClick={(e) => {
                           handleSort(sortId);
                         }}
@@ -122,22 +122,8 @@ const ProductsPage = () => {
           </div>
 
           <div className="w-full flex flex-col gap-8">
-            {props?.blueprints.data && (
-              <>
-                <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {props?.blueprints.data.map((blueprint) => (
-                    <ProductShowcase
-                      key={blueprint.bp_id}
-                      product={blueprint}
-                    />
-                  ))}
-                </div>
-                <Pagination
-                  className="my-8"
-                  links={props?.blueprints?.links}
-                />
-              </>
-            )}
+            <ProductsListing products={props?.blueprints.data} />
+            {props?.blueprints.data.length > 0 && <Pagination pages={props?.blueprints?.links} />}
           </div>
         </div>
       </Container>

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Field, Form, Formik } from "formik";
-import { registerSchema } from "../formik/schemas";
+import { registerSchema } from "../../utils/schemas";
 import NavLink from "../ui/NavLink";
-import TextField from "../formik/TextField";
-import PasswordField from "../formik/PasswordField";
+import TextField from "../ui/formik/TextField";
+import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
 
 const SignUpForm = () => {
@@ -107,7 +107,7 @@ const SignUpForm = () => {
           fullWidth
         />
 
-        <div className="w-full flex items-center mt-1 gap-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 gap-2 text-sm text-slate-400">
           <span>Already have an account?</span>
           {!formState.loading ? (
             <NavLink

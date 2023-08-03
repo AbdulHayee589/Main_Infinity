@@ -22,7 +22,7 @@ const Toggle = ({
       checked={enabled}
       onChange={onChangeHandler}
       className={clsx(
-        enabled ? "bg-gold-main" : "bg-gray-200",
+        enabled ? "bg-gold-main" : "bg-slate-200",
         "w-12 relative inline-flex h-6 items-center rounded-full"
       )}
       {...restProps}
@@ -30,7 +30,7 @@ const Toggle = ({
       <span
         className={clsx(
           enabled ? "translate-x-6" : "-translate-x-2",
-          "text-xl grid items-center p-1.5 transform rounded-full bg-white transition border border-gray-200"
+          "text-xl grid items-center p-1.5 transform rounded-full bg-white transition border border-slate-200"
         )}
       >
         {!enabled ? <HiSun /> : <HiMoon /> }

@@ -25,7 +25,7 @@ const TextField = ({
           className,
           errors[field.name] && touched[field.name]
             ? " border-error-main focus:outline-error-main"
-            : "border-gray-200 hover:border-gray-300 focus:outline-gold-main"
+            : "border-slate-200 hover:border-slate-300 focus:outline-gold-main"
         )}
         {...field}
         {...restProps}

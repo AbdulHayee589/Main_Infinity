@@ -1,6 +1,6 @@
 import Brand from "../ui/Brand";
 import NavLink from "../ui/NavLink";
-import { headerNavLinks } from "../../statics";
+import { headerNavLinks } from "../../utils/statics";
 import NavSideBar from "../sidebar/NavSideBar";
 import useOpenState from "../hooks/useOpenState";
 import Container from "../ui/Container";
