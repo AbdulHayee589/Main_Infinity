@@ -56,7 +56,7 @@ const SignInForm = () => {
           {!formState.loading ? (
             <NavLink
               href="/sign-up"
-              className="font-semibold text-gray-500"
+              className="font-semibold text-slate-500"
               size="sm"
               title="Sign Up"
               hoverEffect={false}

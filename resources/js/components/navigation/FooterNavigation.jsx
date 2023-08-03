@@ -34,7 +34,7 @@ const FooterNavigation = () => {
                     <h4 className="font-semibold">
                       {title}
                     </h4>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-slate-500 text-sm">
                       {description}
                     </p>
                   </div>
@@ -51,7 +51,7 @@ const FooterNavigation = () => {
                 <h4 className="font-semibold">
                   Subscribe to InfinityCustoms!
                 </h4>
-                <p className="text-sm text-gray-500 max-w-[300px]">
+                <p className="text-sm text-slate-500 max-w-[300px]">
                   Register your email to get updates about
                   promotions and attractive offers from us
                 </p>
@@ -70,7 +70,7 @@ const FooterNavigation = () => {
                     href={href}
                     size="sm"
                     title={title}
-                    className="text-gray-500"
+                    className="text-slate-500"
                   >
                     {title}
                   </NavLink>
@@ -86,7 +86,7 @@ const FooterNavigation = () => {
                     href={href}
                     size="sm"
                     title={title}
-                    className="text-gray-500"
+                    className="text-slate-500"
                   >
                     {title}
                   </NavLink>
@@ -107,7 +107,7 @@ const FooterNavigation = () => {
                         title={title}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-gray-500 hover:text-gold-main"
+                        className="text-slate-500 hover:text-gold-main"
                       >
                         {icon}
                       </a>
@@ -136,7 +136,7 @@ const FooterNavigation = () => {
           </div>
         </div>
         <div className="py-4 w-full">
-          <p className="text-gray-500 text-xs md:text-sm">
+          <p className="text-slate-500 text-xs md:text-sm">
             &copy; 2023 InfinityCustoms. All rights reserved.
           </p>
         </div>

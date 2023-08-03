@@ -119,7 +119,7 @@ const HowItWorksPage = () => {
                 <h1 className="text-base md:text-lg xl:text-xl font-bold capitalize">
                   {title}
                 </h1>
-                <p className="text-sm md:text-base text-gray-500">
+                <p className="text-sm md:text-base text-slate-500">
                   {desc}
                 </p>
               </div>

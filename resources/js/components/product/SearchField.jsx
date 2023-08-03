@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
 import clsx from "clsx";
 
@@ -25,7 +25,7 @@ const SearchField = ({ value = null, className, ...restProps }) => {
 
     router.reload({
       method: "get",
-      data: { search: searchValue },
+      data: { search: searchValue, page: 1 },
       only: ["blueprints"],
       preserveState: true,
     });
@@ -41,7 +41,7 @@ const SearchField = ({ value = null, className, ...restProps }) => {
         className
       )}
     >
-      <HiMagnifyingGlass className="text-2xl text-gray-500 min-w-fit" />
+      <HiMagnifyingGlass className="text-2xl text-slate-500 min-w-fit" />
       <input
         onChange={onChangeHandler}
         ref={searchFieldRef}
@@ -56,7 +56,7 @@ const SearchField = ({ value = null, className, ...restProps }) => {
 
       {focus && (
         <HiXMark
-          className="text-2xl text-gray-500 min-w-fit"
+          className="text-2xl text-slate-500 min-w-fit"
           onMouseDown={onMouseDownHandler}
         />
       )}

@@ -23,7 +23,7 @@ const sortBy = [
 const ProductsPage = () => {
   const [activeSort, setActiveSort] = useState(sortBy[0]);
   const { open, setOpen, toggleOpen } = useOpenState(false);
-  const { props, url } = usePage();
+  const { props } = usePage();
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
@@ -40,6 +40,7 @@ const ProductsPage = () => {
       preserveState: true,
       preserveScroll: true,
       onSuccess() {
+        console.log(1);
         console.log(props.blueprints);
       },
     });
@@ -57,7 +58,7 @@ const ProductsPage = () => {
       <Container className="flex flex-col gap-8 py-6">
         <div className="flex items-center justify-between gap-2 w-full">
           <button
-            className="lg:hidden border border-gray-200 p-1 outline-none text-2xl text-gray-500"
+            className="lg:hidden border border-gray-200 p-1 outline-none text-2xl text-slate-500"
             onClick={toggleFiltersSideBar}
           >
             <HiFunnel />
@@ -103,7 +104,7 @@ const ProductsPage = () => {
               </div>
             </div>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-500">
               Hoodies are in-demand all year round without any
               sign of dropping in popularity. Choose between
               various styles, like pullover, zip-up, or cropped,

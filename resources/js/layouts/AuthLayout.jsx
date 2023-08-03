@@ -23,7 +23,7 @@ const AuthLayout = ({ children }) => {
 
           <div className="mt-8 mb-4 w-full flex items-center gap-4">
             <div className="h-[0.1px] grow bg-gray-300"></div>
-            <div className="text-gray-500">Or continue with</div>
+            <div className="text-slate-500">Or continue with</div>
             <div className="h-[0.1px] grow bg-gray-300"></div>
           </div>
 

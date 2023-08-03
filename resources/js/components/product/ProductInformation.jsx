@@ -31,7 +31,7 @@ const ProductInformation = ({ blueprint = null }) => {
         ))}
       </div>
 
-      <Link href="/" className="text-gray-500">
+      <Link href="/" className="text-slate-500">
         Read more
       </Link>
     </div>

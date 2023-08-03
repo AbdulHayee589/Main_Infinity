@@ -31,7 +31,7 @@ const ProductProvider = ({ provider = null }) => {
       setSizes([...sz]);
       setColors([...col]);
     }, 100);
-  }, []);
+  }, [provider]);
 
   return (
     <div className="bg-gray-50 border border-gray-200">
@@ -44,7 +44,7 @@ const ProductProvider = ({ provider = null }) => {
 
       <div className="py-4 px-6 flex flex-wrap items-start gap-x-4">
         <div className="grow grid gap-2">
-          <span className="text-sm text-gray-500">Location</span>
+          <span className="text-sm text-slate-500">Location</span>
 
           <div className="flex flex-wrap gap-2 max-w-[110px]">
             <img
@@ -54,21 +54,21 @@ const ProductProvider = ({ provider = null }) => {
           </div>
         </div>
         <div className="grow grid gap-2 max-w-[140px]">
-          <span className="text-sm text-gray-500">Price</span>
+          <span className="text-sm text-slate-500">Price</span>
           <span>From USD 999.33</span>
         </div>
         <div className="grow grid gap-2">
-          <span className="text-sm text-gray-500">Shipping</span>
+          <span className="text-sm text-slate-500">Shipping</span>
           <span>Standard from USD 4.75</span>
         </div>
         <div className="grow grid gap-2">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-500">
             Avg. prod. time
           </span>
           <span>2.13 business days</span>
         </div>
         <div className="grow grid gap-2 max-w-[200px]">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-500">
             Print areas • {printAreas.length}
           </span>
           <div className="grid">
@@ -85,7 +85,7 @@ const ProductProvider = ({ provider = null }) => {
           </div>
         </div>
         <div className="grow grid gap-2">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-500">
             Sizes • {sizes.length}
           </span>
           <span>
@@ -94,7 +94,7 @@ const ProductProvider = ({ provider = null }) => {
         </div>
         {colors && (
           <div className="grow grid gap-2 min-w-[200px] max-w-[200px]">
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-slate-500">
               Colors • {colors.length}
             </span>
             <div className="flex justify-start flex-wrap gap-2">

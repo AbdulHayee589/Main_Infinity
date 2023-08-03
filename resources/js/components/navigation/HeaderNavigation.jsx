@@ -28,7 +28,7 @@ const HeaderNavigation = () => {
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
             <button
-              className="lg:hidden text-3xl cursor-pointer text-gray-500 hover:text-gold-main"
+              className="lg:hidden text-3xl cursor-pointer text-slate-500 hover:text-gold-main"
               onClick={toggleOpen}
             >
               <HiBars3CenterLeft />
@@ -54,7 +54,7 @@ const HeaderNavigation = () => {
                           <NavLink
                             key={id}
                             href={href}
-                            className="text-gray-500 hover:text-gold-main"
+                            className="text-slate-500 hover:text-gold-main"
                             title={title}
                           >
                             {title}
@@ -78,20 +78,20 @@ const HeaderNavigation = () => {
           </div>
 
           <div className="flex text-2xl items-center gap-4">
-            <NavLink className="text-gray-500 hover:text-gold-main">
+            <NavLink className="text-slate-500 hover:text-gold-main">
               <HiOutlineHeart />
             </NavLink>
 
             <NavLink
               href="/shop/cart"
-              className="text-gray-500 hover:text-gold-main"
+              className="text-slate-500 hover:text-gold-main"
             >
               <HiShoppingCart />
             </NavLink>
 
             <NavLink
               href="/sign-in"
-              className="flex gap-2 items-center text-gray-500"
+              className="flex gap-2 items-center text-slate-500"
             >
               <Button
                 size="sm"

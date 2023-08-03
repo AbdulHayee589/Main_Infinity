@@ -42,7 +42,7 @@ const ProductShowcase = ({ product, className, ...restProps }) => {
           <p title={product.title} className="w-full break-words">
             {product.title}
           </p>
-          <span className="w-full break-words text-sm text-gray-500">
+          <span className="w-full break-words text-sm text-slate-500">
             By {product.brand}
           </span>
         </div>

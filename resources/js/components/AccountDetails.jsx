@@ -11,7 +11,7 @@ const AccountDetails = ({ user, className, ...restProps }) => {
           "w-14 h-14 flex text-xl border rounded-full items-center justify-center min-w-fit font-semibold",
           !user
             ? "bg-white border-gold-light text-gold-light"
-            : "bg-gray-100 text-gray-500 border-gray-100"
+            : "bg-gray-100 text-slate-500 border-gray-100"
         )}
       >
         {!user ? "D" : "G"}
