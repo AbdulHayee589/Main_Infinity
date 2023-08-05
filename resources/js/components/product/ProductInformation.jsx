@@ -1,6 +1,12 @@
 import { Link } from "@inertiajs/react";
 
 const ProductInformation = ({ product = null }) => {
+  const cleanDescription = product?.description
+    .substring(product.description.indexOf(".:"))
+    .replace(/<[^>]*>/g, "")
+    .split(".:")
+    .filter((el) => el != "");
+
   return (
     <div className="w-full grid gap-4">
       <div>
@@ -8,29 +14,21 @@ const ProductInformation = ({ product = null }) => {
         <h1 className="text-2xl md:text-3xl font-semibold">
           {product?.title}
         </h1>
+        <Link href="/" className="hover:text-gold-main">
+          {product?.brand} {product?.model}
+        </Link>
       </div>
-
-      <Link href="/" className="hover:text-gold-main">
-        {product?.brand} {product?.model}
-      </Link>
 
       <div className="grid">
-        {product?.description
-          .substr(product.description.indexOf(".:"))
-          .replace(/<[^>]*>/g, "")
-          .split(".:")
-          .filter((el) => el != "")
-          .map((el) => (
-            <div key={el} className="flex gap-2">
-              <span className="h-full text-slate-500">
-                &#x2022;
-              </span>
-              <span>{el}</span>
-            </div>
-          ))}
+        {cleanDescription.map((el) => (
+          <div key={el} className="flex gap-2">
+            <span className="h-full">&#x2022;</span>
+            <span>{el}</span>
+          </div>
+        ))}
       </div>
 
-      <Link href="/" className="text-slate-500">
+      <Link href="#description" className="text-slate-500" only={[]}>
         Read more
       </Link>
     </div>

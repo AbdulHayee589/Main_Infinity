@@ -5,6 +5,7 @@ import Modal from "../../../components/ui/Modal";
 import ProductProvidersListing from "../../../components/sections/ProductProvidersListing";
 import ProductImagesAndDetails from "../../../components/sections/ProductImagesAndDetails";
 import useOpenState from "../../../components/hooks/useOpenState";
+import ProductDescription from "../../../components/product/ProductDescription";
 
 const ProductDetailsPage = () => {
   const { props } = usePage();
@@ -39,6 +40,8 @@ const ProductDetailsPage = () => {
           onMoreDetailsClickHandler={onMoreDetailsClickHandler}
           providers={props.providers}
         />
+
+        <ProductDescription description={props.blueprints.description}/>
       </Container>
     </>
   );

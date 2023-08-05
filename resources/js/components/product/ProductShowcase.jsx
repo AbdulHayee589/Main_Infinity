@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
 import clsx from "clsx";
@@ -7,7 +7,11 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductShowcase = ({ product, className, ...restProps }) => {
   const [isFav, setIsFav] = useState(false);
-  const onFavBtnClick = () => setIsFav(!isFav);
+
+  const onFavBtnClick = () => {
+    console.log(product.bp_id);
+    setIsFav(!isFav);
+  };
 
   return (
     <div
@@ -21,10 +25,10 @@ const ProductShowcase = ({ product, className, ...restProps }) => {
       <button
         onClick={onFavBtnClick}
         className={clsx(
-          "rounded-full absolute top-2 right-2 z-10 text-2xl p-1.5 bg-white shadow-md transition-all",
+          "rounded-full absolute top-2 right-2 z-10 text-2xl p-2 bg-white shadow-md transition-all",
           isFav
             ? "text-error-main"
-            : "text-slate-300 hidden group-hover:block"
+            : "text-slate-300 lg:hidden lg:group-hover:block"
         )}
       >
         {isFav ? <HiHeart /> : <HiOutlineHeart />}

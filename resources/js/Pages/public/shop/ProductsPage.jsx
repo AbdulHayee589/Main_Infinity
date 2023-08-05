@@ -4,7 +4,7 @@ import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
 import Filters from "../../../components/product/Filters";
-import SearchField from "../../../components/product/SearchField";
+import ProductsSearchField from "../../../components/sections/ProductsSearchField";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
@@ -63,7 +63,7 @@ const ProductsPage = () => {
           >
             <HiFunnel />
           </button>
-          <SearchField className="grow" />
+          <ProductsSearchField className="grow" />
         </div>
 
         <div className="">
@@ -123,7 +123,9 @@ const ProductsPage = () => {
 
           <div className="w-full flex flex-col gap-8">
             <ProductsListing products={props?.blueprints.data} />
-            {props?.blueprints.data.length > 0 && <Pagination pages={props?.blueprints?.links} />}
+            {props?.blueprints.data.length > 0 && (
+              <Pagination pages={props?.blueprints?.links} />
+            )}
           </div>
         </div>
       </Container>

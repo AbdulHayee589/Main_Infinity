@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
-import { router, usePage } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import { HiMagnifyingGlass, HiXMark } from "react-icons/hi2";
 import clsx from "clsx";
 
-const SearchField = ({ value = null, className, ...restProps }) => {
+const ProductsSearchField = ({ value = "", className, ...restProps }) => {
   const searchFieldRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [searchValue, setSearchValue] = useState(value || "");
-  const [prevSearchValue, setPrevSearchValue] = useState(null);
+  const [prevSearchValue, setPrevSearchValue] = useState("");
   const debounceState = useDebounce(searchValue, 250);
 
   const onContainerClickHandler = () => searchFieldRef.current.focus();
@@ -63,4 +63,4 @@ const SearchField = ({ value = null, className, ...restProps }) => {
     </div>
   );
 };
-export default SearchField;
+export default ProductsSearchField;
