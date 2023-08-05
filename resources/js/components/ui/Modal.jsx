@@ -1,26 +1,28 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { FaTimes } from "react-icons/fa";
+import { HiXMark } from "react-icons/hi2";
+import HeaderText from "./HeaderText";
 import clsx from "clsx";
 
 const Modal = ({
-  modalOpen,
-  setModalOpen,
+  open,
+  setOpen,
   closeBtn = true,
   title = "",
+  className,
+  bodyClassName,
   children,
-  ...restProps
 }) => {
   const modalCloseBtnClickHandler = () => {
-    setModalOpen(false);
+    setOpen(false);
   };
 
   return (
-    <Transition appear show={modalOpen} as={Fragment}>
+    <Transition appear show={open} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-50"
-        open={modalOpen}
+        open={open}
         onClose={() => { }}
       >
         <Transition.Child
@@ -48,22 +50,28 @@ const Modal = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  "max-w-5xl w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-sm"
+                  "w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-sm",
+                  className
                 )}
               >
-                <Dialog.Title className="flex justify-between">
-                  <span className="font-semibold">
-                    {title}
-                  </span>
+                <Dialog.Title
+                  as="div"
+                  className="flex justify-between"
+                >
+                  <h1 className="text-2xl font-semibold">{title}</h1>
                   {closeBtn && (
-                    <FaTimes
+                    <button
                       tabIndex={0}
-                      className="text-lg outline-none cursor-pointer text-secondary-main"
                       onClick={modalCloseBtnClickHandler}
-                    />
+                      className="outline-none text-2xl text-slate-400 hover:text-gold-main transition-all"
+                    >
+                      <HiXMark />
+                    </button>
                   )}
                 </Dialog.Title>
-                <div className="mt-1">{children}</div>
+                <div className={clsx("mt-1", bodyClassName)}>
+                  {children}
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>

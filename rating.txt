@@ -1,0 +1,50 @@
+array:14 [ // app/Http/Controllers/Blueprints/BlueprintsController.php:102
+  "id" => 24
+  "bp_id" => 65
+  "title" => "Kids Sweatshirt"
+  "description" => "A kids sweatshirt has quality construction - demonstrated by the tight seams, neck taping, and ribbed-knit collar. The fabric holds up to printing well. This makes for a solid year-round customization opportunity. These items are available in a variety of colors. The custom kids sweatshirt is a chance to display personalization at any time. <div>.:80% Cotton 20% Polyester</div><br /><div>.:Medium Heavy fabric (9.9 oz/yd² (280 g/m²))</div><br /><div>.:Stylish Fit</div><br /><div>.:Tear away label</div><br /><div>.:Runs true to size</div>"
+  "brand" => "AWDIS"
+  "model" => "JH030J"
+  "category_id" => null
+  "images" => array:4 [
+    0 => "https://images.printify.com/6389f79cb2e2522ccb0fddf1"
+    1 => "https://images.printify.com/6389f662793e2a4aae093368"
+    2 => "https://images.printify.com/5c49b147a342bc5342545dd5"
+    3 => "https://images.printify.com/5c49b153a342bc533f79d522"
+  ]
+  "filters" => null
+  "isActive" => 0
+  "created_at" => "2023-07-04T11:23:12.000000Z"
+  "updated_at" => "2023-07-04T12:45:21.000000Z"
+  "rating" => "4.0000"
+  "ratings" => array:2 [
+    0 => array:8 [
+      "id" => 1
+      "isMockup" => 0
+      "star_rating" => 3
+      "message" => "hello"
+      "isApproved" => 1
+      "created_at" => null
+      "updated_at" => null
+      "user" => array:1 [
+        0 => array:1 [
+          "name" => "Admin"
+        ]
+      ]
+    ]
+    1 => array:8 [
+      "id" => 2
+      "isMockup" => 0
+      "star_rating" => 5
+      "message" => "hello"
+      "isApproved" => 1
+      "created_at" => null
+      "updated_at" => null
+      "user" => array:1 [
+        0 => array:1 [
+          "name" => "Admin"
+        ]
+      ]
+    ]
+  ]
+]

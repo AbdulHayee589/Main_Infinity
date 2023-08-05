@@ -1,35 +1,30 @@
-import Label from "./Label";
-import ErrorMessage from "./ErrorMessage";
 import clsx from "clsx";
+import ErrorMessage from "./ErrorMessage";
+import Label from "./Label";
 
-const TextField = ({
+const TextArea = ({
   label = "",
-  sublabel = "",
   fullWidth = false,
   className,
   field,
-  type = "text",
-  disabled,
   form: { errors, touched },
   ...restProps
 }) => {
   return (
-    <div className={clsx("mb-4", fullWidth ? "w-full" : "w-fit")}>
-      <Label label={label} sublabel={sublabel} />
+    <div className={clsx("py-3.5", fullWidth ? "w-full" : "w-fit")}>
+      {label && <Label labelFor={field.name} label={label}/>}
 
-      <input
-        disabled={disabled}
-        type={type || "text"}
+      <textarea
         className={clsx(
-          "px-4 py-2.5 border rounded-sm w-full",
+          "p-4 focus:outline-gold-main border w-full rounded-sm max-h-[200px]",
           className,
           errors[field.name] && touched[field.name]
             ? " border-error-main focus:outline-error-main"
-            : "border-gray-200 hover:border-gray-300 focus:outline-gold-main"
+            : "border-slate-200 hover:border-slate-300 focus:outline-gold-main"
         )}
         {...field}
         {...restProps}
-      />
+      ></textarea>
 
       {errors[field.name] && touched[field.name] && (
         <ErrorMessage msg={errors[field.name]} />
@@ -37,4 +32,4 @@ const TextField = ({
     </div>
   );
 };
-export default TextField;
+export default TextArea;

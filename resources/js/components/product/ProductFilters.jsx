@@ -3,7 +3,7 @@ import { useRemember } from "@inertiajs/react";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import clsx from "clsx";
 
-const Filters = ({ filters, className, handleFilterSearch, ...restProps }) => {
+const ProductFilters = ({ filters, className, handleFilterSearch, ...restProps }) => {
   const [activeFilters, setActiveFilters] = useRemember({}, "ProductsPage");
 
   const onChangeHandler = (event) => {
@@ -52,7 +52,7 @@ const Filters = ({ filters, className, handleFilterSearch, ...restProps }) => {
           key={key}
           boxHoverEffect={true}
           btnClassName="capitalize"
-          panelClassName="border-b border-b-gray-200"
+          panelClassName="border-b border-b-slate-200"
           title={key}
           open={true}
         >
@@ -83,4 +83,4 @@ const Filters = ({ filters, className, handleFilterSearch, ...restProps }) => {
   );
 };
 
-export default Filters;
+export default ProductFilters;

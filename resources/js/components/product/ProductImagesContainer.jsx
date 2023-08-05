@@ -3,6 +3,7 @@ import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { register } from "swiper/element/bundle";
 import "swiper/css";
 import clsx from "clsx";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const params = {
   centeredSlides: false,
@@ -29,7 +30,7 @@ const params = {
   loop: false,
 };
 
-const ImagesDisplayContainer = ({ images, className, ...restProps }) => {
+const ProductImagesContainer = ({ images, className, ...restProps }) => {
   const swiperRef = useRef(null);
   const [activeImg, setActiveImg] = useState(images[0]);
   const onClickHandler = (img) => setActiveImg(img);
@@ -42,7 +43,7 @@ const ImagesDisplayContainer = ({ images, className, ...restProps }) => {
 
   return (
     <>
-      <div className="lg:hidden w-full">
+      <div className="lg:hidden w-full min-h-[300px]">
         <swiper-container
           ref={swiperRef}
           className="mySwiper"
@@ -51,12 +52,12 @@ const ImagesDisplayContainer = ({ images, className, ...restProps }) => {
         >
           {images.map((img) => (
             <swiper-slide key={img}>
-              <img
+              <LazyLoadImage
                 src={img}
-                width={440}
-                height={440}
+                width="100%"
+                height="100%"
                 alt={img}
-                className=""
+                effect="blur"
               />
             </swiper-slide>
           ))}
@@ -70,44 +71,47 @@ const ImagesDisplayContainer = ({ images, className, ...restProps }) => {
         {...restProps}
       >
         <div className="grid-cols-1 flex flex-col gap-2">
-          <div className="flex items-center justify-center text-lg text-gray-400">
+          <div className="flex items-center justify-center text-lg text-slate-400">
             <HiChevronUp />
           </div>
 
           <div className="h-full max-h-[440px] overflow-auto overflow-x-hidden">
-            <div className="flex flex-col gap-2 w-[72px]">
+            <div className="flex flex-col gap-2 w-[74px]">
               {images.map((img) => (
-                <img
+                <LazyLoadImage
                   key={img}
                   onClick={() => onClickHandler(img)}
                   src={img}
-                  width={440}
-                  height={440}
+                  width={74}
+                  height={74}
                   alt={img}
+                  effect="blur"
                   className={clsx(
-                    "cursor-pointer",
-                    activeImg === img &&
-                    "border-2 border-gold-main"
+                    "cursor-pointer border-2",
+                    activeImg === img
+                      ? " border-gold-main"
+                      : "border-transparent"
                   )}
                 />
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-lg text-gray-400">
+          <div className="flex items-center justify-center text-lg text-slate-400">
             <HiChevronDown />
           </div>
         </div>
 
-        <img
+        <LazyLoadImage
           src={activeImg}
           width={440}
           height={440}
           alt={activeImg}
+          effect="blur"
           className="max-h-[440px] max-w-[440px] object-cover"
         />
       </div>
     </>
   );
 };
-export default ImagesDisplayContainer;
+export default ProductImagesContainer;

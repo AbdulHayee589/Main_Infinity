@@ -7,7 +7,7 @@ import {
   stockServices,
   userServices,
   websiteRoadmap,
-} from "../../statics";
+} from "../../utils/statics";
 import Container from "../ui/Container";
 
 const FooterNavigation = () => {
@@ -29,12 +29,13 @@ const FooterNavigation = () => {
                     height="64px"
                     className="min-w-fit min-h-fit max-w-[48px] max-h-[48px] lg:max-w-[64px] lg:max-h-[64px]"
                     alt={img}
+                    effect="blur"
                   />
                   <div className="grid gap-2">
                     <h4 className="font-semibold">
                       {title}
                     </h4>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-slate-500 text-sm">
                       {description}
                     </p>
                   </div>
@@ -43,7 +44,7 @@ const FooterNavigation = () => {
             )}
           </div>
 
-          <div className="bg-gray-200 min-h-[1px] w-full rounded-full"></div>
+          <div className="bg-slate-200 min-h-[1px] w-full rounded-full"></div>
 
           <div className="w-full grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="grid gap-4 col-span-1 md:pl-16 lg:pl-0">
@@ -51,7 +52,7 @@ const FooterNavigation = () => {
                 <h4 className="font-semibold">
                   Subscribe to InfinityCustoms!
                 </h4>
-                <p className="text-sm text-gray-500 max-w-[300px]">
+                <p className="text-sm text-slate-500 max-w-[300px]">
                   Register your email to get updates about
                   promotions and attractive offers from us
                 </p>
@@ -70,7 +71,7 @@ const FooterNavigation = () => {
                     href={href}
                     size="sm"
                     title={title}
-                    className="text-gray-500"
+                    className="text-slate-500"
                   >
                     {title}
                   </NavLink>
@@ -86,7 +87,7 @@ const FooterNavigation = () => {
                     href={href}
                     size="sm"
                     title={title}
-                    className="text-gray-500"
+                    className="text-slate-500"
                   >
                     {title}
                   </NavLink>
@@ -107,7 +108,7 @@ const FooterNavigation = () => {
                         title={title}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-gray-500 hover:text-gold-main"
+                        className="text-slate-500 hover:text-gold-main"
                       >
                         {icon}
                       </a>
@@ -128,6 +129,7 @@ const FooterNavigation = () => {
                       width="32px"
                       height="32px"
                       alt={img}
+                      effect="blur"
                     />
                   ))}
                 </div>
@@ -136,7 +138,7 @@ const FooterNavigation = () => {
           </div>
         </div>
         <div className="py-4 w-full">
-          <p className="text-gray-500 text-xs md:text-sm">
+          <p className="text-slate-500 text-xs md:text-sm">
             &copy; 2023 InfinityCustoms. All rights reserved.
           </p>
         </div>

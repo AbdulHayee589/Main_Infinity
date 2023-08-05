@@ -1,37 +1,44 @@
 import { Link } from "@inertiajs/react";
+import StarRating from "../StarRating";
 
-const details = [
-  "100% Airlume combed and ringspun cotton (fiber content may vary for different colors)",
-  "Light fabric (4.2 oz/yd² (142 g/m²))",
-  "Retail fit",
-  "Tear away label",
-  "Runs true to size",
-];
+const ProductInformation = ({ product = null }) => {
+  const cleanDescription = product?.description
+    .substring(product.description.indexOf(".:"))
+    .replace(/<[^>]*>/g, "")
+    .split(".:")
+    .filter((el) => el != "");
 
-const ProductInformation = ({ blueprint = null }) => {
   return (
-    <div className="grid gap-4">
+    <div className="w-full grid gap-4">
       <div>
-        <span className="text-gray-400 text-sm">t-shirt</span>
+        <span className="text-slate-400 text-sm">t-shirt</span>
         <h1 className="text-2xl md:text-3xl font-semibold">
-          {blueprint?.title}
+          {product?.title}
         </h1>
+
+        <StarRating
+          rating={product.rating || 0.0}
+          count={product.ratings.length}
+          showCount={true}
+          showLabel={true}
+          className="text-xl"
+        />
       </div>
 
       <Link href="/" className="hover:text-gold-main">
-        {blueprint?.brand} {blueprint?.model}
-      </Link>
+          {product?.brand} {product?.model}
+        </Link>
 
       <div className="grid">
-        {details.map((detail) => (
-          <div key={detail} className="flex gap-2">
+        {cleanDescription.map((el) => (
+          <div key={el} className="flex gap-2">
             <span className="h-full">&#x2022;</span>
-            <span>{detail}</span>
+            <span>{el}</span>
           </div>
         ))}
       </div>
 
-      <Link href="/" className="text-gray-500">
+      <Link href="#description" className="text-slate-500" only={[]}>
         Read more
       </Link>
     </div>

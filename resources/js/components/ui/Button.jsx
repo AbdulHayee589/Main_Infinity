@@ -1,16 +1,16 @@
 import { cva } from "class-variance-authority";
-import { rounded } from "../../cvaStatics";
+import { rounded } from "../../utils/cva/rounded";
 import clsx from "clsx";
 import Spinner from "./Spinner";
 
 const button = cva("button", {
   variants: {
     intent: {
-      primary: ["bg-gold-light", "text-black", "border-transparent"],
+      primary: ["bg-gold-main", "text-black", "border-transparent"],
       outlined: [
         "bg-white",
         "text-black",
-        "border-gray-300",
+        "border-slate-300",
         "hover:text-gold-main",
       ],
     },

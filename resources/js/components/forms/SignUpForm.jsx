@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { Field, Form, Formik } from "formik";
-import { registerSchema } from "../formik/schemas";
+import { registerSchema } from "../../utils/schemas";
 import NavLink from "../ui/NavLink";
-import TextField from "../formik/TextField";
-import PasswordField from "../formik/PasswordField";
+import TextField from "../ui/formik/TextField";
+import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
+import useFormState from "../hooks/useFormState";
+import Alert from "../ui/Alert";
 
 const SignUpForm = () => {
-  const [formState, setFormState] = useState({
-    loading: false,
-    error: "",
-  });
+  const { formState , setFormState} = useFormState();
 
   const onFormSubmitHandler = async (values) => {
     setFormState({ ...formState, loading: true });
@@ -107,12 +105,12 @@ const SignUpForm = () => {
           fullWidth
         />
 
-        <div className="w-full flex items-center mt-1 gap-2 text-sm text-gray-400">
+        <div className="w-full flex items-center mt-1 gap-2 text-sm text-slate-400">
           <span>Already have an account?</span>
           {!formState.loading ? (
             <NavLink
               href="/sign-in"
-              className="font-semibold text-gray-500"
+              className="font-semibold text-slate-500"
               size="sm"
               title="Sign In"
               hoverEffect={false}

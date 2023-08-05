@@ -22,9 +22,9 @@ const AuthLayout = ({ children }) => {
           {children}
 
           <div className="mt-8 mb-4 w-full flex items-center gap-4">
-            <div className="h-[0.1px] grow bg-gray-300"></div>
-            <div className="text-gray-500">Or continue with</div>
-            <div className="h-[0.1px] grow bg-gray-300"></div>
+            <div className="h-[0.1px] grow bg-slate-300"></div>
+            <div className="text-slate-500">Or continue with</div>
+            <div className="h-[0.1px] grow bg-slate-300"></div>
           </div>
 
           <div className="flex items-center justify-center gap-4">
@@ -32,15 +32,16 @@ const AuthLayout = ({ children }) => {
               <Button
                 key={provider.id}
                 variant="outlined"
-                className="border-transparent grid items-center justify-center max-w-fit"
+                className="border-0 grid items-center justify-center max-w-fit"
                 onClick={() => authClickHandler(provider.name)}
               >
                 <div className="max-h-[28px] max-w-[28px]">
                   <LazyLoadImage
                     src={`/logo/${provider.img}.svg`}
                     alt={provider.name}
-                    width={64}
-                    height={64}
+                    width={28}
+                    height={28}
+                    effect="blur"
                   />
                 </div>
               </Button>
