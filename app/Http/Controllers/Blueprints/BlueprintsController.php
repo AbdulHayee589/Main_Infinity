@@ -200,6 +200,25 @@ class BlueprintsController extends Controller
         return $this->show($id);
     }
 
+    public function editor($id, $provider) {
+        $bp = Blueprint::find($id);
+        if(!$bp)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
+
+        $provider = $bp->print_providers->where('internal_id', $provider)->first();
+
+        if(!$provider)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
+
+        return Inertia::render('public/shop/ProductEditor', [
+            'blueprint' => $bp,
+            'provider' => $provider
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.

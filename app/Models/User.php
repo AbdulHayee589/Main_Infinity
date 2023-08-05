@@ -32,6 +32,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'billingAddressId',
+        'shippingAddressId',
         'password',
         'remember_token',
     ];
@@ -50,11 +52,15 @@ class User extends Authenticatable
         return $this->hasMany(Mockup::class);
     }
 
+    public function addresses() {
+        return $this->hasMany(ShippingBook::class, 'user_id');
+    }
+
     public function shippingAddress() {
-        return $this->hasOne(ShippingBook::class, 'shippingAddressId');
+        return $this->hasOne(ShippingBook::class, 'id', 'shippingAddressId');
     }
 
     public function billingAddress() {
-        return $this->hasOne(ShippingBook::class, 'billingAddressId');
+        return $this->hasOne(ShippingBook::class, 'id', 'billingAddressId');
     }
 }
