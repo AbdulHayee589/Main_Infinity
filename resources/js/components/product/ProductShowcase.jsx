@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
 import clsx from "clsx";
-import ProductRating from "./ProductRating";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import StarRating from "../StarRating";
 
 const ProductShowcase = ({ product, className, ...restProps }) => {
   const [isFav, setIsFav] = useState(false);
@@ -46,7 +46,7 @@ const ProductShowcase = ({ product, className, ...restProps }) => {
         </div>
 
         <div className="w-full px-4 py-2 text-base group-hover:bg-[#f7f6f6]">
-          <ProductRating rating={product.rating || 0.0} />
+          <StarRating rating={product.rating || 0.0} />
           <p title={product.title} className="w-full break-words">
             {product.title}
           </p>

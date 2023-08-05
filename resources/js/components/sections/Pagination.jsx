@@ -24,6 +24,8 @@ const Pagination = ({ pages = [], className, ...restProps }) => {
         setPagination(strippedPages.slice(activeIndex - 4, activeIndex + 1));
       else if (activeIndex === strippedPages.length - 2)
         setPagination(strippedPages.slice(activeIndex - 3, activeIndex + 2));
+      else if(activeIndex === 1)
+      setPagination(strippedPages.slice(activeIndex - 1, activeIndex + 4));
       else
         setPagination(strippedPages.slice(activeIndex - 2, activeIndex + 3));
     } else {

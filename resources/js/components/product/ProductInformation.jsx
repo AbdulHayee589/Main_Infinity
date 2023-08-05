@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react";
+import StarRating from "../StarRating";
 
 const ProductInformation = ({ product = null }) => {
   const cleanDescription = product?.description
@@ -14,10 +15,19 @@ const ProductInformation = ({ product = null }) => {
         <h1 className="text-2xl md:text-3xl font-semibold">
           {product?.title}
         </h1>
-        <Link href="/" className="hover:text-gold-main">
+
+        <StarRating
+          rating={product.rating || 0.0}
+          count={product.ratings.length}
+          showCount={true}
+          showLabel={true}
+          className="text-xl"
+        />
+      </div>
+
+      <Link href="/" className="hover:text-gold-main">
           {product?.brand} {product?.model}
         </Link>
-      </div>
 
       <div className="grid">
         {cleanDescription.map((el) => (

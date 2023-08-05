@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { Field, Form, Formik } from "formik";
 import { registerSchema } from "../../utils/schemas";
 import NavLink from "../ui/NavLink";
 import TextField from "../ui/formik/TextField";
 import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
+import useFormState from "../hooks/useFormState";
+import Alert from "../ui/Alert";
 
 const SignUpForm = () => {
-  const [formState, setFormState] = useState({
-    loading: false,
-    error: "",
-  });
+  const { formState , setFormState} = useFormState();
 
   const onFormSubmitHandler = async (values) => {
     setFormState({ ...formState, loading: true });

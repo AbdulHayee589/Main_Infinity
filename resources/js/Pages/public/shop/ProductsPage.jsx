@@ -3,7 +3,7 @@ import { useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
-import Filters from "../../../components/product/Filters";
+import ProductFilters from "../../../components/product/ProductFilters";
 import ProductsSearchField from "../../../components/sections/ProductsSearchField";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
@@ -115,7 +115,7 @@ const ProductsPage = () => {
 
         <div className="flex items-start justify-between">
           <div className="hidden lg:block col-span-1 w-full max-w-[320px]">
-            <Filters
+            <ProductFilters
               filters={props.filters}
               handleFilterSearch={handleFilters}
             />

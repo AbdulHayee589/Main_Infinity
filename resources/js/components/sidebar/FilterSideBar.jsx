@@ -1,5 +1,5 @@
 import SideBar from "../ui/SideBar";
-import Filters from "../product/Filters";
+import ProductFilters from "../product/ProductFilters";
 
 const FilterSideBar = ({
   filters,
@@ -17,7 +17,7 @@ const FilterSideBar = ({
       className="p-4"
       {...restProps}
     >
-      <Filters
+      <ProductFilters
         filters={filters}
         handleFilterSearch={handleFilterSearch}
       />

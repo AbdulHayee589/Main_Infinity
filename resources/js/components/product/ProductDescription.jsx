@@ -1,9 +1,11 @@
+import HeaderText from "../ui/HeaderText";
+
 const ProductDescription = ({ description = "" }) => {
   const cleanDescription = description.replace(/<[^>]*>/g, "");
 
   return (
     <div id="description">
-      <h1 className="text-2xl font-bold my-6">About</h1>
+      <HeaderText>About</HeaderText>
 
       <div className="grid gap-6">
         <p>

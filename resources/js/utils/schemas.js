@@ -42,3 +42,9 @@ export const registerSchema = Yup.object().shape({
         .max(20, "Maximum length of 20 symbols is exceeded")
         .required("Field is required"),
 });
+
+export const reviewSchema = Yup.object().shape({
+    message: Yup.string()
+        .required("Field is required")
+        .max(100, "Maximum length is exceeded"),
+});
