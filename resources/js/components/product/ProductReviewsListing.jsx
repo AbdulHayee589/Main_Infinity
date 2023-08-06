@@ -55,7 +55,7 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
                             <button
                                 onClick={handlePreviousClick}
                                 disabled={prevBtnDisabled}
-                                className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
+                                className="p-2 border rounded-sm border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
                             >
                                 <HiChevronLeft />
                             </button>
@@ -63,7 +63,7 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
                             <button
                                 onClick={handleNextClick}
                                 disabled={nextBtnDisabled}
-                                className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
+                                className="p-2 border rounded-sm border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
                             >
                                 <HiChevronRight />
                             </button>
