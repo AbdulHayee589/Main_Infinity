@@ -35,7 +35,19 @@ Route::prefix('shop')->group(function() {
     Route::resource("products", \App\Http\Controllers\Blueprints\BlueprintsController::class);
     Route::get("products/{id}/{provider}/variants", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "variants"]);
     Route::get("products/{id}/providers", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "providers"]);
+    Route::get("products/{id}/{provider}/editor", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "editor"]);
     Route::post("products/{id}/rate", [\App\Http\Controllers\Blueprints\BlueprintsController::class, "rate"]);
+});
+
+//User
+Route::prefix('user')->group(function () {
+    Route::get("/", [\App\Http\Controllers\Users\UserController::class, "index"]);
+    Route::get("/addresses", [\App\Http\Controllers\Users\UserController::class, "addresses"]);
+    Route::post("/addresses", [\App\Http\Controllers\Users\UserController::class, "createAddy"]);
+    Route::delete("/addresses/{id}", [\App\Http\Controllers\Users\UserController::class, "removeAddy"]);
+
+    Route::post("/addresses/shipping/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainShippingAddy"]);
+    Route::post("/addresses/billing/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainBillingAddy"]);
 });
 
 //Authentication

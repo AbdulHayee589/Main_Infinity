@@ -9,6 +9,8 @@ class ShippingBook extends Model
 {
     use HasFactory;
 
+    protected $table = "address_books";
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -22,6 +24,7 @@ class ShippingBook extends Model
         'EIK',
         'DDS',
         'MOL',
+        'user_id'
     ];
 
     public function user() {
