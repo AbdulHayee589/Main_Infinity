@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight, HiPencilSquare } from "react-icons/hi2";
 import Button from "../ui/Button";
-import HeaderText from "../ui/HeaderText";
-import ProductReview from "../product/ProductReview";
+import ProductReview from "./ProductReview";
 
 const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
     const [totalPages, setTotalPages] = useState(1);
@@ -37,8 +36,9 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
 
     return (
         <div>
-            <div className="flex justify-between items-center gap-2">
-                <HeaderText className="mb-0">Reviews</HeaderText>
+            <h1 className="text-2xl font-bold mb-6">Reviews</h1>
+
+            <div className="flex items-center justify-between">
                 <Button
                     onClick={openReviewModal}
                     size="sm"
@@ -48,27 +48,29 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
                     Write a Review
                     <HiPencilSquare className="text-xl" />
                 </Button>
-            </div>
 
-            {!!review.length && (
-                <div className="flex justify-end items-center gap-2 my-6">
-                    <button
-                        onClick={handlePreviousClick}
-                        disabled={prevBtnDisabled}
-                        className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
-                    >
-                        <HiChevronLeft />
-                    </button>
+                <div>
+                    {!!review.length && (
+                        <div className="flex justify-end items-center gap-1">
+                            <button
+                                onClick={handlePreviousClick}
+                                disabled={prevBtnDisabled}
+                                className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
+                            >
+                                <HiChevronLeft />
+                            </button>
 
-                    <button
-                        onClick={handleNextClick}
-                        disabled={nextBtnDisabled}
-                        className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
-                    >
-                        <HiChevronRight />
-                    </button>
+                            <button
+                                onClick={handleNextClick}
+                                disabled={nextBtnDisabled}
+                                className="p-2 border border-slate-200 text-2xl text-slate-500 disabled:text-slate-200"
+                            >
+                                <HiChevronRight />
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
+            </div>
 
             <div className="max-w-full overflow-auto grid">
                 {currentData.map((review) => (
