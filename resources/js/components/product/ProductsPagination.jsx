@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import clsx from "clsx";
 
-const Pagination = ({ pages = [], className, ...restProps }) => {
+const ProductsPagination = ({ pages = [], className, ...restProps }) => {
   const [pagination, setPagination] = useState([]);
   const { searchParams } = useSearchParams();
 

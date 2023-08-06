@@ -128,7 +128,7 @@ const ProductsPage = () => {
                 <ProductsListing
                   products={props?.blueprints.data}
                 />
-                <Pagination pages={props?.blueprints?.links} />
+                <ProductsPagination pages={props?.blueprints?.links} />
               </div>
             </>
           ) : (
