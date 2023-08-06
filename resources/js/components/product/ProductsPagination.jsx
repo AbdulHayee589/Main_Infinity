@@ -88,4 +88,4 @@ const ProductsPagination = ({ pages = [], className, ...restProps }) => {
     </div>
   );
 };
-export default Pagination;
+export default ProductsPagination;
