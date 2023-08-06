@@ -16,14 +16,14 @@ const StarRating = ({
         { length: rating >= 0.5 && rating < 1 ? 1 : rating },
         (_, index) => index
       ).map((index) => (
-        <BsStarFill key={index} className="text-gold-light" />
+        <BsStarFill key={index} className="text-gold-main" />
       ));
 
   return (
     <div className={clsx("flex items-center gap-2")}>
       <div className={clsx("flex items-center", className)}>
         {starsMap}
-        {rating % 1 != 0 && <BsStarHalf className="text-gold-light" />}
+        {rating % 1 != 0 && <BsStarHalf className="text-gold-main" />}
       </div>
 
       {showLabel && (

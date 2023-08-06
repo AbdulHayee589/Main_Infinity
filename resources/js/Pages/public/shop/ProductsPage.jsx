@@ -4,12 +4,12 @@ import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
 import ProductFilters from "../../../components/product/ProductFilters";
-import ProductsSearchField from "../../../components/sections/ProductsSearchField";
+import ProductsSearchField from "../../../components/product/ProductsSearchField";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
-import ProductsListing from "../../../components/sections/ProductsListing";
-import Pagination from "../../../components/sections/Pagination";
+import ProductsListing from "../../../components/product/ProductsListing";
+import ProductsPagination from "../../../components/product/ProductsPagination";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
 
@@ -124,7 +124,7 @@ const ProductsPage = () => {
           <div className="w-full flex flex-col gap-8">
             <ProductsListing products={props?.blueprints.data} />
             {props?.blueprints.data.length > 0 && (
-              <Pagination pages={props?.blueprints?.links} />
+              <ProductsPagination pages={props?.blueprints?.links} />
             )}
           </div>
         </div>

@@ -10,7 +10,7 @@ const AccountDetails = ({ user, className, ...restProps }) => {
         className={clsx(
           "w-14 h-14 flex text-xl border rounded-full items-center justify-center min-w-fit font-semibold",
           !user
-            ? "bg-white border-gold-light text-gold-light"
+            ? "bg-white border-gold-main text-gold-main"
             : "bg-slate-100 text-slate-500 border-slate-100"
         )}
       >

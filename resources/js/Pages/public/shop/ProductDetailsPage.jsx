@@ -2,11 +2,11 @@ import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 import Container from "../../../components/ui/Container";
 import Modal from "../../../components/ui/Modal";
-import ProductProvidersListing from "../../../components/sections/ProductProvidersListing";
-import ProductImagesAndDetails from "../../../components/sections/ProductImagesAndDetails";
+import ProductProvidersListing from "../../../components/product/ProductProvidersListing";
+import ProductImagesAndDetails from "../../../components/product/ProductImagesAndDetails";
 import useOpenState from "../../../components/hooks/useOpenState";
 import ProductDescription from "../../../components/product/ProductDescription";
-import ProductReviewsListing from "../../../components/sections/ProductReviewsListing";
+import ProductReviewsListing from "../../../components/product/ProductReviewsListing";
 import { v4 as uuidv4 } from "uuid";
 import WriteAReviewModal from "../../../components/modals/WriteAReviewModal";
 

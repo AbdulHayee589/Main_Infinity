@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import ProductProvider from "../product/ProductProvider";
-import HeaderText from "../ui/HeaderText";
+import ProductProvider from "./ProductProvider";
 
 const ProductProvidersListing = ({
   onMoreDetailsClickHandler = () => { },
@@ -14,7 +13,7 @@ const ProductProvidersListing = ({
 
   return (
     <div>
-      <HeaderText>Available print providers</HeaderText>
+      <h1 className="text-2xl font-bold mb-6">Available print providers</h1>
       <div className="grid gap-6">
         {providers.map((provider) => (
           <ProductProvider

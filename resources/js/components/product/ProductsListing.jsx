@@ -1,5 +1,5 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ProductShowcase from "../product/ProductShowcase";
+import ProductShowcase from "./ProductShowcase";
 
 const ProductsListing = ({ products = [] }) => {
   return products.length > 0 ? (
