@@ -15,9 +15,6 @@ const SignUpForm = () => {
   const { formState, setFormState } = useFormState();
 
   const onFormSubmitHandler = async (values) => {
-    console.log(values);
-    setFormState({ ...formState, loading: true });
-
     router.visit("/auth/signup", {
       method: 'post',
       data: {
