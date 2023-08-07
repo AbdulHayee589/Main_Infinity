@@ -11,8 +11,10 @@ const SideBar = ({
   showFrom = "left",
   children,
   className,
+  headerClassName,
   ...restProps
 }) => {
+
   return (
     <div className={clsx("lg:hidden z-50 w-full h-full")} {...restProps}>
       <div
@@ -36,8 +38,8 @@ const SideBar = ({
         )}
       >
         <div className="h-[100%] pb-24 overflow-auto">
-          <div className="relative grid gap-4">
-            <div className="flex items-center justify-between">
+          <div className="relative grid">
+            <div className={clsx("flex items-center justify-between", headerClassName)}>
               {headerComponent ? (
                 headerComponent
               ) : title ? (

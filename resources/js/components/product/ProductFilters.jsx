@@ -46,13 +46,13 @@ const ProductFilters = ({ filters, className, handleFilterSearch, ...restProps }
     activeFilters[key].includes(value);
 
   return (
-    <div className={clsx("grid", className)} {...restProps}>
+    <div className={clsx("grid px-2", className)} {...restProps}>
       {Object.keys(filters).map((key) => (
         <DisclouseContainer
           key={key}
           boxHoverEffect={true}
-          btnClassName="capitalize"
-          panelClassName="border-b border-b-slate-200"
+          btnClassName="capitalize px-4 py-2"
+          panelClassName="px-4 lg:border-b lg:border-b-slate-200"
           title={key}
           open={true}
         >

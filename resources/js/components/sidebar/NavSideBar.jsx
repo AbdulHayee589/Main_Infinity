@@ -10,11 +10,21 @@ const NavSideBar = ({
   ...restProps
 }) => {
   return (
-    <SideBar open={open} onClose={onClose} className="p-4" {...restProps}>
+    <SideBar
+      open={open}
+      onClose={onClose}
+      headerClassName="px-6 py-4"
+      {...restProps}
+    >
       <nav className="grid">
         {navLinks.map(({ id, title, type, ...rest }) =>
           type === "category" ? (
-            <DisclouseContainer key={id} title={title}>
+            <DisclouseContainer
+              key={id}
+              title={title}
+              btnClassName="px-6 py-2"
+              panelClassName="px-6"
+            >
               {rest?.links.map(({ id, title, href }) => (
                 <NavLink
                   key={id}
@@ -32,7 +42,7 @@ const NavSideBar = ({
               href={rest?.href}
               title={title}
               onClick={onClose}
-              className="font-semibold px-2"
+              className="font-semibold px-6 py-2"
             >
               {title}
             </NavLink>

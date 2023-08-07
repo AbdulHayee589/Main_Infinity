@@ -14,7 +14,7 @@ const FilterSideBar = ({
       open={open}
       onClose={onClose}
       showFrom="left"
-      className="p-4"
+      headerClassName="px-6 py-4"
       {...restProps}
     >
       <ProductFilters
