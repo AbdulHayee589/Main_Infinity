@@ -19,11 +19,12 @@ const SignUpForm = () => {
     setFormState({ ...formState, loading: true });
 
     router.visit("/auth/signup", {
+      method: 'post',
       data: {
         name: `${values.firstName} ${values.lastName}`,
         email: values.email,
         password: values.password,
-        password_confirm: values.password_confirm,
+        password_confirmation: values.password_confirmation,
         gender: values.gender,
       },
       onBefore: () => {
@@ -49,7 +50,7 @@ const SignUpForm = () => {
         lastName: "",
         email: "",
         password: "",
-        password_confirm: "",
+        password_confirmation: "",
         gender: "Male",
       }}
       validationSchema={registerSchema}
@@ -117,8 +118,8 @@ const SignUpForm = () => {
         />
 
         <Field
-          id="password_confirm"
-          name="password_confirm"
+          id="password_confirmation"
+          name="password_confirmation"
           type="password"
           label="Confirm Password"
           placeholder="••••••••••"

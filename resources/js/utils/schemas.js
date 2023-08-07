@@ -37,7 +37,7 @@ export const registerSchema = Yup.object().shape({
         )
         .max(20, "Maximum length of 20 symbols is exceeded")
         .required("Field is required"),
-    password_confirm: Yup.string()
+    password_confirmation: Yup.string()
         .oneOf([Yup.ref("password"), null], "Both passwords must match")
         .max(20, "Maximum length of 20 symbols is exceeded")
         .required("Field is required"),
