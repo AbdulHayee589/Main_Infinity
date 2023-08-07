@@ -5,18 +5,20 @@ import TextField from "../ui/formik/TextField";
 import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
 import useFormState from "../hooks/useFormState";
-import Alert from "../ui/Alert";
 import SelectField from "../ui/formik/SelectField";
 import { router } from "@inertiajs/react";
-
-const genders = ["Male", "Female", "Other"];
+import { genders } from "../../utils/statics";
 
 const SignUpForm = () => {
   const { formState, setFormState } = useFormState();
 
-  const onFormSubmitHandler = async (values) => {
+  const onFormSubmitHandler = async (
+    values,
+    { setSubmitting, setErrors }
+  ) => {
     router.visit("/auth/signup", {
-      method: 'post',
+      method: "post",
+      preserveState: true,
       data: {
         name: `${values.firstName} ${values.lastName}`,
         email: values.email,
@@ -28,11 +30,13 @@ const SignUpForm = () => {
         setFormState({ ...formState, loading: true });
       },
       onError: (errors) => {
-        console.log(errors);
-        setFormState({ ...formState, error: errors });
+        values.password = "";
+        values.password_confirmation = "";
+        setErrors(errors);
       },
-      onFinish: (visit) => {
+      onFinish: () => {
         setFormState({ ...formState, loading: false });
+        setSubmitting(false);
       },
     });
   };
@@ -51,10 +55,6 @@ const SignUpForm = () => {
       onSubmit={onFormSubmitHandler}
     >
       <Form>
-        {formState.error && (
-          <Alert variant="error">{formState.error}</Alert>
-        )}
-
         <Field
           id="gender"
           name="gender"

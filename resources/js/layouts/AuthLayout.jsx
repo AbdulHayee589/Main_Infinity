@@ -1,7 +1,7 @@
 import Button from "../components/ui/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { v4 as uuidv4 } from "uuid";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 const authProviders = [
   { id: uuidv4(), name: "facebook", img: "facebook" },
@@ -11,6 +11,10 @@ const authProviders = [
 ];
 
 const AuthLayout = ({ children }) => {
+
+  const { props} = usePage();
+  console.log(props);
+
   const authClickHandler = (method) => {
     window.location.href = `/oauth/make/${method}`;
   };

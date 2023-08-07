@@ -5,26 +5,43 @@ import TextField from "../ui/formik/TextField";
 import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
 import useFormState from "../hooks/useFormState";
-import Alert from "../ui/Alert";
 
 const SignInForm = () => {
-  const { formState , setFormState} = useFormState();
+  const { formState, setFormState } = useFormState();
 
-  const onFormSubmitHandler = async (values) => {
-    setFormState({ ...formState, loading: true });
+  const onFormSubmitHandler = async (
+    values,
+    { setSubmitting, setErrors }
+  ) => {
+    router.visit("/auth/login", {
+      method: "post",
+      preserveState: true,
+      data: {
+        email: values.email,
+        password: values.password,
+        remember: true,
+      },
+      onBefore: () => {
+        setFormState({ ...formState, loading: true });
+      },
+      onError: (errors) => {
+        values.password = "";
+        setErrors(errors);
+      },
+      onFinish: () => {
+        setFormState({ ...formState, loading: false });
+        setSubmitting(false);
+      },
+    });
   };
 
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: "", password: "", remember: true }}
       validationSchema={loginSchema}
       onSubmit={onFormSubmitHandler}
     >
       <Form>
-        {formState.error && (
-          <Alert variant="error">{formState.error}</Alert>
-        )}
-
         <Field
           id="email"
           name="email"

@@ -7,6 +7,8 @@ import {
 } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
+export const genders = ["Male", "Female", "Other"];
+
 export const headerNavLinks = [
   {
     id: uuidv4(),
