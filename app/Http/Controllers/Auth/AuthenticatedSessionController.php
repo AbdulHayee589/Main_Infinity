@@ -44,7 +44,7 @@ class AuthenticatedSessionController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return Redirect::route('homePage');
+        return redirect()->intended();
     }
 
     /**
@@ -78,7 +78,7 @@ class AuthenticatedSessionController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return Redirect::route('homePage');
+        return redirect()->intended();
     }
 
     public function oauth_redirect(string $provider) {
