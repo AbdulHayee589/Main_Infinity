@@ -45,7 +45,7 @@ class RegisterRequest extends FormRequest
     protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {
         RateLimiter::hit($this->throttleKey());
-        throw ValidationException::withMessages($validator->errors());
+        throw ValidationException::withMessages($validator->errors()->toArray());
     }
 
     public function register()
