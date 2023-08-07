@@ -29,12 +29,10 @@ const ProductDetailsPage = () => {
   const { open, setOpen } = useOpenState(false);
   const { open: openReviewModal, setOpen: setOpenReviewModal } =
     useOpenState(false);
-  const [providerTitle, setProviderTitle] = useState("");
-  const [variants, setVariants] = useState([]);
+  const [activeProvider, setActiveProvider] = useState({});
 
   const onMoreDetailsClickHandler = (provider) => {
-    setProviderTitle(provider.variants.title);
-    setVariants(provider.variants.variants);
+    setActiveProvider(provider);
     setOpen(true);
   };
 
@@ -51,10 +49,10 @@ const ProductDetailsPage = () => {
       <Modal
         open={open}
         setOpen={setOpen}
-        title={`${providerTitle}'s variants`}
+        title={`${activeProvider?.provider?.title || "test"}'s variants`}
       >
         <div className="overflow-auto h-96">
-          <pre>{JSON.stringify(variants, null, 4)}</pre>
+          <pre>{JSON.stringify(activeProvider, null, 4)}</pre>
         </div>
       </Modal>
 

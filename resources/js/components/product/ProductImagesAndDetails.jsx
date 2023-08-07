@@ -15,7 +15,7 @@ const ProductImagesAndDetails = ({ product = null }) => {
 
       <div className="w-full grid gap-4">
         <div>
-          <span className="text-slate-400 text-sm">t-shirt</span>
+          {/* <span className="text-slate-400 text-sm">t-shirt</span> */}
           <h1 className="text-2xl md:text-3xl font-semibold">
             {product?.title}
           </h1>
