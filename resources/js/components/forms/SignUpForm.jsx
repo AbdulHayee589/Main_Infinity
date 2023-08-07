@@ -102,7 +102,7 @@ const SignUpForm = () => {
           label="Password"
           placeholder="••••••••••"
           disabled={formState.loading}
-          maxLength={20}
+          maxLength={32}
           component={PasswordField}
           fullWidth
         />
@@ -114,7 +114,7 @@ const SignUpForm = () => {
           label="Confirm Password"
           placeholder="••••••••••"
           disabled={formState.loading}
-          maxLength={20}
+          maxLength={32}
           component={PasswordField}
           fullWidth
         />

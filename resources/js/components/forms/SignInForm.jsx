@@ -59,7 +59,7 @@ const SignInForm = () => {
           label="Password"
           placeholder="••••••••••"
           disabled={formState.loading}
-          maxLength={20}
+          maxLength={32}
           component={PasswordField}
           fullWidth
         />
