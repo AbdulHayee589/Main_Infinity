@@ -22,7 +22,7 @@ const DisclouseContainer = ({
             <Disclosure.Button
               as="div"
               className={clsx(
-                "p-2 group flex justify-between items-center font-semibold transition-all",
+                "cursor-pointer group flex justify-between items-center font-semibold transition-all",
                 boxHoverEffect
                   ? "hover:bg-slate-100"
                   : "hover:text-gold-main",

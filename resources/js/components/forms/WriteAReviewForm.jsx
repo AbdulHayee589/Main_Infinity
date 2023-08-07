@@ -48,7 +48,7 @@ const WriteAReviewForm = () => {
                     }
                     className={
                       index <= rating
-                        ? "text-gold-light"
+                        ? "text-gold-main"
                         : "text-slate-200"
                     }
                   />

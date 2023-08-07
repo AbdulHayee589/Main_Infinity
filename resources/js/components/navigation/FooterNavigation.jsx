@@ -1,4 +1,3 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Button from "../ui/Button";
 import NavLink from "../ui/NavLink";
 import {
@@ -22,14 +21,13 @@ const FooterNavigation = () => {
                   key={id}
                   className="col-span-1 flex items-start gap-4"
                 >
-                  <LazyLoadImage
+                  <img
                     key={id}
                     src={`/${img}`}
                     width="64px"
                     height="64px"
                     className="min-w-fit min-h-fit max-w-[48px] max-h-[48px] lg:max-w-[64px] lg:max-h-[64px]"
                     alt={img}
-                    effect="blur"
                   />
                   <div className="grid gap-2">
                     <h4 className="font-semibold">
@@ -122,14 +120,13 @@ const FooterNavigation = () => {
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {paymentMethods.map(({ id, img }) => (
-                    <LazyLoadImage
+                    <img
                       key={id}
                       src={`/${img}`}
                       className="w-8 h-8"
                       width="32px"
                       height="32px"
                       alt={img}
-                      effect="blur"
                     />
                   ))}
                 </div>

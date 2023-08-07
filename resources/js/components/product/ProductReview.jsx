@@ -25,19 +25,9 @@ const ProductReview = ({ review }) => {
       </div>
 
       <p className="text-black/80">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
-        nam ratione saepe nobis voluptate maxime odit ipsa. Et ea in
-        reiciendis dolorem quos minus repudiandae dolore nulla, dolorum
-        assumenda quae hic voluptas rerum, alias reprehenderit? Ab
-        dolorum modi necessitatibus pariatur saepe enim tempora nemo
-        possimus minus cupiditate iure doloribus rerum ut sint, aliquid
-        explicabo, suscipit consectetur maiores culpa provident
-        dignissimos voluptatum. Eveniet ullam nemo laborum quidem
-        obcaecati necessitatibus odio perferendis iste, iusto, sapiente
-        expedita laudantium nulla ab, esse quam delectus qui. Distinctio
-        eius, officiis inventore autem maiores corrupti harum porro
-        aliquam quas, facilis vel totam ipsum illum repudiandae
-        voluptatum minima?
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum
+        dignissimos ea, est quas et a consectetur eius labore cumque
+        distinctio!
       </p>
 
       {review.isApproved && (

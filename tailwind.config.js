@@ -34,7 +34,7 @@ module.exports = {
                 black: "#17262B",
                 gold: {
                     light: "#FCD535",
-                    main: "#F2BC07",
+                    main: "#FCD535",
                     dark: "#F0B90B",
                 },
                 success: {

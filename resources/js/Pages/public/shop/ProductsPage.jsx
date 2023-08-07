@@ -4,14 +4,15 @@ import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
 import Container from "../../../components/ui/Container";
 import ProductFilters from "../../../components/product/ProductFilters";
-import ProductsSearchField from "../../../components/sections/ProductsSearchField";
+import ProductsSearchField from "../../../components/product/ProductsSearchField";
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
-import ProductsListing from "../../../components/sections/ProductsListing";
-import Pagination from "../../../components/sections/Pagination";
+import ProductsListing from "../../../components/product/ProductsListing";
+import ProductsPagination from "../../../components/product/ProductsPagination";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const sortBy = [
   { id: uuidv4(), sortId: 0, name: "Popularity" },
@@ -114,19 +115,41 @@ const ProductsPage = () => {
         </div>
 
         <div className="flex items-start justify-between">
-          <div className="hidden lg:block col-span-1 w-full max-w-[320px]">
-            <ProductFilters
-              filters={props.filters}
-              handleFilterSearch={handleFilters}
-            />
-          </div>
+          {props?.blueprints.data.length > 0 ? (
+            <>
+              <div className="hidden lg:block w-full max-w-[320px]">
+                <ProductFilters
+                  filters={props.filters}
+                  handleFilterSearch={handleFilters}
+                />
+              </div>
 
-          <div className="w-full flex flex-col gap-8">
-            <ProductsListing products={props?.blueprints.data} />
-            {props?.blueprints.data.length > 0 && (
-              <Pagination pages={props?.blueprints?.links} />
-            )}
-          </div>
+              <div className="w-full flex flex-col gap-8">
+                <ProductsListing
+                  products={props?.blueprints.data}
+                />
+                <ProductsPagination pages={props?.blueprints?.links} />
+              </div>
+            </>
+          ) : (
+            <div className="w-full min-h-[400px] lg:min-h-[500px] grid justify-center items-center">
+              <div>
+                <div className="flex items-center justify-center">
+                  <LazyLoadImage
+                    src="/no-results.webp"
+                    width={128}
+                    height={128}
+                    alt="no-results.webp"
+                    effect="blur"
+                  />
+                </div>
+
+                <div className="text-slate-500 font-bold py-6">
+                  Nothing to be found here...
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </Container>
     </>

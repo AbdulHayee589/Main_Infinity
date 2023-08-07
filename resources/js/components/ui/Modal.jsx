@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiXMark } from "react-icons/hi2";
-import HeaderText from "./HeaderText";
 import clsx from "clsx";
 
 const Modal = ({
