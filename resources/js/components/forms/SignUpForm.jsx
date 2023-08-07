@@ -12,10 +12,7 @@ import { genders } from "../../utils/statics";
 const SignUpForm = () => {
   const { formState, setFormState } = useFormState();
 
-  const onFormSubmitHandler = async (
-    values,
-    { setSubmitting, setErrors }
-  ) => {
+  const onFormSubmitHandler = async (values, { setErrors }) => {
     router.visit("/auth/signup", {
       method: "post",
       preserveState: true,
@@ -36,7 +33,6 @@ const SignUpForm = () => {
       },
       onFinish: () => {
         setFormState({ ...formState, loading: false });
-        setSubmitting(false);
       },
     });
   };

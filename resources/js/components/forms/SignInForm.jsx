@@ -10,10 +10,7 @@ import { router } from "@inertiajs/react";
 const SignInForm = () => {
   const { formState, setFormState } = useFormState();
 
-  const onFormSubmitHandler = async (
-    values,
-    { setSubmitting, setErrors }
-  ) => {
+  const onFormSubmitHandler = async (values, { setErrors }) => {
     router.visit("/auth/login", {
       method: "post",
       preserveState: true,
@@ -26,12 +23,12 @@ const SignInForm = () => {
         setFormState({ ...formState, loading: true });
       },
       onError: (errors) => {
+        console.log(errors);
         values.password = "";
         setErrors(errors);
       },
       onFinish: () => {
         setFormState({ ...formState, loading: false });
-        setSubmitting(false);
       },
     });
   };
