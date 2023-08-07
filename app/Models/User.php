@@ -32,10 +32,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'oauth',
+        'email_verified_at',
         'billingAddressId',
         'shippingAddressId',
         'password',
         'remember_token',
+    ];
+
+    protected $appends = [
+        'mockups',
+        'shippingAddress',
+        'billingAddress',
+        'addresses'
     ];
 
     /**
@@ -47,6 +56,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getMockupsAttribute() {
+        return $this->mockups()->get();
+    }
+
+    public function getAddressesAttribute() {
+        return $this->addresses()->get();
+    }
+
+    public function getShippingAddressAttribute() {
+        return $this->shippingAddress()->get();
+    }
+
+    public function getBillingAddressAttribute() {
+        return $this->billingAddress()->get();
+    }
 
     public function mockups() {
         return $this->hasMany(Mockup::class);
