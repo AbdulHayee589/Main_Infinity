@@ -6,28 +6,41 @@ import PasswordField from "../ui/formik/PasswordField";
 import Button from "../ui/Button";
 import useFormState from "../hooks/useFormState";
 import Alert from "../ui/Alert";
+import SelectField from "../ui/formik/SelectField";
+import { router } from "@inertiajs/react";
+
+const genders = ["Male", "Female", "Other"];
 
 const SignUpForm = () => {
-  const { formState , setFormState} = useFormState();
+  const { formState, setFormState } = useFormState();
 
   const onFormSubmitHandler = async (values) => {
+    console.log(values);
     setFormState({ ...formState, loading: true });
+
+    router.visit("/auth/signup", {
+      data: {
+        name: `${values.firstName} ${values.lastName}`,
+        email: values.email,
+        password: values.password,
+        password_confirm: values.password_confirm,
+        gender: values.gender,
+      },
+      onBefore: () => {
+        setFormState({ ...formState, loading: true });
+      },
+      onSuccess: (page) => {
+        alert(1);
+      },
+      onError: (errors) => {
+        console.log(errors);
+        setFormState({ ...formState, error: errors });
+      },
+      onFinish: (visit) => {
+        setFormState({ ...formState, loading: false });
+      },
+    });
   };
-  // setFormState({ loading: true, error: "" });
-  // const { email, password } = values;
-  // await signIn("sign-in", {
-  //   email,
-  //   password,
-  //   redirect: false,
-  // }).then(({ ok, error }) => {
-  //   if (error) {
-  //     setFormState({
-  //       loading: false,
-  //       error: error || "Something went wrong. Please try again later",
-  //     });
-  //     values.password = "";
-  //   } else if (ok) router.replace("/");
-  // });
 
   return (
     <Formik
@@ -36,7 +49,8 @@ const SignUpForm = () => {
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        password_confirm: "",
+        gender: "Male",
       }}
       validationSchema={registerSchema}
       onSubmit={onFormSubmitHandler}
@@ -45,6 +59,15 @@ const SignUpForm = () => {
         {formState.error && (
           <Alert variant="error">{formState.error}</Alert>
         )}
+
+        <Field
+          id="gender"
+          name="gender"
+          label="Select your gender"
+          options={genders}
+          component={SelectField}
+          fullWidth
+        />
 
         <div className="md:flex gap-4 justify-between">
           <Field
@@ -94,8 +117,8 @@ const SignUpForm = () => {
         />
 
         <Field
-          id="confirmPassword"
-          name="confirmPassword"
+          id="password_confirm"
+          name="password_confirm"
           type="password"
           label="Confirm Password"
           placeholder="••••••••••"

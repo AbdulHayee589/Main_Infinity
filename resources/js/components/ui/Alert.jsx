@@ -9,7 +9,7 @@ import clsx from "clsx";
 const variants = {
   info: {
     className:
-      "bg-white border-primary-light/40 border-l-primary-main text-primary-main",
+      "bg-white border-blue-400/40 border-l-blue-400 text-primary-main",
     icon: <FiInfo />,
   },
   success: {

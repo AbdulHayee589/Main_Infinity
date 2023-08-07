@@ -37,10 +37,14 @@ export const registerSchema = Yup.object().shape({
         )
         .max(20, "Maximum length of 20 symbols is exceeded")
         .required("Field is required"),
-    confirmPassword: Yup.string()
+    password_confirm: Yup.string()
         .oneOf([Yup.ref("password"), null], "Both passwords must match")
         .max(20, "Maximum length of 20 symbols is exceeded")
         .required("Field is required"),
+    gender: Yup.string().oneOf(
+        ["Male", "Female", "Other", "Decline to state"],
+        "Please specify your gender"
+    ),
 });
 
 export const reviewSchema = Yup.object().shape({

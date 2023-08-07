@@ -67,7 +67,7 @@ const PasswordField = ({
           tabIndex={-1}
           type="button"
           disabled={disabled}
-          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-secondary-dark cursor-pointer rounded-sm select-none"
+          className="hover:text-gold-main transition-all bg-transparent absolute top-2 right-2 px-1.5 py-1.5 text-xl text-slate-500 cursor-pointer rounded-sm select-none"
           onClick={PasswordIconClickHandler}
         >
           {isVisible ? <HiOutlineEyeSlash /> : <HiOutlineEye />}

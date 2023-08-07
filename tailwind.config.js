@@ -9,7 +9,7 @@ module.exports = {
         container: {
             center: true,
             padding: {
-                DEFAULT: '1.5rem',
+                DEFAULT: "1.5rem",
             },
         },
         extend: {
@@ -18,22 +18,9 @@ module.exports = {
                 xs: "425px",
             },
             colors: {
-                //temp
-                lightGray: "#f1f4f8",
-                primary: {
-                    light: "#3d8eff",
-                    main: "#0D72FF",
-                    dark: "#0a5bcc",
-                },
-                secondary: {
-                    light: "#d0d8e3",
-                    main: "#b7c3d5",
-                    dark: "#7F8C9F",
-                },
-                //temp
                 black: "#17262B",
                 gold: {
-                    light: "#FCD535",
+                    light: "#FCDD5D",
                     main: "#FCD535",
                     dark: "#F0B90B",
                 },
