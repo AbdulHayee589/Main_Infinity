@@ -30,6 +30,11 @@ class ExtractColors extends Command
         $providers = Provider::all();
         $colors = [];
 
+        if(count($providers) == 0) {
+            $this->error("Please run 'app:fresh-blueprints' and 'app:fresh-providers' first.");
+            return;
+        }
+
         foreach($providers as $provider) {
             $variants = json_decode($provider->variants, true);
             foreach($variants['variants'] as $k => $variant) {

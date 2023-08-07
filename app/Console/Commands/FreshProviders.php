@@ -45,6 +45,11 @@ class FreshProviders extends Command
 
         $this->info("Starting at: ". Carbon::now());
 
+        if(count($blueprints) == 0) {
+            $this->error("Please run app:fresh-blueprints first");
+            return;
+        }
+
         foreach ($blueprints as $bp) {
             $providers = $bp->fetchProviders();
             $sentRequests++;

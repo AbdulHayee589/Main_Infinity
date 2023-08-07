@@ -11,6 +11,7 @@ class Blueprint extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'bp_id',
         'title',
         'description',
@@ -21,11 +22,6 @@ class Blueprint extends Model
         'filters',
         'print_providers'
     ];
-
-    protected $attributes = [
-      'print_providers'
-    ];
-
     protected $casts = [
         'images' => 'array',
         'filters' => 'json',
