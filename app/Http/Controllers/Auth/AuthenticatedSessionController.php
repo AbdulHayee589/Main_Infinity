@@ -10,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -43,7 +44,7 @@ class AuthenticatedSessionController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return Inertia::render('public/Test');
+        return Redirect::route('homePage');
     }
 
     /**
@@ -77,7 +78,7 @@ class AuthenticatedSessionController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return to_route("homePage");
+        return Redirect::route('homePage');
     }
 
     public function oauth_redirect(string $provider) {

@@ -10,10 +10,6 @@ Route::get('/', function () {
     return Inertia::render('public/Test'); // This will get component Test.jsx from the resources/js/Pages/Test.jsx
 })->name('homePage');
 
-
-Route::inertia('/sign-in', 'auth/SignInPage');
-Route::inertia('/sign-up', 'auth/SignUpPage');
-
 Route::inertia('/how-it-works', 'public/HowItWorksPage');
 Route::inertia('/policy/terms-and-conditions', 'policy/TermsAndConditionsPage');
 Route::inertia('/policy/refund', 'policy/RefundPage');
