@@ -38,6 +38,8 @@ class RegisterController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended();
+        // TODO
+        // @ddimitrov1108
+        return Inertia::render('public/Test');
     }
 }
