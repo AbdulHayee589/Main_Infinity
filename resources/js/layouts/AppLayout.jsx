@@ -5,7 +5,6 @@ const AppLayout = ({ children }) => {
   return (
     <>
       <HeaderNavigation />
-
       <main>{children}</main>
       <FooterNavigation />
     </>

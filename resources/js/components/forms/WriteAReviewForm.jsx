@@ -6,10 +6,14 @@ import { reviewSchema } from "../../utils/schemas";
 import Alert from "../ui/Alert";
 import Label from "../ui/formik/Label";
 import TextArea from "../ui/formik/TextArea";
+import { usePage } from "@inertiajs/react";
 
 const ratingNames = ["Terrible", "Poor", "Average", "Good", "Excellent"];
 
 const WriteAReviewForm = () => {
+  const { props } = usePage();
+  console.log(props);
+  
   const { formState, setFormState } = useFormState();
   const [rating, setRating] = useState(0);
 

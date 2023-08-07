@@ -17,7 +17,7 @@ const AuthLayout = ({ children }) => {
 
   return (
     <div className="relative grid items-center grid-cols-7">
-      <div className="grid items-center min-h-screen bg-white px-6 py-16 w-full max-w-[520px] mx-auto lg:mx-0 lg:max-w-none col-span-full lg:col-span-3 xl:col-span-2 xl:px-12">
+      <div className="lg:grid items-center min-h-screen bg-white px-6 py-16 w-full max-w-[520px] mx-auto lg:mx-0 lg:max-w-none col-span-full lg:col-span-3 xl:col-span-2 xl:px-12">
         <div>
           {children}
 
