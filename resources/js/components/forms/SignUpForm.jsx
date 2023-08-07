@@ -30,9 +30,6 @@ const SignUpForm = () => {
       onBefore: () => {
         setFormState({ ...formState, loading: true });
       },
-      onSuccess: (page) => {
-        alert(1);
-      },
       onError: (errors) => {
         console.log(errors);
         setFormState({ ...formState, error: errors });
