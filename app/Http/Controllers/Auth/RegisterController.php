@@ -33,7 +33,7 @@ class RegisterController extends Controller
         try {
             $request->register();
         } catch(ValidationException $ex) {
-            return back()->withErrors($ex->errors())->withInput();
+            return back()->withErrors($ex->errors());
         }
 
         $request->session()->regenerate();

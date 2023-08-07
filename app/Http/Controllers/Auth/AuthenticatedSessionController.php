@@ -30,12 +30,7 @@ class AuthenticatedSessionController extends Controller
             'status' => session('status'),
         ]);
     }
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function store(LoginRequest $request)
     {
         try {
@@ -46,7 +41,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended();
+        // TODO
+        // @ddimitrov1108
+        return Inertia::render('public/Test');
     }
 
     /**
@@ -78,7 +75,9 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended();
+        // TODO
+        // @ddimitrov1108
+        return Inertia::render('public/Test');
     }
 
     public function oauth_redirect(string $provider) {
