@@ -11,7 +11,6 @@ const authProviders = [
 ];
 
 const AuthLayout = ({ children }) => {
-
   const { props} = usePage();
   console.log(props);
 
