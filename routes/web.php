@@ -8,7 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return Inertia::render('public/Test'); // This will get component Test.jsx from the resources/js/Pages/Test.jsx
-});
+})->name('homePage');
 
 
 Route::inertia('/sign-in', 'auth/SignInPage');

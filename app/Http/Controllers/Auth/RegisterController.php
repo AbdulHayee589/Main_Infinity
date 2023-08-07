@@ -40,6 +40,6 @@ class RegisterController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return Inertia::render('public/Test');
+        return to_route("homePage");
     }
 }
