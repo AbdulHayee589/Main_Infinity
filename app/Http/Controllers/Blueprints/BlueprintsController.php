@@ -153,12 +153,11 @@ class BlueprintsController extends Controller
     }
 
     public function rate(string $id, Request $request) {
-        //TODO uncomment after frontend part is done
-//        $user = Auth::user();
-//        if(!$user)
-//            return back()->withErrors([
-//                "errors" => trans("blueprints.rating_guest")
-//            ]);
+        $user = Auth::user();
+        if(!$user)
+            return back()->withErrors([
+                "errors" => trans("blueprints.rating_guest")
+            ]);
 
         $bp = Blueprint::find($id);
         if(!$bp)
@@ -166,15 +165,14 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
 
-        //TODO uncomment after frontend part is done
-//        $user_rating = Rating::where('bp_id', $bp->id)
-//            ->where('by_id', $user->id)
-//            ->exists();
-//
-//        if($user_rating)
-//            return back()->withErrors([
-//                "errors" => trans("blueprints.rating_exists")
-//            ]);
+        $user_rating = Rating::where('bp_id', $bp->id)
+            ->where('by_id', $user->id)
+            ->exists();
+
+        if($user_rating)
+            return back()->withErrors([
+                "errors" => trans("blueprints.rating_exists")
+            ]);
 
         $rating = $request->get("rating");
         if(!$rating || is_nan($rating) || $rating < 1 || $rating > 5)
@@ -191,7 +189,7 @@ class BlueprintsController extends Controller
         $rating = Rating::create([
             "isMockup" => false,
             "bp_id" => $bp->id,
-            "by_id" => 1, //TODO replace with $user->id after frontend part is done
+            "by_id" => $user->id,
             "star_rating" => $rating,
             "message" => $rating_msg
         ]);

@@ -13,24 +13,18 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
     public function index() {
-        // TODO: REMOVE IN PRODUCTION
-        //$user = Auth::user();
-        $user = User::find(1)->with(["shippingAddress", "billingAddress", "addresses"])->get();
+        $user = Auth::user();
         return response()->json($user);
     }
 
 
     public function addresses() {
-        // TODO: REMOVE IN PRODUCTION
-        //$user = Auth::user();
-        $user = User::find(1);
+        $user = Auth::user();
         return response()->json($user->addresses);
     }
 
     public function changeMainShippingAddy($id) {
-        // TODO: REMOVE IN PRODUCTION
-        //$user = Auth::user();
-        $user = User::find(1);
+        $user = Auth::user();
         $addy = ShippingBook::where(['id' => $id, 'user_id' => $user->id])->first();
 
         if(!$addy)
@@ -42,9 +36,7 @@ class UserController extends Controller
     }
 
     public function changeMainBillingAddy($id) {
-        // TODO: REMOVE IN PRODUCTION
-        //$user = Auth::user();
-        $user = User::find(1);
+        $user = Auth::user();
         $addy = ShippingBook::where(['id' => $id, 'user_id' => $user->id])->first();
 
         if(!$addy)
@@ -65,9 +57,7 @@ class UserController extends Controller
 
     public function removeAddy($id)
     {
-        // TODO: REMOVE IN PRODUCTION
-        //$user = Auth::user();
-        $user = User::find(1);
+        $user = Auth::user();
         $addy = ShippingBook::where(['id' => $id, 'user_id' => $user->id])->first();
 
         if(!$addy)
