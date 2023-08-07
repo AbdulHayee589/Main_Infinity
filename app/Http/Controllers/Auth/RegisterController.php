@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -40,6 +41,6 @@ class RegisterController extends Controller
 
         // TODO
         // @ddimitrov1108
-        return to_route("homePage");
+        return Redirect::route('homePage');
     }
 }
