@@ -42,9 +42,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // TODO
-        // @ddimitrov1108
-        return redirect()->intended();
+        return redirect(RouteServiceProvider::HOME);
     }
 
     /**
@@ -59,6 +57,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        return redirect("sign-in");
     }
 
     public function oauth(string $provider) {
@@ -76,9 +76,7 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user);
 
-        // TODO
-        // @ddimitrov1108
-        return redirect()->intended();
+        return redirect(RouteServiceProvider::HOME);
     }
 
     public function oauth_redirect(string $provider) {

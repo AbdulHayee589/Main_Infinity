@@ -39,8 +39,6 @@ class RegisterController extends Controller
 
         $request->session()->regenerate();
 
-        // TODO
-        // @ddimitrov1108
-        return Redirect::route('homePage');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -42,28 +42,12 @@ Route::prefix('user')->group(function () {
 
     Route::post("/addresses/shipping/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainShippingAddy"]);
     Route::post("/addresses/billing/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainBillingAddy"]);
-});
-
-//Authentication
-Route::prefix('auth')->group(function () {
-    Route::post("/login", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, "store"]);
-    Route::get("/login", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, "create"]);
-    Route::post("/logout", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, "destroy"]);
-
-    Route::post("/signup", [\App\Http\Controllers\Auth\RegisterController::class, "store"]);
-    Route::get("/signup", [\App\Http\Controllers\Auth\RegisterController::class, "create"]);
-});
+})->middleware("auth");
 
 
-//oAuth Webhooks
-Route::prefix('oauth')->group(function () {
-    //Handle oauth webhooks
-    Route::get("/{oauth}", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'oauth']);
-
-    //Handle oauth login requests && redirect them to provider
-    Route::get("/make/{oauth}", [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'oauth_redirect']);
-});
 
 Route::fallback(function () {
     return Inertia::render('NotFound');
 });
+
+require __DIR__.'/auth.php';

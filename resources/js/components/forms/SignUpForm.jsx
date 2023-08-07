@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const { formState, setFormState } = useFormState();
 
   const onFormSubmitHandler = async (values, { setErrors }) => {
-    router.visit("/auth/signup", {
+    router.visit("/sign-up", {
       method: "post",
       preserveState: true,
       data: {

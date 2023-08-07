@@ -11,7 +11,7 @@ const SignInForm = () => {
   const { formState, setFormState } = useFormState();
 
   const onFormSubmitHandler = async (values, { setErrors }) => {
-    router.visit("/auth/login", {
+    router.visit("/sign-in", {
       method: "post",
       preserveState: true,
       data: {
