@@ -24,7 +24,7 @@ const DisclouseContainer = ({
               className={clsx(
                 "cursor-pointer group flex justify-between items-center font-semibold transition-all",
                 boxHoverEffect
-                  ? "hover:bg-slate-100"
+                  ? "hover:bg-slate-50"
                   : "hover:text-gold-main",
                 btnClassName
               )}

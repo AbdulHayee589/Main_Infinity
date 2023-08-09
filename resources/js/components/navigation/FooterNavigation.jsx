@@ -42,7 +42,7 @@ const FooterNavigation = () => {
             )}
           </div>
 
-          <div className="bg-slate-200 min-h-[1px] w-full rounded-full"></div>
+          <div className="bg-slate-100 min-h-[1px] w-full rounded-full"></div>
 
           <div className="w-full grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="grid gap-4 col-span-1 md:pl-16 lg:pl-0">

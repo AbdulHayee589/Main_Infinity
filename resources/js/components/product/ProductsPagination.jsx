@@ -65,7 +65,7 @@ const ProductsPagination = ({ pages = [], className, ...restProps }) => {
           }
           className={clsx(
             "w-9 h-9 grid items-center justify-center rounded-md font-semibold",
-            active ? "bg-gold-main text-white" : "hover:bg-slate-100"
+            active ? "bg-gold-main text-white" : "hover:bg-slate-50"
           )}
         >
           {label}
