@@ -23,10 +23,7 @@ const ProductImagesAndDetails = ({ product = null }) => {
           </h1>
 
           <StarRating
-            rating={product.rating || 0.0}
-            count={product.ratings.length}
-            showCount={true}
-            showLabel={true}
+            rating={product.rating || 0}
             className="text-xl"
           />
         </div>

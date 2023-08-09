@@ -68,6 +68,17 @@
         }
       }
     },
+    "productsPage": {
+      "sortBy": {
+          "title": "Sort by",
+          "options": [
+              "Popularity",
+              "Newest",
+              "Lowest price",
+              "Highest price"
+          ]
+      }
+  },
     "productDetailsPage": {
       "readMore": "Read More...",
       "providers": {

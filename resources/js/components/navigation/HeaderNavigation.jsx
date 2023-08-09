@@ -19,7 +19,7 @@ const HeaderNavigation = () => {
   const { props } = usePage();
 
   const changeLanguageHandler = (lng) => {
-    localStorage.setItem("selected-language", lng);
+    localStorage.setItem("selected-lng", lng);
     changeLanguage(lng);
   }
 
@@ -90,7 +90,7 @@ const HeaderNavigation = () => {
             )}
           </div>
 
-          <div className="flex text-2xl items-center gap-2">
+          <div className="flex text-2xl items-center gap-3">
             <NavLink className="text-slate-500 hover:text-gold-main">
               <HiOutlineHeart />
             </NavLink>

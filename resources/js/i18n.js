@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import languages from './utils/locales';
 
-const selectedLanguage = localStorage.getItem('selected-language') || 'en';
+const selectedLanguage = localStorage.getItem('selected-lng') || 'en';
 const resources = languages;
 
 i18n

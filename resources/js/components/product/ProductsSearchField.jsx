@@ -25,7 +25,7 @@ const ProductsSearchField = ({ value = "", className, ...restProps }) => {
 
     router.reload({
       method: "get",
-      data: { search: searchValue, page: 1 },
+      data: { category: undefined, search: searchValue, page: 1 },
       only: ["blueprints"],
       preserveState: true,
     });

@@ -1,4 +1,4 @@
-import { router, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 import FilterSideBar from "../../../components/sidebar/FilterSideBar";
 import useOpenState from "../../../components/hooks/useOpenState";
@@ -8,43 +8,24 @@ import ProductsSearchField from "../../../components/product/ProductsSearchField
 import Dropdown from "../../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
-import ProductsListing from "../../../components/product/ProductsListing";
 import ProductsPagination from "../../../components/product/ProductsPagination";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import ProductShowcase from "../../../components/product/ProductShowcase";
+import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
-const sortBy = [
-  { id: uuidv4(), sortId: 0, name: "Popularity" },
-  { id: uuidv4(), sortId: 1, name: "Latest" },
-  { id: uuidv4(), sortId: 2, name: "Lowest price" },
-  { id: uuidv4(), sortId: 3, name: "Highest price" },
-];
 
 const ProductsPage = () => {
-  const [activeSort, setActiveSort] = useState(sortBy[0]);
+  const { t } = useTranslation();
+  const [activeSortIndex, setActiveSortIndex] = useState(0);
   const { open, setOpen, toggleOpen } = useOpenState(false);
   const { props } = usePage();
-  console.log(props);
 
   const toggleFiltersSideBar = () => toggleOpen();
   const closeFiltersSideBar = () => setOpen(false);
 
-  const handleSort = (sortId) => {
-    setActiveSort(sortBy[sortId]);
-  };
-
-  const handleFilters = (filters) => {
-    router.reload({
-      method: "post",
-      data: { filters },
-      only: ["blueprints"],
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess() {
-        console.log(1);
-      },
-    });
+  const handleSort = (sortIndex) => {
+    setActiveSortIndex(sortIndex);
   };
 
   return (
@@ -53,7 +34,6 @@ const ProductsPage = () => {
         filters={props.filters}
         open={open}
         onClose={closeFiltersSideBar}
-        handleFilterSearch={handleFilters}
       />
 
       <Container className="flex flex-col gap-8 py-6 pb-24">
@@ -71,33 +51,41 @@ const ProductsPage = () => {
           <div className="flex gap-2"></div>
 
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-y-2 xxs:flex-row justify-between xxs:items-center">
-              <h1 className="font-semibold text-2xl truncate ...">
+            <div className="flex flex-col gap-y-4 sm:flex-row justify-between sm:items-center">
+              <h1 className="font-semibold text-3xl truncate ...">
                 Hoodies
               </h1>
               <div className="flex items-center gap-2">
-                <span className="min-w-fit text-sm">
-                  Sort by
+                <span className="min-w-fit">
+                  {t("productsPage.sortBy.title")}
                 </span>
-                <Dropdown title={activeSort.name}>
-                  {sortBy.map(({ id, sortId, name }) => (
-                    <Menu.Item key={id}>
+                <Dropdown
+                  title={
+                    t("productsPage.sortBy.options", {
+                      returnObjects: true,
+                    })[activeSortIndex]
+                  }
+                >
+                  {t("productsPage.sortBy.options", {
+                    returnObjects: true,
+                  }).map((sortBy, index) => (
+                    <Menu.Item key={uuidv4()}>
                       <button
                         className="hover:bg-slate-100 w-full flex items-center justify-start gap-2 p-2"
                         onClick={(e) => {
-                          handleSort(sortId);
+                          handleSort(index);
                         }}
                       >
                         <HiCheck
                           className={clsx(
                             "text-2xl text-gold-main",
-                            activeSort.sortId ===
-                              sortId
+                            activeSortIndex ===
+                              index
                               ? "opacity-100"
                               : "opacity-0"
                           )}
                         />
-                        {name}
+                        {sortBy}
                       </button>
                     </Menu.Item>
                   ))}
@@ -105,7 +93,7 @@ const ProductsPage = () => {
               </div>
             </div>
 
-            <p className="text-sm text-slate-500">
+            <p className="text-base text-slate-500">
               Hoodies are in-demand all year round without any
               sign of dropping in popularity. Choose between
               various styles, like pullover, zip-up, or cropped,
@@ -118,17 +106,21 @@ const ProductsPage = () => {
           {props?.blueprints.data.length > 0 ? (
             <>
               <div className="hidden lg:block w-full max-w-[320px]">
-                <ProductFilters
-                  filters={props.filters}
-                  handleFilterSearch={handleFilters}
-                />
+                <ProductFilters filters={props.filters} />
               </div>
 
               <div className="w-full flex flex-col gap-8">
-                <ProductsListing
-                  products={props?.blueprints.data}
+                <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {props?.blueprints.data.map((blueprint) => (
+                    <ProductShowcase
+                      key={blueprint.bp_id}
+                      product={blueprint}
+                    />
+                  ))}
+                </div>
+                <ProductsPagination
+                  pages={props?.blueprints?.links}
                 />
-                <ProductsPagination pages={props?.blueprints?.links} />
               </div>
             </>
           ) : (

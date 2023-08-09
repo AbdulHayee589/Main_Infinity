@@ -1,10 +1,12 @@
 import { useEffect } from "react";
-import { useRemember } from "@inertiajs/react";
+import { router, useRemember } from "@inertiajs/react";
 import DisclouseContainer from "../ui/DisclouseContainer";
+import useSearchParams from "../hooks/useSearchParams";
 import clsx from "clsx";
 
-const ProductFilters = ({ filters, className, handleFilterSearch, ...restProps }) => {
+const ProductFilters = ({ filters, className, ...restProps }) => {
   const [activeFilters, setActiveFilters] = useRemember({}, "ProductsPage");
+  const { searchParams } = useSearchParams();
 
   const onChangeHandler = (event) => {
     const getPair = event.target.id.split("_");
@@ -32,13 +34,31 @@ const ProductFilters = ({ filters, className, handleFilterSearch, ...restProps }
     }
   };
 
+  const applyFilters = () => {
+    router.reload({
+      method: "post",
+      data: {
+        category: searchParams?.category,
+        search: searchParams?.search,
+        page: 1,
+        filters: activeFilters,
+      },
+      only: ["blueprints"],
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess() {
+        console.log(`filters active`);
+      },
+    });
+  };
+
   useEffect(() => {
-    handleFilterSearch(activeFilters);
+    applyFilters();
   }, [activeFilters]);
 
   useEffect(() => {
-    console.log(activeFilters);
-    handleFilterSearch(activeFilters);
+    if(activeFilters.length)
+      applyFilters();
   }, []);
 
   const isFilterChecked = (key, value) =>

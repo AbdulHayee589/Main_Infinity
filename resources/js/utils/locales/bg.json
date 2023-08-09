@@ -22,7 +22,7 @@
                 },
                 "firstName": "Име",
                 "lastName": "Фамилия",
-                "email": "Имейл",
+                "email": "Имейл адрес",
                 "password": "Парола",
                 "password_confirmation": "Потвърдете паролата",
                 "accMsg": {
@@ -68,8 +68,19 @@
                 }
             }
         },
+        "productsPage": {
+            "sortBy": {
+                "title": "Сортиране",
+                "options": [
+                    "Популярност",
+                    "Най-нови",
+                    "Най-ниска цена",
+                    "Най-висока цена"
+                ]
+            }
+        },
         "productDetailsPage": {
-            "readMore": "Прочетете повече...",
+            "readMore": "Прочетете още...",
             "providers": {
                 "title": "Налични доставчици",
                 "table": {

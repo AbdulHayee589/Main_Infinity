@@ -45,7 +45,7 @@ const Dropdown = ({
           >
             <Menu.Items
               className={clsx(
-                "z-30 absolute right-0 mt-2 w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-secondary-light focus:outline-none outline-none select-none",
+                "z-30 overflow-hidden absolute right-0 mt-2 w-52 origin-top-right rounded-md border bg-white shadow-lg focus:outline-none outline-none select-none",
                 menuItemsClassName
               )}
             >
