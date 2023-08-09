@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
 createInertiaApp({
   remember: (key, value) => {
     if (value !== undefined) {
@@ -27,7 +28,11 @@ createInertiaApp({
     return page;
   },
   setup({ el, App, props }) {
-    createRoot(el).render(<App {...props} />);
+    createRoot(el).render(
+      <I18nextProvider i18n={i18n}>
+        <App {...props} />
+      </I18nextProvider>
+    );
   },
   // ...
 });

@@ -2,34 +2,59 @@ import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import useFormState from "../hooks/useFormState";
 import { Field, Form, Formik } from "formik";
-import { reviewSchema } from "../../utils/schemas";
 import Alert from "../ui/Alert";
 import Label from "../ui/formik/Label";
 import TextArea from "../ui/formik/TextArea";
-import { usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
+import Button from "../ui/Button";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
 
-const ratingNames = ["Terrible", "Poor", "Average", "Good", "Excellent"];
-
-const WriteAReviewForm = () => {
-  const { props } = usePage();
-  console.log(props);
-  
-  const { formState, setFormState } = useFormState();
+const WriteAReviewForm = ({ closeOnSubmit }) => {
+  const [formState, setFormState] = useFormState();
   const [rating, setRating] = useState(0);
+  const { props } = usePage();
+  const { t } = useTranslation();
 
   const onStarClickHandler = (rate) => setRating(rate);
 
-  const onFormSubmitHandler = async (values) => {
-    setFormState({ ...formState, loading: true });
+  const onFormSubmitHandler = async (values, { setErrors }) => {
+    if (!productId) return;
+
+    router.post(`shop/products/${props.blueprints.id}/rate`, {
+      method: "post",
+      preserveState: true,
+      data: {
+        rating: rating + 1,
+        message: values.message,
+      },
+      onBefore: () => {
+        setFormState({ ...formState, loading: true });
+      },
+      onError: (errors) => {
+        console.log(errors);
+        setErrors(errors);
+      },
+      onSuccess: () => {
+        closeOnSubmit();
+      },
+      onFinish: () => {
+        setFormState({ ...formState, loading: false });
+      },
+    });
   };
 
   return (
-    <div className="my-8">
+    <div className="my-6">
       <Formik
         initialValues={{
           message: "",
         }}
-        validationSchema={reviewSchema}
+        validationSchema={Yup.object().shape({
+          message: Yup.string()
+              .required(t("forms.errors.fieldRequired"))
+              .max(100, t("forms.errors.maxSymbolsExceeded")),
+      })}
         onSubmit={onFormSubmitHandler}
       >
         <Form>
@@ -37,10 +62,10 @@ const WriteAReviewForm = () => {
             <Alert variant="error">{formState.error}</Alert>
           )}
           <div className="mb-4" disabled={formState.loading}>
-            <Label ignoreResponsiveStyle={false} labelFor="rating" label="Rate the product" />
+            <Label label={t("forms.writeAReview.rate")} />
 
             <div id="rating" className="flex items-center gap-2">
-              <div className="flex items-center text-4xl">
+              <div className="flex items-center text-3xl xxs:text-4xl sm:text-5xl">
                 {Array.from(
                   { length: 5 },
                   (_, index) => index
@@ -59,23 +84,48 @@ const WriteAReviewForm = () => {
                 ))}
               </div>
 
-              <span className="text-slate-400">
-                {ratingNames[rating]}
+              <span className="text-slate-500">
+                {
+                  t("forms.writeAReview.rateText", {
+                    returnObjects: true,
+                  })[rating]
+                }
               </span>
             </div>
           </div>
 
-          <Label ignoreResponsiveStyle={false} labelFor="message" label="Message" />
-
           <Field
             id="message"
             name="message"
-            label=""
+            label={t("forms.writeAReview.message")}
             component={TextArea}
+            style={{ resize: "none" }}
             rows={8}
             disabled={formState.loading}
             fullWidth
           />
+
+          <div className="grid lg:flex items-center gap-2">
+            <Button
+              type="submit"
+              className={
+                "flex justify-center w-full lg:w-fit lg:disabled:px-8"
+              }
+              disabled={formState.loading}
+              loading={formState.loading}
+            >
+              {t("forms.writeAReview.submitBtn")}
+            </Button>
+            <Button
+              variant="outlined"
+              className={"flex justify-center w-full lg:w-fit"}
+              disabled={formState.loading}
+              loading={formState.loading}
+              onClick={closeOnSubmit}
+            >
+              {t("forms.writeAReview.cancelBtn")}
+            </Button>
+          </div>
         </Form>
       </Formik>
     </div>

@@ -27,8 +27,7 @@ const StarRating = ({
       </div>
 
       {showLabel && (
-        <div className="text-slate-400">
-          {rating > 0 ? rating.toFixed(2) : rating} &#x2022; Total{" "}
+        <div className="text-slate-500">
           {count}
         </div>
       )}

@@ -49,7 +49,7 @@ const SideBar = ({
               )}
               <button
                 aria-label="Close Menu"
-                className="outline-none text-2xl w-fit ml-auto text-slate-400 hover:text-gold-main transition-all"
+                className="outline-none text-2xl w-fit ml-auto text-slate-500 hover:text-gold-main transition-all"
                 onClick={onClose}
               >
                 <HiXMark />

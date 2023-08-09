@@ -10,10 +10,18 @@ import {
   HiOutlineHeart,
   HiShoppingCart,
 } from "react-icons/hi2";
+import { usePage } from "@inertiajs/react";
+import { changeLanguage } from "i18next";
 
 const HeaderNavigation = () => {
   const { open, setOpen, toggleOpen } = useOpenState(false);
   const closeMobileMenu = () => setOpen(false);
+  const { props } = usePage();
+
+  const changeLanguageHandler = (lng) => {
+    localStorage.setItem("selected-language", lng);
+    changeLanguage(lng);
+  }
 
   return (
     <>
@@ -25,6 +33,11 @@ const HeaderNavigation = () => {
       />
 
       <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
+      <div className="flex items-center gap-2">
+        <button onClick={() => changeLanguageHandler('en')}>EN</button>
+        <button onClick={() => changeLanguageHandler('bg')}>BG</button>
+      </div>
+    
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
             <button
@@ -77,7 +90,7 @@ const HeaderNavigation = () => {
             )}
           </div>
 
-          <div className="flex text-2xl items-center gap-4">
+          <div className="flex text-2xl items-center gap-2">
             <NavLink className="text-slate-500 hover:text-gold-main">
               <HiOutlineHeart />
             </NavLink>
@@ -89,18 +102,33 @@ const HeaderNavigation = () => {
               <HiShoppingCart />
             </NavLink>
 
-            <NavLink
-              href="/sign-in"
-              className="flex gap-2 items-center text-slate-500"
-            >
-              <Button
-                size="sm"
-                variant="outlined"
-                className="px-6 text-base text-black/80"
+            {props.auth.user?.id ? (
+              <NavLink
+                href="/logout"
+                className="flex gap-2 items-center text-slate-500"
               >
-                Sign In
-              </Button>
-            </NavLink>
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  className="px-6 text-base text-black/80"
+                >
+                  Logout
+                </Button>
+              </NavLink>
+            ) : (
+              <NavLink
+                href="/sign-in"
+                className="flex gap-2 items-center text-slate-500"
+              >
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  className="px-6 text-base text-black/80"
+                >
+                  Sign In
+                </Button>
+              </NavLink>
+            )}
           </div>
         </Container>
       </header>

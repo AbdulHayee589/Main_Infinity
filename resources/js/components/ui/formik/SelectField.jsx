@@ -26,16 +26,16 @@ const SelectField = ({
           <>
             <div
               className={clsx(
-                "relative outline-none rounded-sm w-full",
+                "relative outline-none rounded-md w-full",
                 className
               )}
             >
               <Listbox.Button
                 className={clsx(
-                  "border outline-none -outline-offset-1 relative rounded-sm w-full flex items-center text-left cursor-pointer px-4 py-2.5",
+                  "border outline-none -outline-offset-1 relative rounded-md w-full flex items-center text-left cursor-pointer px-4 py-2.5",
                   errors[field.name] && touched[field.name]
                     ? " border-error-main focus:outline-error-main"
-                    : "border-slate-200 hover:border-slate-300",
+                    : "border-slate-200",
                   open && " outline-gold-main"
                 )}
               >
@@ -48,7 +48,7 @@ const SelectField = ({
                 />
               </Listbox.Button>
 
-              <Listbox.Options className="z-10 mt-2 absolute w-full rounded-sm bg-white shadow-lg ">
+              <Listbox.Options className="z-10 mt-2 absolute w-full rounded-md bg-white shadow-lg ">
                 {options.map((option) => (
                   <Listbox.Option
                     key={option}

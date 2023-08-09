@@ -7,6 +7,6 @@ const useFormState = () => {
     disabled: false,
   });
 
-  return { formState, setFormState };
+  return [formState, setFormState];
 }
 export default useFormState

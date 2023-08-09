@@ -1,0 +1,101 @@
+{
+  "translation": {
+    "priceSymbol": "EUR",
+    "forms": {
+      "errors": {
+        "invalidField": "Invalid field",
+        "fieldRequired": "Field is required",
+        "maxSymbolsExceeded": "Maximum number of characters exceeded",
+        "minSymbols": "Minimum of 8 characters is required",
+        "genderSelect": "Please select your gender",
+        "password": "Minimum of 8 characters, including at least one digit and one special character",
+        "password_confirmation": "Passwords do not match"
+      },
+      "signUp": {
+        "gender": {
+          "title": "Select Gender",
+          "options": [
+            "Male",
+            "Female",
+            "Other"
+          ]
+        },
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Confirm Password",
+        "accMsg": {
+          "text": "Already have an account?",
+          "link": "Sign In"
+        },
+        "submitBtn": "Sign Up"
+      },
+      "signIn": {
+        "email": "Email",
+        "password": "Password",
+        "accMsg": {
+          "text": "Don't have an account?",
+          "link": "Sign Up"
+        },
+        "submitBtn": "Sign In"
+      },
+      "writeAReview": {
+        "rate": "Rate the product",
+        "rateText": [
+          "Terrible",
+          "Bad",
+          "Average",
+          "Good",
+          "Excellent"
+        ],
+        "message": "Write a comment",
+        "submitBtn": "Comment",
+        "cancelBtn": "Cancel"
+      }
+    },
+    "modals": {
+      "writeAReview": {
+        "title": "Write a Review",
+        "info": {
+          "title": "How to Write a Review",
+          "description": "Describe your experience using the product in a free form or in the form of answers to questions:",
+          "steps": [
+            "How long have you been using the product?",
+            "What criteria did you use when choosing the product?",
+            "What advantages and disadvantages did you notice in the process of using the product?"
+          ]
+        }
+      }
+    },
+    "productDetailsPage": {
+      "readMore": "Read More...",
+      "providers": {
+        "title": "Available print providers",
+        "table": {
+          "location": "Location",
+          "price": "Price",
+          "shipping": "Shipping",
+          "avgProdTime": {
+            "title": "Avg. Prod. time",
+            "text": "business days"
+          },
+          "printAreas": "Print areas",
+          "sizes": "Sizes",
+          "colors": "Colors"
+        },
+        "moreDetailsBtn": "Details",
+        "startDesigningBtn": "Start Designing"
+      },
+      "about": {
+        "title": "About"
+      },
+      "reviews": {
+        "title": "Reviews",
+        "approved": "Approved",
+        "notLoggedMsg": "Log in to your account to write a review",
+        "writeAReviewBtn": "Write a Review"
+      }
+    }
+  }
+}

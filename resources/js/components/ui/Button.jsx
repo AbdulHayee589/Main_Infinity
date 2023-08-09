@@ -10,13 +10,13 @@ const button = cva("button", {
       outlined: [
         "bg-white",
         "text-black",
-        "border-slate-300",
+        "border-slate-200",
         "hover:text-gold-main",
       ],
     },
     size: {
-      sm: ["py-2", "px-4"],
-      md: ["py-2.5", "px-4"],
+      sm: ["py-1.5", "px-4"],
+      md: ["py-2", "px-4"],
       lg: ["py-3", "px-4"],
     },
     rounded: rounded,

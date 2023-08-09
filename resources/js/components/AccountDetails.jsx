@@ -18,7 +18,7 @@ const AccountDetails = ({ user, className, ...restProps }) => {
       </div>
       <div className="truncate ...">
         {user && (
-          <div className="text-slate-400 text-xs">Logged in as:</div>
+          <div className="text-slate-500 text-xs">Logged in as:</div>
         )}
         {!user ? (
           <>

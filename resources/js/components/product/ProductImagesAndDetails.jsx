@@ -1,8 +1,10 @@
 import ProductImagesContainer from "./ProductImagesContainer";
 import StarRating from "../StarRating";
 import { Link } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
 
 const ProductImagesAndDetails = ({ product = null }) => {
+  const { t } = useTranslation();
   const cleanDescription = product?.description
     .substring(product.description.indexOf(".:"))
     .replace(/<[^>]*>/g, "")
@@ -15,7 +17,7 @@ const ProductImagesAndDetails = ({ product = null }) => {
 
       <div className="w-full grid gap-4">
         <div>
-          {/* <span className="text-slate-400 text-sm">t-shirt</span> */}
+          {/* <span className="text-slate-500 text-sm">t-shirt</span> */}
           <h1 className="text-2xl md:text-3xl font-semibold">
             {product?.title}
           </h1>
@@ -43,7 +45,7 @@ const ProductImagesAndDetails = ({ product = null }) => {
         </div>
 
         <Link href="#description" className="text-slate-500" only={[]}>
-          Read more
+          {t('productDetailsPage.readMore')}
         </Link>
       </div>
     </div>

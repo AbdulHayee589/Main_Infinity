@@ -49,7 +49,7 @@ const ProductsPagination = ({ pages = [], className, ...restProps }) => {
               ? `${prevPage?.url}&search=${searchParams["search"]}`
               : prevPage?.url
           }
-          className="w-9 h-9 grid items-center justify-center rounded-sm text-slate-400"
+          className="w-9 h-9 grid items-center justify-center rounded-md text-slate-500"
         >
           <HiChevronLeft />
         </Link>
@@ -64,7 +64,7 @@ const ProductsPagination = ({ pages = [], className, ...restProps }) => {
               : url
           }
           className={clsx(
-            "w-9 h-9 grid items-center justify-center rounded-sm font-semibold",
+            "w-9 h-9 grid items-center justify-center rounded-md font-semibold",
             active ? "bg-gold-main text-white" : "hover:bg-slate-100"
           )}
         >
@@ -80,7 +80,7 @@ const ProductsPagination = ({ pages = [], className, ...restProps }) => {
               ? `${nextPage?.url}&search=${searchParams["search"]}`
               : nextPage?.url
           }
-          className="w-9 h-9 grid items-center justify-center rounded-sm text-slate-400"
+          className="w-9 h-9 grid items-center justify-center rounded-md text-slate-500"
         >
           <HiChevronRight />
         </Link>

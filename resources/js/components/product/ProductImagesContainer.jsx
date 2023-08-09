@@ -71,7 +71,7 @@ const ProductImagesContainer = ({ images, className, ...restProps }) => {
         {...restProps}
       >
         <div className="grid-cols-1 flex flex-col gap-2">
-          <div className="flex items-center justify-center text-lg text-slate-400">
+          <div className="flex items-center justify-center text-lg text-slate-500">
             <HiChevronUp />
           </div>
 
@@ -97,7 +97,7 @@ const ProductImagesContainer = ({ images, className, ...restProps }) => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center text-lg text-slate-400">
+          <div className="flex items-center justify-center text-lg text-slate-500">
             <HiChevronDown />
           </div>
         </div>

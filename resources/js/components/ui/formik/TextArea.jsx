@@ -12,15 +12,15 @@ const TextArea = ({
 }) => {
   return (
     <div className={clsx("py-3.5", fullWidth ? "w-full" : "w-fit")}>
-      {label && <Label labelFor={field.name} label={label}/>}
+      {label && <Label label={label}/>}
 
       <textarea
         className={clsx(
-          "p-4 focus:outline-gold-main border w-full rounded-sm max-h-[200px]",
+          "p-4 focus:outline-gold-main border w-full rounded-md max-h-[200px] bg-white",
           className,
           errors[field.name] && touched[field.name]
             ? " border-error-main focus:outline-error-main"
-            : "border-slate-200 hover:border-slate-300 focus:outline-gold-main"
+            : "border-slate-200 focus:outline-gold-main"
         )}
         {...field}
         {...restProps}

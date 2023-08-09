@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { registerSchema } from "../../utils/schemas";
+import { nameRegex, passwordRegex } from "../../utils/regex";
 import NavLink from "../ui/NavLink";
 import TextField from "../ui/formik/TextField";
 import PasswordField from "../ui/formik/PasswordField";
@@ -7,10 +7,12 @@ import Button from "../ui/Button";
 import useFormState from "../hooks/useFormState";
 import SelectField from "../ui/formik/SelectField";
 import { router } from "@inertiajs/react";
-import { genders } from "../../utils/statics";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
 
 const SignUpForm = () => {
-  const { formState, setFormState } = useFormState();
+  const { t } = useTranslation();
+  const [formState, setFormState] = useFormState();
 
   const onFormSubmitHandler = async (values, { setErrors }) => {
     router.visit("/sign-up", {
@@ -45,26 +47,62 @@ const SignUpForm = () => {
         email: "",
         password: "",
         password_confirmation: "",
-        gender: "Male",
+        gender: t("forms.signUp.gender.options", {
+          returnObjects: true,
+        })[0],
       }}
-      validationSchema={registerSchema}
+      validationSchema={Yup.object().shape({
+        firstName: Yup.string()
+          .matches(nameRegex, t("forms.errors.invalidField"))
+          .max(20, t("forms.errors.maxSymbolsExceeded"))
+          .required(t("forms.errors.fieldRequired")),
+        lastName: Yup.string()
+          .matches(nameRegex, t("forms.errors.invalidField"))
+          .max(20, t("forms.errors.maxSymbolsExceeded"))
+          .required(t("forms.errors.fieldRequired")),
+        email: Yup.string()
+          .email(t("forms.errors.invalidField"))
+          .max(60, t("forms.errors.maxSymbolsExceeded"))
+          .required(t("forms.errors.fieldRequired")),
+        password: Yup.string()
+          .matches(passwordRegex, t("forms.errors.password"))
+          .max(32, t("forms.errors.maxSymbolsExceeded"))
+          .required(t("forms.errors.fieldRequired")),
+        password_confirmation: Yup.string()
+          .oneOf(
+            [Yup.ref("password"), null],
+            t("forms.errors.password_confirmation")
+          )
+          .max(32, t("forms.errors.maxSymbolsExceeded"))
+          .required(t("forms.errors.fieldRequired")),
+        gender: Yup.string()
+          .oneOf(
+            t("forms.signUp.gender.options", {
+              returnObjects: true,
+            }),
+            t("forms.errors.fieldRequired")
+          )
+          .required(t("forms.errors.fieldRequired")),
+      })}
       onSubmit={onFormSubmitHandler}
     >
       <Form>
         <Field
           id="gender"
           name="gender"
-          label="Select your gender"
-          options={genders}
+          label={t("forms.signUp.gender.title")}
+          options={t("forms.signUp.gender.options", {
+            returnObjects: true,
+          })}
           component={SelectField}
           fullWidth
         />
 
-        <div className="md:flex gap-4 justify-between">
+        <div className="md:flex gap-4 items-center justify-between">
           <Field
             id="firstName"
             name="firstName"
-            label="First Name"
+            label={t("forms.signUp.firstName")}
             placeholder="e.g. Daniel"
             disabled={formState.loading}
             maxLength={60}
@@ -74,7 +112,7 @@ const SignUpForm = () => {
           <Field
             id="lastName"
             name="lastName"
-            label="Last Name"
+            label={t("forms.signUp.lastName")}
             placeholder="e.g. Dimitrov"
             disabled={formState.loading}
             maxLength={60}
@@ -87,7 +125,7 @@ const SignUpForm = () => {
           id="email"
           name="email"
           type="email"
-          label="Email Address"
+          label={t("forms.signUp.email")}
           placeholder="name@address.com"
           disabled={formState.loading}
           maxLength={60}
@@ -99,7 +137,7 @@ const SignUpForm = () => {
           id="password"
           name="password"
           type="password"
-          label="Password"
+          label={t("forms.signUp.password")}
           placeholder="••••••••••"
           disabled={formState.loading}
           maxLength={32}
@@ -111,7 +149,7 @@ const SignUpForm = () => {
           id="password_confirmation"
           name="password_confirmation"
           type="password"
-          label="Confirm Password"
+          label={t("forms.signUp.password_confirmation")}
           placeholder="••••••••••"
           disabled={formState.loading}
           maxLength={32}
@@ -119,21 +157,21 @@ const SignUpForm = () => {
           fullWidth
         />
 
-        <div className="w-full flex items-center mt-1 gap-2 text-sm text-slate-400">
-          <span>Already have an account?</span>
+        <div className="w-full flex items-center mt-1 gap-2 text-sm text-slate-500">
+          <span>{t("forms.signUp.accMsg.text")}</span>
           {!formState.loading ? (
             <NavLink
               href="/sign-in"
               className="font-semibold text-slate-500"
               size="sm"
-              title="Sign In"
+              title={t("forms.signUp.accMsg.link")}
               hoverEffect={false}
             >
-              Sign In
+              {t("forms.signUp.accMsg.link")}
             </NavLink>
           ) : (
             <span className="font-semibold cursor-wait text-sm">
-              Sign In
+              {t("forms.signUp.accMsg.link")}
             </span>
           )}
         </div>
@@ -143,9 +181,10 @@ const SignUpForm = () => {
           className={"flex justify-center mt-8"}
           disabled={formState.loading}
           loading={formState.loading}
+          title={t("forms.signUp.submitBtn")}
           fullWidth
         >
-          Sign Up
+          {t("forms.signUp.submitBtn")}
         </Button>
       </Form>
     </Formik>

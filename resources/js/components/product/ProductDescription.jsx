@@ -1,9 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 const ProductDescription = ({ description = "" }) => {
+  const { t } = useTranslation();
   const cleanDescription = description.replace(/<[^>]*>/g, "");
 
   return (
     <div id="description">
-      <h1 className="text-2xl font-bold mb-6">About</h1>
+      <h1 className="text-2xl font-bold mb-6">
+        {t("productDetailsPage.about.title")}
+      </h1>
 
       <div className="grid gap-6">
         <p>

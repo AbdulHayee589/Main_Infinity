@@ -4,35 +4,35 @@ const Label = ({
   label = "",
   sublabel = "",
   className,
-  ignoreResponsiveStyle = true,
+  ignoreResponsiveStyle = false,
   ...restProps
 }) => {
   return (
-    <div className={clsx("min-w-fit pb-1", className)} {...restProps}>
+    <div className={clsx("min-w-fit pb-2", className)} {...restProps}>
       {label && (
-        <div
+        <label
           className={clsx(
             "min-w-fit font-semibold",
-            !ignoreResponsiveStyle
+            ignoreResponsiveStyle
               ? "text-sm sm:text-base"
               : "text-sm"
           )}
         >
           {label}
-        </div>
+        </label>
       )}
 
       {sublabel && (
-        <div
+        <label
           className={clsx(
-            "min-w-fit text-slate-400",
-            !ignoreResponsiveStyle
+            "min-w-fit text-slate-500",
+            ignoreResponsiveStyle
               ? "text-sm sm:text-base"
               : "text-sm"
           )}
         >
           {sublabel}
-        </div>
+        </label>
       )}
     </div>
   );

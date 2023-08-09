@@ -49,7 +49,7 @@ const Modal = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  "w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-sm",
+                  "w-full p-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md",
                   className
                 )}
               >
@@ -62,7 +62,7 @@ const Modal = ({
                     <button
                       tabIndex={0}
                       onClick={modalCloseBtnClickHandler}
-                      className="outline-none text-2xl text-slate-400 hover:text-gold-main transition-all"
+                      className="outline-none text-3xl text-slate-500 hover:text-gold-main transition-all"
                     >
                       <HiXMark />
                     </button>
