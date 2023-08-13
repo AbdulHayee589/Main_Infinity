@@ -71,7 +71,7 @@ const ProductsPage = () => {
                   }).map((sortBy, index) => (
                     <Menu.Item key={uuidv4()}>
                       <button
-                        className="hover:bg-slate-100 w-full flex items-center justify-start gap-2 p-2"
+                        className="hover:bg-slate-50 w-full flex items-center justify-start gap-2 p-2"
                         onClick={(e) => {
                           handleSort(index);
                         }}

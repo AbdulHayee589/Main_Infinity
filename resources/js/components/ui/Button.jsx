@@ -9,7 +9,7 @@ const button = cva("button", {
       primary: ["bg-gold-main", "text-black", "border-transparent"],
       outlined: [
         "bg-white",
-        "text-black",
+        "text-black/80",
         "border-slate-200",
         "hover:text-gold-main",
       ],

@@ -94,6 +94,7 @@ const SignUpForm = () => {
           options={t("forms.signUp.gender.options", {
             returnObjects: true,
           })}
+          disabled={formState.loading}
           component={SelectField}
           fullWidth
         />
