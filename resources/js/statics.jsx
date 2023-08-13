@@ -9,6 +9,19 @@ import { v4 as uuidv4 } from "uuid";
 
 export const genders = ["Male", "Female", "Other"];
 
+export const headerNavUserDropdownLinks = [
+  {
+    id: uuidv4(),
+    title: "Account Details",
+    href: "/user",
+  },
+  {
+    id: uuidv4(),
+    title: "Sign out",
+    href: "/logout",
+  },
+]
+
 export const headerNavLinks = [
   {
     id: uuidv4(),

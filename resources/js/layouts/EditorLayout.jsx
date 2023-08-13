@@ -1,4 +1,9 @@
+import { usePage } from "@inertiajs/react";
+
 const EditorLayout = ({ children }) => {
+  const { props} = usePage();
+  console.log(props);
+  
   return (
     <>
       editor

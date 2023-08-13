@@ -6,7 +6,7 @@ import {
   stockServices,
   userServices,
   websiteRoadmap,
-} from "../../utils/statics";
+} from "../../statics";
 import Container from "../ui/Container";
 
 const FooterNavigation = () => {

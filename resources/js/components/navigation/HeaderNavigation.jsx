@@ -1,6 +1,6 @@
 import Brand from "../ui/Brand";
 import NavLink from "../ui/NavLink";
-import { headerNavLinks } from "../../utils/statics";
+import { headerNavLinks, headerNavUserDropdownLinks } from "../../statics";
 import NavSideBar from "../sidebar/NavSideBar";
 import useOpenState from "../hooks/useOpenState";
 import Container from "../ui/Container";
@@ -12,6 +12,8 @@ import {
 } from "react-icons/hi2";
 import { usePage } from "@inertiajs/react";
 import { changeLanguage } from "i18next";
+import { Menu } from "@headlessui/react";
+import Dropdown from "../ui/Dropdown";
 
 const HeaderNavigation = () => {
   const { open, setOpen, toggleOpen } = useOpenState(false);
@@ -21,7 +23,9 @@ const HeaderNavigation = () => {
   const changeLanguageHandler = (lng) => {
     localStorage.setItem("selected-lng", lng);
     changeLanguage(lng);
-  }
+  };
+
+  const { user } = props.auth;
 
   return (
     <>
@@ -33,11 +37,15 @@ const HeaderNavigation = () => {
       />
 
       <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
-      <div className="flex items-center gap-2">
-        <button onClick={() => changeLanguageHandler('en')}>EN</button>
-        <button onClick={() => changeLanguageHandler('bg')}>BG</button>
-      </div>
-    
+        {/* <div className="flex items-center gap-2">
+          <button onClick={() => changeLanguageHandler("en")}>
+            EN
+          </button>
+          <button onClick={() => changeLanguageHandler("bg")}>
+            BG
+          </button>
+        </div> */}
+
         <Container className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
             <button
@@ -102,19 +110,46 @@ const HeaderNavigation = () => {
               <HiShoppingCart />
             </NavLink>
 
-            {props.auth.user?.id ? (
-              <NavLink
-                href="/logout"
-                className="flex gap-2 items-center text-slate-500"
+            {user?.id ? (
+              <Dropdown
+                className="border-none"
+                menuBtnClassName="border-none text-base px-0 py-0 gap-2"
+                menuItemsClassName="text-base py-2"
+                hideChevronOnSmallScreens={true}
+                title={
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-full grid items-center p-2 lg:p-1.5 text-white font-semibold bg-gold-main">
+                      {
+                        user.name
+                          .split(" ")[0]
+                          .split("")[0]
+                      }
+                      {
+                        user.name
+                          .split(" ")[1]
+                          .split("")[0]
+                      }
+                    </div>
+                    <span className="hidden lg:block max-w-[100px] xl:max-w-[120px] truncate ...">
+                      {user.name}
+                    </span>
+                  </div>
+                }
               >
-                <Button
-                  size="sm"
-                  variant="outlined"
-                  className="px-6 text-base text-black/80"
-                >
-                  Logout
-                </Button>
-              </NavLink>
+                {headerNavUserDropdownLinks.map(
+                  ({ id, title, href }) => (
+                    <Menu.Item
+                      as="div"
+                      key={id}
+                      className="px-4 py-1 w-full"
+                    >
+                      <NavLink href={href}>
+                        {title}
+                      </NavLink>
+                    </Menu.Item>
+                  )
+                )}
+              </Dropdown>
             ) : (
               <NavLink
                 href="/sign-in"

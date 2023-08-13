@@ -5,6 +5,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import AccountLayout from "./layouts/AccountLayout";
+import EditorLayout from "./layouts/EditorLayout";
 createInertiaApp({
   remember: (key, value) => {
     if (value !== undefined) {
@@ -18,10 +20,17 @@ createInertiaApp({
     const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
     let page = pages[`./Pages/${name}.jsx`];
 
-    if (name.startsWith("public/"))
-      page.default.layout = (page) => <AppLayout children={page} />;
+    if (name.startsWith("user/"))
+      page.default.layout = (page) => (
+        <AppLayout>
+          <AccountLayout children={page} />
+        </AppLayout>
+      );
     else if (name.startsWith("auth/"))
       page.default.layout = (page) => <AuthLayout children={page} />;
+    else if (name.startsWith("shop/editor/"))
+      page.default.layout = (page) => <EditorLayout children={page} />;
+    else page.default.layout = (page) => <AppLayout children={page} />;
     // else if(name.startsWith('/dashboard'))
     //   page.default.layout = page => <DashboardLayout children={page} />
 

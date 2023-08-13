@@ -9,6 +9,7 @@ const Dropdown = ({
   menuBtnClassName,
   menuItemsClassName,
   chevronDown = true,
+  hideChevronOnSmallScreens = false,
   children,
 }) => {
   return (
@@ -18,8 +19,9 @@ const Dropdown = ({
           <div>
             <Menu.Button
               className={clsx(
-                "rounded-md border border-slate-200 px-4 py-2 w-full items-center flex justify-between gap-6 outline-none",
-                menuBtnClassName
+                menuBtnClassName,
+                "rounded-md border border-slate-200 px-4 py-2 w-full items-center flex gap-4 outline-none",
+                
               )}
             >
               {title}
@@ -27,7 +29,8 @@ const Dropdown = ({
                 <HiChevronDown
                   className={clsx(
                     "transition-all",
-                    open && "rotate-180"
+                    open && "rotate-180",
+                    hideChevronOnSmallScreens && "hidden lg:block"
                   )}
                 />
               )}

@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import colorsJson from "../../utils/colors.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useTranslation } from "react-i18next";
+import { Link } from "@inertiajs/react";
 
 const ProductProvider = ({
   onMoreDetailsClickHandler,
@@ -52,9 +53,12 @@ const ProductProvider = ({
         >
           {t("productDetailsPage.providers.moreDetailsBtn")}
         </Button>
-        <Button className="break-words w-full lg:w-fit">
-          {t("productDetailsPage.providers.startDesigningBtn")}
-        </Button>
+        <Link href={`/shop/products/${provider.blueprint_id}/${provider.id}/editor`}>
+          <Button className="break-words w-full lg:w-fit">
+            {t("productDetailsPage.providers.startDesigningBtn")}
+          </Button>
+        </Link>
+
       </div>
 
       <div className="py-4 px-4 md:px-6 flex flex-col lg:flex-row items-start gap-4">

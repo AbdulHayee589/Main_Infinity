@@ -74,7 +74,7 @@ class BlueprintsController extends Controller
 
         $blueprints = $blueprints->paginate(25);
 
-        return Inertia::render('public/shop/ProductsPage', [
+        return Inertia::render('shop/ProductsPage', [
             'blueprints' => $blueprints,
             'lastPage' => $blueprints->lastPage(),
             'filters' => Blueprint::filters(),
@@ -109,7 +109,7 @@ class BlueprintsController extends Controller
         $providers = $bp->print_providers->get();
 
 
-        return Inertia::render('public/shop/ProductDetailsPage', [
+        return Inertia::render('shop/ProductDetailsPage', [
             'blueprints' => $bp,
             'providers' => $providers,
         ]);
@@ -131,7 +131,7 @@ class BlueprintsController extends Controller
 
         $variants = $bp->getVariantsOfProvider($providerId);
 
-        return Inertia::render('public/shop/ProductDetailsPage', [
+        return Inertia::render('shop/ProductDetailsPage', [
             'variants' => $variants,
         ]);
     }
@@ -147,7 +147,7 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
 
-        return Inertia::render('public/shop/ProductDetailsPage', [
+        return Inertia::render('shop/ProductDetailsPage', [
             'providers' => $bp->getPrintProviders()
         ]);
     }
@@ -211,8 +211,8 @@ class BlueprintsController extends Controller
             return back()->withErrors([
                 "errors" => trans("blueprints.not_found")
             ]);
-
-        return Inertia::render('public/shop/ProductEditor', [
+            /* @ddimitrov1108 */
+        return Inertia::render('shop/editor/ProductEditor', [
             'blueprint' => $bp,
             'provider' => $provider
         ]);

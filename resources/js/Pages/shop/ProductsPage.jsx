@@ -1,16 +1,16 @@
 import { usePage } from "@inertiajs/react";
 import { useState } from "react";
-import FilterSideBar from "../../../components/sidebar/FilterSideBar";
-import useOpenState from "../../../components/hooks/useOpenState";
-import Container from "../../../components/ui/Container";
-import ProductFilters from "../../../components/product/ProductFilters";
-import ProductsSearchField from "../../../components/product/ProductsSearchField";
-import Dropdown from "../../../components/ui/Dropdown";
+import FilterSideBar from "../../components/sidebar/FilterSideBar";
+import useOpenState from "../../components/hooks/useOpenState";
+import Container from "../../components/ui/Container";
+import ProductFilters from "../../components/product/ProductFilters";
+import ProductsSearchField from "../../components/product/ProductsSearchField";
+import Dropdown from "../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
-import ProductsPagination from "../../../components/product/ProductsPagination";
+import ProductsPagination from "../../components/product/ProductsPagination";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ProductShowcase from "../../../components/product/ProductShowcase";
+import ProductShowcase from "../../components/product/ProductShowcase";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
@@ -103,12 +103,12 @@ const ProductsPage = () => {
         </div>
 
         <div className="flex items-start justify-between">
+          <div className="hidden lg:block w-full max-w-[320px]">
+            <ProductFilters filters={props.filters} />
+          </div>
+
           {props?.blueprints.data.length > 0 ? (
             <>
-              <div className="hidden lg:block w-full max-w-[320px]">
-                <ProductFilters filters={props.filters} />
-              </div>
-
               <div className="w-full flex flex-col gap-8">
                 <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {props?.blueprints.data.map((blueprint) => (

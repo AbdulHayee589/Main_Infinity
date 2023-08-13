@@ -6,9 +6,9 @@ use Laravel\Socialite\Facades\Socialite;
 
 // We are going to use this class to render React components
 
-Route::inertia('/', 'public/Test');
+Route::inertia('/', 'HomePage');
 
-Route::inertia('/how-it-works', 'public/HowItWorksPage');
+Route::inertia('/how-it-works', 'HowItWorksPage');
 Route::inertia('/policy/terms-and-conditions', 'policy/TermsAndConditionsPage');
 Route::inertia('/policy/refund', 'policy/RefundPage');
 Route::inertia('/policy/privacy', 'policy/PrivacyPage');

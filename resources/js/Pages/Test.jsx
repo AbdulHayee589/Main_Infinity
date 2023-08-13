@@ -1,5 +1,5 @@
-import Container from "../../components/ui/Container";
-import Toggle from "../../components/ui/Toggle";
+import Container from "../components/ui/Container";
+import Toggle from "../components/ui/Toggle";
 
 const Test = () => {
   return (

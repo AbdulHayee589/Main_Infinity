@@ -1,7 +1,7 @@
-import Button from "../../components/ui/Button";
+import Button from "../components/ui/Button";
 import { FaChevronRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-import Container from "../../components/ui/Container";
+import Container from "../components/ui/Container";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const steps = [
