@@ -53,7 +53,7 @@ const ProductProvider = ({
         >
           {t("productDetailsPage.providers.moreDetailsBtn")}
         </Button>
-        <Link href={`/shop/products/${provider.blueprint_id}/${provider.id}/editor`} className="break-words w-full lg:w-fit">
+        <Link href={`/shop/products/${provider.blueprint_id}/${provider.internal_id}/editor`} className="break-words w-full lg:w-fit">
           <Button  fullWidth>
             {t("productDetailsPage.providers.startDesigningBtn")}
           </Button>
