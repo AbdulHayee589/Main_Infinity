@@ -1,7 +1,7 @@
-import enJson from './en.json';
+import enGbJson from './en-gb.json';
 import bgJson from './bg.json';
 
 export default {
-  en: enJson,
+  en: enGbJson,
   bg: bgJson
 }

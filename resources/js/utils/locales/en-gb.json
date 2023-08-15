@@ -1,6 +1,7 @@
 {
   "translation": {
-    "priceSymbol": "EUR",
+    "lngPrefix": "gb",
+    "priceSymbol": "GBP",
     "forms": {
       "errors": {
         "invalidField": "Invalid field",

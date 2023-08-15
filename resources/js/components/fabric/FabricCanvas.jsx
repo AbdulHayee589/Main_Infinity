@@ -1,17 +1,42 @@
-import { useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { fabric } from "fabric";
+import { draw } from "./drawing";
 
 const FabricCanvas = () => {
-  useEffect(() => {
-    const canvas = new fabric.Canvas("fabric-canvas");
-    // Configure the canvas and add objects, event listeners, etc.
-  }, []);
+  const canvasRef = useRef(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+
+  const startDrawing = ({ offsetX, offsetY }) => {
+    draw(canvasRef.current, offsetX, offsetY);
+    setIsDrawing(true);
+  };
+
+  const continueDrawing = ({ offsetX, offsetY }) => {
+    if (!isDrawing) return;
+
+    const canvas = canvasRef.current;
+    const activeObject = canvas.getActiveObject();
+
+    if (activeObject && activeObject.type === 'path') {
+      activeObject.path.push(['L', offsetX, offsetY]);
+      canvas.renderAll();
+    }
+  };
+
+  const stopDrawing = () => {
+    setIsDrawing(false);
+  };
 
   return (
-    <div className="">
-      canvas
-      <canvas className="" id="fabric-canvas" />
-    </div>
+    <canvas
+      ref={canvasRef}
+      onMouseDown={startDrawing}
+      onMouseMove={continueDrawing}
+      onMouseUp={stopDrawing}
+      onMouseOut={stopDrawing}
+      width={600}
+      height={600}
+    />
   );
 };
 export default FabricCanvas;

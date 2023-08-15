@@ -7,6 +7,24 @@ import {
 } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
+export const langs = [
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "English (GB)", prefix: "en-gb", src: "gb"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+  { id: uuidv4(), name: "Bulgarian", prefix: "bg", src: "bg"},
+]
+
 export const genders = ["Male", "Female", "Other"];
 
 export const headerNavUserDropdownLinks = [

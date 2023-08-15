@@ -1,9 +1,8 @@
 import NavLink from "../ui/NavLink";
 import DisclouseContainer from "../ui/DisclouseContainer";
 import SideBar from "../ui/SideBar";
-
+import { headerNavLinks } from "../../statics";
 const NavSideBar = ({
-  navLinks = [],
   open,
   onNavLinkClick,
   onClose,
@@ -17,7 +16,7 @@ const NavSideBar = ({
       {...restProps}
     >
       <nav className="grid">
-        {navLinks.map(({ id, title, type, ...rest }) =>
+        {headerNavLinks.map(({ id, title, type, ...rest }) =>
           type === "category" ? (
             <DisclouseContainer
               key={id}

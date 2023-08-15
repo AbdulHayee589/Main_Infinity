@@ -60,6 +60,7 @@ const ProductsPage = () => {
                   {t("productsPage.sortBy.title")}
                 </span>
                 <Dropdown
+                  menuBtnClassName="px-4 py-2"
                   title={
                     t("productsPage.sortBy.options", {
                       returnObjects: true,

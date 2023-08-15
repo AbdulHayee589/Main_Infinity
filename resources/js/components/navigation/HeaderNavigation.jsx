@@ -11,29 +11,42 @@ import {
   HiShoppingCart,
 } from "react-icons/hi2";
 import { usePage } from "@inertiajs/react";
-import { changeLanguage } from "i18next";
 import { Menu } from "@headlessui/react";
 import Dropdown from "../ui/Dropdown";
+import LanguageSelectionModal from "../modals/LanguageSelectionModal";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useTranslation } from "react-i18next";
 
 const HeaderNavigation = () => {
-  const { open, setOpen, toggleOpen } = useOpenState(false);
-  const closeMobileMenu = () => setOpen(false);
+  const {
+    open: openLngModal,
+    setOpen: setOpenLngModal,
+    toggleOpen: toggleOpenLngModal,
+  } = useOpenState(false);
+  const {
+    open: openNavSideBar,
+    setOpen: setOpenNavSideBar,
+    toggleOpen: toggleOpenNavSideBar,
+  } = useOpenState(false);
+  const { t } = useTranslation();
+
+  const openNavSideBarHandler = () => toggleOpenNavSideBar();
+  const closeNavSideBarHandler = () => setOpenNavSideBar(false);
+
   const { props } = usePage();
-
-  const changeLanguageHandler = (lng) => {
-    localStorage.setItem("selected-lng", lng);
-    changeLanguage(lng);
-  };
-
   const { user } = props.auth;
 
   return (
     <>
       <NavSideBar
-        navLinks={headerNavLinks}
-        open={open}
-        onNavLinkClick={closeMobileMenu}
-        onClose={toggleOpen}
+        open={openNavSideBar}
+        onNavLinkClick={closeNavSideBarHandler}
+        onClose={toggleOpenNavSideBar}
+      />
+
+      <LanguageSelectionModal
+        open={openLngModal}
+        setOpen={setOpenLngModal}
       />
 
       <header className="bg-white shadow flex justify-between items-center transition-all py-4 lg:py-2">
@@ -50,7 +63,7 @@ const HeaderNavigation = () => {
           <div className="flex gap-4 items-center">
             <button
               className="lg:hidden text-3xl cursor-pointer text-slate-500 hover:text-gold-main"
-              onClick={toggleOpen}
+              onClick={openNavSideBarHandler}
             >
               <HiBars3CenterLeft />
             </button>
@@ -98,7 +111,8 @@ const HeaderNavigation = () => {
             )}
           </div>
 
-          <div className="flex text-2xl items-center gap-3">
+          <div className="flex text-2xl items-center gap-4">
+            <div className="flex gap-3">
             <NavLink className="text-slate-500 hover:text-gold-main">
               <HiOutlineHeart />
             </NavLink>
@@ -109,6 +123,16 @@ const HeaderNavigation = () => {
             >
               <HiShoppingCart />
             </NavLink>
+
+            <button className="h-[24px]" onClick={toggleOpenLngModal}>
+              <LazyLoadImage
+                src={`https://hatscripts.github.io/circle-flags/flags/${t("lngPrefix")}.svg`}
+                width="24"
+                effect="blur"
+              />
+            </button>
+            </div>
+
 
             {user?.id ? (
               <Dropdown
@@ -158,7 +182,7 @@ const HeaderNavigation = () => {
                 <Button
                   size="sm"
                   variant="outlined"
-                  className="px-6 text-base text-black/80"
+                  className="px-4 text-base text-black/80"
                 >
                   Sign In
                 </Button>

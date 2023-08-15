@@ -212,7 +212,7 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
             /* @ddimitrov1108 */
-        return Inertia::render('shop/editor/ProductEditor', [
+        return Inertia::render('shop/editor/ProductEditorPage', [
             'blueprint' => $bp,
             'provider' => $provider
         ]);

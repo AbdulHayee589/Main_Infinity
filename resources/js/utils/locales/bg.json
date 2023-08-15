@@ -1,5 +1,6 @@
 {
     "translation": {
+        "lngPrefix": "bg",
         "priceSymbol": "лв.",
         "forms": {
             "errors": {

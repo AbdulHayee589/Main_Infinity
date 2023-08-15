@@ -57,7 +57,7 @@ const Modal = ({
                   as="div"
                   className="flex justify-between"
                 >
-                  <h1 className="text-2xl font-semibold">{title}</h1>
+                  <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold">{title}</h1>
                   {closeBtn && (
                     <button
                       tabIndex={0}

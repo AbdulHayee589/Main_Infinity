@@ -20,7 +20,7 @@ const Dropdown = ({
             <Menu.Button
               className={clsx(
                 menuBtnClassName,
-                "rounded-md border border-slate-200 px-4 py-2 w-full items-center flex gap-4 outline-none",
+                "rounded-md border border-slate-200 w-full items-center flex gap-2 outline-none",
                 
               )}
             >

@@ -23,20 +23,20 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
 
     useEffect(() => {
         if (review.length === 0) setTotalPages(0);
-        else setTotalPages(Math.ceil(review.length / 5));
+        else setTotalPages(Math.ceil(review.length / 7));
     }, [review]);
 
-    const indexOfLastItem = currentPage * 5;
-    const indexOfFirstItem = indexOfLastItem - 5;
+    const indexOfLastItem = currentPage * 7;
+    const indexOfFirstItem = indexOfLastItem - 7;
     let currentData = review?.slice(indexOfFirstItem, indexOfLastItem);
 
-    if (currentPage === totalPages && review?.length % 5 !== 0) {
+    if (currentPage === totalPages && review?.length % 7 !== 0) {
         currentData = review?.slice(indexOfFirstItem);
     }
 
     const prevBtnDisabled = currentPage === 1;
     const nextBtnDisabled =
-        currentPage === totalPages && review?.length % 5 !== 0;
+        currentPage === totalPages && review?.length % 7 !== 0;
 
     return (
         <div>

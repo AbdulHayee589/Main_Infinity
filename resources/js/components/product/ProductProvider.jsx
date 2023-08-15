@@ -45,7 +45,7 @@ const ProductProvider = ({
 
   return (
     <div className="flex flex-col-reverse lg:flex-col bg-slate-50 rounded-md border border-slate-200">
-      <div className="flex flex-col sm:flex-row justify-end gap-2 items-center py-3 px-4 md:px-6 lg:border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row lg:justify-end gap-2 items-center py-3 px-4 md:px-6 lg:border-b border-slate-200">
         <Button
           onClick={() => onClickHandler(provider)}
           variant="outlined"
@@ -53,8 +53,8 @@ const ProductProvider = ({
         >
           {t("productDetailsPage.providers.moreDetailsBtn")}
         </Button>
-        <Link href={`/shop/products/${provider.blueprint_id}/${provider.id}/editor`}>
-          <Button className="break-words w-full lg:w-fit">
+        <Link href={`/shop/products/${provider.blueprint_id}/${provider.id}/editor`} className="break-words w-full lg:w-fit">
+          <Button  fullWidth>
             {t("productDetailsPage.providers.startDesigningBtn")}
           </Button>
         </Link>
