@@ -78,6 +78,7 @@ const FabricCanvas = () => {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onContextMenu={(e) => e.preventDefault()}
     >
       <div
         style={{
