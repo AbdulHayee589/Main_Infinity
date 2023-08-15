@@ -21,14 +21,18 @@ function DrawingCanvas() {
     <canvas
       className="border border-red-500"
       ref={canvasRef}
-      width={400}
-      height={400}
+      width={800}
+      height={800}
     />
   );
 }
 
 const FabricCanvas = () => {
-  const containerSize = 3000;
+  const containerSize = 800;
+  const containerWidth = 80; // Change to your desired container width
+  const containerHeight = 60; // Change to your desired container height
+  const borderThreshold = 50; // Change the threshold distance from the container border
+  
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [dragStartY, setDragStartY] = useState(0);
@@ -36,40 +40,47 @@ const FabricCanvas = () => {
   const [offsetY, setOffsetY] = useState(0);
 
   const handleMouseDown = (e) => {
-    e.preventDefault();
-    if (e.button != 2) { // Right mouse button
-      setIsDragging(false);
+    if (e.button === 2) { // Right mouse button
+      e.preventDefault(); // Prevent the context menu from appearing
+      setIsDragging(!isDragging);
+      setDragStartX(e.clientX);
+      setDragStartY(e.clientY);
       return;
     }
+
+    if (
+      e.clientX <= borderThreshold ||
+      e.clientX >= containerWidth - borderThreshold ||
+      e.clientY <= borderThreshold ||
+      e.clientY >= containerHeight - borderThreshold
+    ) {
+      return; // Disable dragging when near container border
+    }
+
     setIsDragging(true);
     setDragStartX(e.clientX);
     setDragStartY(e.clientY);
   };
 
   const handleMouseMove = (e) => {
-    
-
     if (!isDragging) return;
-
     const deltaX = e.clientX - dragStartX;
     const deltaY = e.clientY - dragStartY;
-
     setOffsetX(offsetX + deltaX);
     setOffsetY(offsetY + deltaY);
     setDragStartX(e.clientX);
     setDragStartY(e.clientY);
   };
 
-  const handleMouseUp = (e) => {
-    e.preventDefault();
+  const handleMouseUp = () => {
     setIsDragging(false);
   };
 
   return (
     <div
       style={{
-        width: '800px', // Change to your desired width
-        height: '600px', // Change to your desired height
+        width: '100%', // Change to your desired width
+        height: '100vh', // Change to your desired height
         border: '1px solid black',
         position: 'relative',
         cursor: isDragging ? 'grabbing' : 'grab',
@@ -78,6 +89,7 @@ const FabricCanvas = () => {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onContextMenu={(e) => e.preventDefault()}
     >
       <div
         style={{
