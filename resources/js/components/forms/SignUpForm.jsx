@@ -9,11 +9,11 @@ import SelectField from "../ui/formik/SelectField";
 import { router } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
+import { useEffect } from "react";
 
 const SignUpForm = () => {
   const { t } = useTranslation();
   const [formState, setFormState] = useFormState();
-
   const onFormSubmitHandler = async (values, { setErrors }) => {
     router.visit("/sign-up", {
       method: "post",
@@ -38,6 +38,10 @@ const SignUpForm = () => {
       },
     });
   };
+
+  useEffect(() => {
+    console.log(1);
+  }, [t]);
 
   return (
     <Formik
