@@ -1,10 +1,10 @@
-import FabricCanvas from "../../../components/fabric/FabricCanvas"
+import FabricCanvas from "../../../components/fabric/FabricCanvas";
 
 const ProductEditorPage = ({ children }) => {
   return (
     <div>
-      <FabricCanvas/>
+      <FabricCanvas />
     </div>
-  )
-}
-export default ProductEditorPage
+  );
+};
+export default ProductEditorPage;
