@@ -3,18 +3,18 @@ import { fabric } from "fabric";
 import { HiMinus, HiPaintBrush, HiPlus } from "react-icons/hi2";
 import clsx from "clsx";
 
-const containerSize = 800;
 const canvasWidth = 600;
 const canvasHeight = 600;
-const canvasBoundary = 600;
+const canvasBoundary = 0;
 const maxScale = 3;
-const minScale = 1;
+const minScale = 0.5;
 
-const FabricCanvas = () => {
+const fabricCanvas = () => {
   const canvasRef = useRef(null);
+  const imgInputRef = useRef(null);
   const selectedObjectRef = useRef(null);
 
-  const [canvas, setCanvas] = useState(null);
+  const [fabricCanvas, setFabricCanvas] = useState(null);
   const [windowScale, setWindowScale] = useState(1);
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -42,7 +42,7 @@ const FabricCanvas = () => {
       const newWindowX = windowPosition.x + deltaX;
       const newWindowY = windowPosition.y + deltaY;
 
-      // Constrain movement within the canvas boundary
+      // Constrain movement within the fabricCanvas boundary
       const maxX = window.innerWidth - canvasBoundary;
       const maxY = window.innerHeight - canvasBoundary;
 
@@ -77,12 +77,38 @@ const FabricCanvas = () => {
     setIsDrawingMode(!isDrawingMode);
   };
 
-  useEffect(() => {
-    if (canvas) {
-      canvas.isDrawingMode = isDrawingMode;
-      canvas.selection = isDrawingMode ? false : true;
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = () => {
+          // Create Fabric.js Image object
+          const fabricImage = new fabric.Image(img, {
+            left: 100, // Initial X position
+            top: 100,  // Initial Y position
+          });
+
+          // Add the image to the fabricCanvas
+          fabricCanvas.add(fabricImage);
+        };
+      };
+
+      reader.readAsDataURL(file);
+      imgInputRef.current.value = "";
     }
-  }, [canvas, isDrawingMode]);
+  };
+
+  useEffect(() => {
+    if (fabricCanvas) {
+      fabricCanvas.isDrawingMode = isDrawingMode;
+      fabricCanvas.selection = isDrawingMode ? false : true;
+    }
+  }, [fabricCanvas, isDrawingMode]);
 
   useEffect(() => {
     document.querySelector("#dragContainer").style.cursor = isDragging
@@ -91,64 +117,65 @@ const FabricCanvas = () => {
   }, [isDragging]);
 
   useEffect(() => {
-    const canvas = new fabric.Canvas(canvasRef.current, {
-      selection: false, // Disable Fabric.js default selection
+    const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+      selection: true, 
+  controlsAboveOverlay: true,
     });
 
-    canvas.freeDrawingBrush.width = 1;
-    setCanvas(canvas);
+    fabricCanvas.freeDrawingBrush.width = 1;
+    setFabricCanvas(fabricCanvas);
 
-    canvas.on("object:moving", (e) => {
-      const object = e.target;
+    // fabricCanvas.on("object:moving", (e) => {
+    //   const object = e.target;
 
-      // Constrain movement within the canvas
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
+    //   // Constrain movement within the fabricCanvas
+    //   const canvasWidth = fabricCanvas.width;
+    //   const canvasHeight = fabricCanvas.height;
 
-      const maxX = canvasWidth - object.getScaledWidth();
-      const maxY = canvasHeight - object.getScaledHeight();
+    //   const maxX = canvasWidth - object.getScaledWidth();
+    //   const maxY = canvasHeight - object.getScaledHeight();
 
-      if (object.left < 0) {
-        object.left = 0;
-      } else if (object.left > maxX) {
-        object.left = maxX;
-      }
+    //   if (object.left < 0) {
+    //     object.left = 0;
+    //   } else if (object.left > maxX) {
+    //     object.left = maxX;
+    //   }
 
-      if (object.top < 0) {
-        object.top = 0;
-      } else if (object.top > maxY) {
-        object.top = maxY;
-      }
-    });
+    //   if (object.top < 0) {
+    //     object.top = 0;
+    //   } else if (object.top > maxY) {
+    //     object.top = maxY;
+    //   }
+    // });
 
-    canvas.on("object:selected", (e) => {
-      e.target.set({
-        lockMovementX: false,
-        lockMovementY: false,
-      });
-    });
+    // fabricCanvas.on("object:selected", (e) => {
+    //   e.target.set({
+    //     lockMovementX: false,
+    //     lockMovementY: false,
+    //   });
+    // });
 
-    canvas.on("selection:cleared", () => {
-      canvas.getObjects().forEach((obj) => {
-        obj.set({
-          lockMovementX: true,
-          lockMovementY: true,
-        });
-      });
-    });
+    // fabricCanvas.on("selection:cleared", () => {
+    //   fabricCanvas.getObjects().forEach((obj) => {
+    //     obj.set({
+    //       lockMovementX: false,
+    //       lockMovementY: false,
+    //     });
+    //   });
+    // });
 
     return () => {
-      canvas.dispose();
+      fabricCanvas.dispose();
     };
   }, []);
 
   useEffect(() => {
-    // Calculate initial window position to center the canvas
+    // Calculate initial window position to center the fabricCanvas
     const centerX = (window.innerWidth - canvasBoundary) / 2;
     const centerY = (window.innerHeight - canvasBoundary) / 2;
     setWindowPosition({ x: centerX, y: centerY });
 
-    // Calculate initial canvas position to center it inside the window
+    // Calculate initial fabricCanvas position to center it inside the window
     const canvasX = (canvasBoundary - canvasWidth * windowScale) / 2;
     const canvasY = (canvasBoundary - canvasHeight * windowScale) / 2;
     setCanvasPosition({ x: canvasX, y: canvasY });
@@ -180,6 +207,7 @@ const FabricCanvas = () => {
         <button onClick={() => handleZoom(0.25)} className="text-3xl">
           <HiPlus />
         </button>
+        <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
       <div
         style={{
@@ -202,4 +230,4 @@ const FabricCanvas = () => {
     </div>
   );
 };
-export default FabricCanvas;
+export default fabricCanvas;
