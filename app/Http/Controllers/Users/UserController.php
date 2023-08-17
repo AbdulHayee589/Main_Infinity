@@ -9,12 +9,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        return response()->json($user);
+
+        return Inertia::render('user/ProfilePage', [
+            'user' => $user,
+            'mockups' => $user->mockups
+        ]);
     }
 
 
