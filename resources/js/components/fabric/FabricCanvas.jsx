@@ -1,107 +1,233 @@
 import { useRef, useState, useEffect } from "react";
 import { fabric } from "fabric";
-import Draggable from "react-draggable";
+import { HiMinus, HiPaintBrush, HiPlus } from "react-icons/hi2";
+import clsx from "clsx";
 
-function DrawingCanvas() {
+const canvasWidth = 600;
+const canvasHeight = 600;
+const canvasBoundary = 0;
+const maxScale = 3;
+const minScale = 0.5;
+
+const fabricCanvas = () => {
   const canvasRef = useRef(null);
-  let canvas;
+  const imgInputRef = useRef(null);
+  const selectedObjectRef = useRef(null);
 
-  useEffect(() => {
-    canvas = new fabric.Canvas(canvasRef.current, {
-      isDrawingMode: true,
-    });
-    canvas.freeDrawingBrush.width = 1; // Set brush width
-
-    return () => {
-      canvas.dispose();
-    };
-  }, []);
-
-  return (
-    <canvas
-      className="border border-red-500"
-      ref={canvasRef}
-      width={800}
-      height={800}
-    />
-  );
-}
-
-const FabricCanvas = () => {
-  const containerSize = 800;
-  const containerWidth = 80; // Change to your desired container width
-  const containerHeight = 60; // Change to your desired container height
-  const borderThreshold = 50; // Change the threshold distance from the container border
-  
+  const [fabricCanvas, setFabricCanvas] = useState(null);
+  const [windowScale, setWindowScale] = useState(1);
+  const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragStartY, setDragStartY] = useState(0);
-  const [offsetX, setOffsetX] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
+  const [windowPosition, setWindowPosition] = useState({ x: 0, y: 0 });
+  const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
+  const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseDown = (e) => {
-    if (e.button === 2) { // Right mouse button
-      e.preventDefault(); // Prevent the context menu from appearing
-      setIsDragging(!isDragging);
-      setDragStartX(e.clientX);
-      setDragStartY(e.clientY);
-      return;
+  const handleMouseDown = (event) => {
+    if (event.button === 2) {
+      setDragStartPosition({ x: event.clientX, y: event.clientY });
+      setIsDragging(true);
     }
-
-    if (
-      e.clientX <= borderThreshold ||
-      e.clientX >= containerWidth - borderThreshold ||
-      e.clientY <= borderThreshold ||
-      e.clientY >= containerHeight - borderThreshold
-    ) {
-      return; // Disable dragging when near container border
-    }
-
-    setIsDragging(true);
-    setDragStartX(e.clientX);
-    setDragStartY(e.clientY);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - dragStartX;
-    const deltaY = e.clientY - dragStartY;
-    setOffsetX(offsetX + deltaX);
-    setOffsetY(offsetY + deltaY);
-    setDragStartX(e.clientX);
-    setDragStartY(e.clientY);
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    document.body.style.cursor = "grab";
   };
+
+  const handleMouseMove = (event) => {
+    if (isDragging) {
+      const deltaX = event.clientX - dragStartPosition.x;
+      const deltaY = event.clientY - dragStartPosition.y;
+
+      const newWindowX = windowPosition.x + deltaX;
+      const newWindowY = windowPosition.y + deltaY;
+
+      // Constrain movement within the fabricCanvas boundary
+      const maxX = window.innerWidth - canvasBoundary;
+      const maxY = window.innerHeight - canvasBoundary;
+
+      const constrainedX = Math.max(
+        -canvasBoundary,
+        Math.min(maxX, newWindowX)
+      );
+      const constrainedY = Math.max(
+        -canvasBoundary,
+        Math.min(maxY, newWindowY)
+      );
+
+      setWindowPosition({ x: constrainedX, y: constrainedY });
+      setDragStartPosition({ x: event.clientX, y: event.clientY });
+    }
+  };
+
+  const handleZoom = (factor) => {
+    const newScale = windowScale + factor;
+
+    // Constrain scaling to avoid exceeding reasonable values
+    if (newScale > maxScale) {
+      setWindowScale(maxScale);
+    } else if (newScale < minScale) {
+      setWindowScale(minScale);
+    } else {
+      setWindowScale(newScale);
+    }
+  };
+
+  const toggleDrawingMode = () => {
+    setIsDrawingMode(!isDrawingMode);
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = () => {
+          // Create Fabric.js Image object
+          const fabricImage = new fabric.Image(img, {
+            left: 100, // Initial X position
+            top: 100,  // Initial Y position
+          });
+
+          // Add the image to the fabricCanvas
+          fabricCanvas.add(fabricImage);
+        };
+      };
+
+      reader.readAsDataURL(file);
+      imgInputRef.current.value = "";
+    }
+  };
+
+  useEffect(() => {
+    if (fabricCanvas) {
+      fabricCanvas.isDrawingMode = isDrawingMode;
+      fabricCanvas.selection = isDrawingMode ? false : true;
+    }
+  }, [fabricCanvas, isDrawingMode]);
+
+  useEffect(() => {
+    document.querySelector("#dragContainer").style.cursor = isDragging
+      ? "grab"
+      : "default";
+  }, [isDragging]);
+
+  useEffect(() => {
+    const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+      selection: true, 
+  controlsAboveOverlay: true,
+    });
+
+    fabricCanvas.freeDrawingBrush.width = 1;
+    setFabricCanvas(fabricCanvas);
+
+    // fabricCanvas.on("object:moving", (e) => {
+    //   const object = e.target;
+
+    //   // Constrain movement within the fabricCanvas
+    //   const canvasWidth = fabricCanvas.width;
+    //   const canvasHeight = fabricCanvas.height;
+
+    //   const maxX = canvasWidth - object.getScaledWidth();
+    //   const maxY = canvasHeight - object.getScaledHeight();
+
+    //   if (object.left < 0) {
+    //     object.left = 0;
+    //   } else if (object.left > maxX) {
+    //     object.left = maxX;
+    //   }
+
+    //   if (object.top < 0) {
+    //     object.top = 0;
+    //   } else if (object.top > maxY) {
+    //     object.top = maxY;
+    //   }
+    // });
+
+    // fabricCanvas.on("object:selected", (e) => {
+    //   e.target.set({
+    //     lockMovementX: false,
+    //     lockMovementY: false,
+    //   });
+    // });
+
+    // fabricCanvas.on("selection:cleared", () => {
+    //   fabricCanvas.getObjects().forEach((obj) => {
+    //     obj.set({
+    //       lockMovementX: false,
+    //       lockMovementY: false,
+    //     });
+    //   });
+    // });
+
+    return () => {
+      fabricCanvas.dispose();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Calculate initial window position to center the fabricCanvas
+    const centerX = (window.innerWidth - canvasBoundary) / 2;
+    const centerY = (window.innerHeight - canvasBoundary) / 2;
+    setWindowPosition({ x: centerX, y: centerY });
+
+    // Calculate initial fabricCanvas position to center it inside the window
+    const canvasX = (canvasBoundary - canvasWidth * windowScale) / 2;
+    const canvasY = (canvasBoundary - canvasHeight * windowScale) / 2;
+    setCanvasPosition({ x: canvasX, y: canvasY });
+  }, []);
 
   return (
     <div
-      style={{
-        width: '100%', // Change to your desired width
-        height: '100vh', // Change to your desired height
-        border: '1px solid black',
-        position: 'relative',
-        cursor: isDragging ? 'grabbing' : 'grab',
-        overflow: 'hidden',
-      }}
+      id="dragContainer"
+      className="w-full h-screen relative overflow-hidden bg-slate-100"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onContextMenu={(e) => e.preventDefault()}
     >
+      <div className="z-30 absolute flex justify-end items-center gap-4 bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-6 py-4">
+        <button
+          onClick={toggleDrawingMode}
+          className={clsx(
+            "text-3xl",
+            isDrawingMode && "text-gold-main"
+          )}
+        >
+          <HiPaintBrush />
+        </button>
+
+        <button onClick={() => handleZoom(-0.25)} className="text-3xl">
+          <HiMinus />
+        </button>
+        <button onClick={() => handleZoom(0.25)} className="text-3xl">
+          <HiPlus />
+        </button>
+        <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageUpload} />
+      </div>
       <div
         style={{
-          width: `${containerSize}px`,
-          height: `${containerSize}px`,
-          transform: `translate(${offsetX}px, ${offsetY}px)`,
-          transition: isDragging ? 'none' : 'transform 0.2s',
+          position: "absolute",
+          left: canvasPosition.x,
+          top: canvasPosition.y,
+          width: canvasWidth,
+          height: canvasHeight,
+          transform: `translate(${windowPosition.x}px, ${windowPosition.y}px) scale(${windowScale})`,
+          transition: isDragging ? "none" : "transform 0.2s",
         }}
       >
-        <DrawingCanvas />
+        <canvas
+          className="border-dashed border-4 border-black"
+          ref={canvasRef}
+          width={canvasWidth}
+          height={canvasHeight}
+        />
       </div>
     </div>
   );
 };
-export default FabricCanvas;
+export default fabricCanvas;
