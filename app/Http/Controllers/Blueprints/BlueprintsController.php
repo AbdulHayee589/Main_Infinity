@@ -129,10 +129,15 @@ class BlueprintsController extends Controller
                 "errors" => trans("blueprints.not_found")
             ]);
 
-        $variants = $bp->getVariantsOfProvider($providerId);
+        $provider = $bp->print_providers->where('internal_id', $providerId)->first();
+
+        if(!$provider)
+            return back()->withErrors([
+                "errors" => trans("blueprints.not_found")
+            ]);
 
         return Inertia::render('shop/ProductDetailsPage', [
-            'variants' => $variants,
+            'variants' =>  $provider->variants
         ]);
     }
 
@@ -148,7 +153,7 @@ class BlueprintsController extends Controller
             ]);
 
         return Inertia::render('shop/ProductDetailsPage', [
-            'providers' => $bp->getPrintProviders()
+            'providers' => $bp->print_providers->get()
         ]);
     }
 

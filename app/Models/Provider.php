@@ -15,4 +15,8 @@ class Provider extends Model
         'title',
         'variants'
     ];
+
+    protected $casts = [
+        'variants' => 'json'
+    ];
 }

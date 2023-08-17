@@ -14,6 +14,12 @@ Route::inertia('/policy/refund', 'policy/RefundPage');
 Route::inertia('/policy/privacy', 'policy/PrivacyPage');
 
 
+//Orders
+Route::prefix('orders')->group(function () {
+    Route::get("/", [\App\Http\Controllers\Orders\OrderController::class, 'index']);
+    Route::get("/{id}", [\App\Http\Controllers\Orders\OrderController::class, 'show']);
+});
+
 //Shop
 Route::prefix('shop')->group(function() {
     //Mockups

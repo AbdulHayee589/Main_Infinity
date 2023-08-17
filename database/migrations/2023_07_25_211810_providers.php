@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('blueprint_id');
-            $table->unsignedBigInteger('internal_id');
+            $table->unsignedBigInteger('internal_id')->index();
             $table->text("title");
             $table->json("variants");
             $table->float("price")->default(0);
