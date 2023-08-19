@@ -40,7 +40,7 @@ const ProductShowcase = ({ product, className, ...restProps }) => {
 
   return (
     <div
-      key={product.bp_id}
+      key={product.id}
       className={clsx(
         "relative group grid gap-2 w-full h-full sm:max-w-[320px] lg:max-w-[200px] xl:max-w-[256px] rounded-md overflow-hidden",
         className

@@ -27,7 +27,7 @@ class ShoppingCartController extends Controller
         $cart = CartService::getCart();
 
         # @ddimitrov1108
-        return Inertia::render('public/CartPage')->with([
+        return Inertia::render('shop/CartPage')->with([
            'cart' => $cart
         ]);
     }

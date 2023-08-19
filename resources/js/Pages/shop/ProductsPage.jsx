@@ -8,12 +8,10 @@ import ProductsSearchField from "../../components/product/ProductsSearchField";
 import Dropdown from "../../components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
 import { HiCheck, HiFunnel } from "react-icons/hi2";
-import ProductsPagination from "../../components/product/ProductsPagination";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import ProductShowcase from "../../components/product/ProductShowcase";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import clsx from "clsx";
+import ProductShowcasesListing from "../../components/product/ProductShowcasesListing";
 
 const ProductsPage = () => {
   const { t } = useTranslation();
@@ -108,41 +106,9 @@ const ProductsPage = () => {
             <ProductFilters filters={props.filters} />
           </div>
 
-          {props?.blueprints.data.length > 0 ? (
-            <>
-              <div className="w-full flex flex-col gap-8">
-                <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {props?.blueprints.data.map((blueprint) => (
-                    <ProductShowcase
-                      key={blueprint.bp_id}
-                      product={blueprint}
-                    />
-                  ))}
-                </div>
-                <ProductsPagination
-                  pages={props?.blueprints?.links}
-                />
-              </div>
-            </>
-          ) : (
-            <div className="w-full min-h-[400px] lg:min-h-[500px] grid justify-center items-center">
-              <div>
-                <div className="flex items-center justify-center">
-                  <LazyLoadImage
-                    src="/no-results.webp"
-                    width={102}
-                    height={102}
-                    alt="no-results.webp"
-                    effect="blur"
-                  />
-                </div>
-
-                <div className="text-slate-500 py-12">
-                  Nothing to be found here...
-                </div>
-              </div>
-            </div>
-          )}
+          <ProductShowcasesListing
+            products={props?.blueprints.data}
+          />
         </div>
       </Container>
     </>

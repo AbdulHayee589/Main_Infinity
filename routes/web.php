@@ -30,6 +30,7 @@ Route::prefix('shop')->group(function() {
     //Mockups
     Route::resource("/mockups", \App\Http\Controllers\Orders\MockupController::class);
 
+    Route::inertia("/favourites", 'shop/FavouriteProductsPage');
     //Shopping Cart
     Route::get("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'index']);
     Route::post("/cart", [\App\Http\Controllers\Orders\ShoppingCartController::class, 'store']);

@@ -113,26 +113,33 @@ const HeaderNavigation = () => {
 
           <div className="flex text-2xl items-center gap-3">
             <div className="flex gap-3">
-            <NavLink className="text-slate-500 hover:text-gold-main">
-              <HiOutlineHeart />
-            </NavLink>
+              <NavLink
+                href="/shop/favourites"
+                className="text-slate-500 hover:text-gold-main"
+              >
+                <HiOutlineHeart />
+              </NavLink>
 
-            <NavLink
-              href="/shop/cart"
-              className="text-slate-500 hover:text-gold-main"
-            >
-              <HiShoppingCart />
-            </NavLink>
+              <NavLink
+                href="/shop/cart"
+                className="text-slate-500 hover:text-gold-main"
+              >
+                <HiShoppingCart />
+              </NavLink>
 
-            <button className="h-[24px]" onClick={toggleOpenLngModal}>
-              <LazyLoadImage
-                src={`https://hatscripts.github.io/circle-flags/flags/${t("lngPrefix")}.svg`}
-                width="24"
-                effect="blur"
-              />
-            </button>
+              <button
+                className="h-[24px]"
+                onClick={toggleOpenLngModal}
+              >
+                <LazyLoadImage
+                  src={`https://hatscripts.github.io/circle-flags/flags/${t(
+                    "lngPrefix"
+                  )}.svg`}
+                  width="24"
+                  effect="blur"
+                />
+              </button>
             </div>
-
 
             {user?.id ? (
               <Dropdown
