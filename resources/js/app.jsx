@@ -54,23 +54,9 @@ createInertiaApp({
           draggable
           pauseOnHover
           theme="light"
-          className="hidden md:block"
+          className=""
         />
 
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          limit={1}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          className="md:hidden w-full px-12"
-        />
         <App {...props} />
       </I18nextProvider>
     );

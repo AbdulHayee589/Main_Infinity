@@ -40,7 +40,7 @@ const Button = ({
   return (
     <button
       className={clsx(
-        "transition-all font-semibold border",
+        "font-semibold border",
         className,
         fullWidth ? "w-full" : "w-fit",
         button({ intent: variant, size: size })

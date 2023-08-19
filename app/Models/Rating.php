@@ -34,7 +34,7 @@ class Rating extends Model
     }
 
     public function getUserAttribute() {
-        return $this->user()->name;
+        return $this->user()->first()->name;
     }
 
     public function product() {

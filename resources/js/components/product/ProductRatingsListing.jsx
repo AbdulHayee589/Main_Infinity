@@ -82,7 +82,7 @@ const ProductRatingsListing = ({ openReviewModal, ratings = [] }) => {
                 )}
             </div>
 
-            {displayedRatings.length > 0 ? (
+            {!!displayedRatings.length ? (
                 <div className="max-w-full overflow-auto grid">
                     {displayedRatings.map((rating) => (
                         <ProductRating

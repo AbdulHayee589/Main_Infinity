@@ -111,7 +111,7 @@ const HeaderNavigation = () => {
             )}
           </div>
 
-          <div className="flex text-2xl items-center gap-4">
+          <div className="flex text-2xl items-center gap-3">
             <div className="flex gap-3">
             <NavLink className="text-slate-500 hover:text-gold-main">
               <HiOutlineHeart />
@@ -142,7 +142,7 @@ const HeaderNavigation = () => {
                 hideChevronOnSmallScreens={true}
                 title={
                   <div className="flex items-center gap-2">
-                    <div className="rounded-full grid items-center p-2 lg:p-1.5 text-white font-semibold bg-gold-main">
+                    <div className="rounded-full grid items-center w-8 h-8 text-white font-semibold bg-gold-main">
                       {
                         user.name
                           .split(" ")[0]

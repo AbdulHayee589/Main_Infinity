@@ -1,17 +1,42 @@
 import { useEffect, useState } from "react";
 import { Link } from "@inertiajs/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
-import clsx from "clsx";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import StarRating from "../StarRating";
+import clsx from "clsx";
 
 const ProductShowcase = ({ product, className, ...restProps }) => {
   const [isFav, setIsFav] = useState(false);
 
   const onFavBtnClick = () => {
-    console.log(product.bp_id);
-    setIsFav(!isFav);
+    const favProducts = JSON.parse(
+      localStorage.getItem("fav-products") || "[]"
+    );
+    const newState = !isFav;
+
+    if (newState) {
+      if (favProducts.find((p) => p.id === product.id)) return;
+
+      localStorage.setItem(
+        "fav-products",
+        JSON.stringify([...favProducts, product])
+      );
+    } else {
+      localStorage.setItem(
+        "fav-products",
+        JSON.stringify(favProducts.filter((p) => p.id != product.id))
+      );
+    }
+
+    setIsFav(newState);
   };
+
+  useEffect(() => {
+    const favProducts = JSON.parse(
+      localStorage.getItem("fav-products") || "[]"
+    );
+    if (favProducts.find((p) => p.id === product.id)) setIsFav(true);
+  }, []);
 
   return (
     <div

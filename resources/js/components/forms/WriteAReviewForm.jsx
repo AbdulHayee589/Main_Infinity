@@ -9,19 +9,20 @@ import { router, usePage } from "@inertiajs/react";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 const WriteAReviewForm = ({ closeOnSubmit }) => {
+  const { t } = useTranslation();
   const [formState, setFormState] = useFormState();
   const [rating, setRating] = useState(0);
   const { props } = usePage();
-  console.log(props);
-  const { t } = useTranslation();
 
   const onStarClickHandler = (rate) => setRating(rate);
 
   const onFormSubmitHandler = async (values, { setErrors }) => {
     router.visit(`/shop/products/${props.blueprints.id}/rate`, {
       method: "post",
+      only: ["blueprints"],
       preserveState: true,
       data: {
         rating: rating + 1,
@@ -37,6 +38,7 @@ const WriteAReviewForm = ({ closeOnSubmit }) => {
       },
       onFinish: () => {
         setFormState({ ...formState, loading: false });
+        toast.success("Review submited to product");
         closeOnSubmit();
       },
     });
@@ -118,7 +120,6 @@ const WriteAReviewForm = ({ closeOnSubmit }) => {
               variant="outlined"
               className={"flex justify-center w-full lg:w-fit"}
               disabled={formState.loading}
-              loading={formState.loading}
               onClick={closeOnSubmit}
             >
               {t("forms.writeAReview.cancelBtn")}
