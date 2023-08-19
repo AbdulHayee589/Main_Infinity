@@ -11,12 +11,19 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'printifyId',
         'user_id',
         'bp_id',
         'provider_id',
         'variant_id',
         'shipping_id',
-        'billing_id'
+        'billing_id',
+        'print_areas',
+        'print_details'
+    ];
+    protected $casts = [
+        'print_areas' => 'json',
+        'print_details' => 'json'
     ];
 
     protected $hidden = [
@@ -49,9 +56,7 @@ class Order extends Model
     }
 
     public function getVariantAttribute() {
-        return Arr::where($this->provider()->first()['variants']['variants'], function($value, $key) {
-            return $value['id'] == $this->variant_id;
-        });
+        return $this->provider()->variant($this->variant_id);
     }
 
     public function provider() {

@@ -6,6 +6,7 @@ use App\Models\Mockup;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -18,6 +19,9 @@ class NewMockupRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $user = Auth::user();
+        if(!$user) return false;
+
         return true;
     }
 
@@ -42,8 +46,6 @@ class NewMockupRequest extends FormRequest
     public function createMockup()
     {
         $this->ensureIsNotRateLimited();
-        $user = $this->user();
-        if(!$user) $user = null;
 
         $mockup = Mockup::create([
             "title" => $this->input('title'),

@@ -13,12 +13,17 @@ Route::inertia('/policy/terms-and-conditions', 'policy/TermsAndConditionsPage');
 Route::inertia('/policy/refund', 'policy/RefundPage');
 Route::inertia('/policy/privacy', 'policy/PrivacyPage');
 
+//Media
+Route::prefix('media')->group(function () {
+    Route::post("/", [\App\Http\Controllers\Media\MediaController::class, 'store']);
+})->middleware("auth");
 
 //Orders
 Route::prefix('orders')->group(function () {
     Route::get("/", [\App\Http\Controllers\Orders\OrderController::class, 'index']);
     Route::get("/{id}", [\App\Http\Controllers\Orders\OrderController::class, 'show']);
-});
+    Route::post("/", [\App\Http\Controllers\Orders\OrderController::class, 'store']);
+})->middleware("auth");
 
 //Shop
 Route::prefix('shop')->group(function() {
