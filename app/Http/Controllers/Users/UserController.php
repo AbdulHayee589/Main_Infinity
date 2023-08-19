@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index() {
         $user = Auth::user();
 
-        return Inertia::render('user/ProfilePage', [
+        return Inertia::render('user/ProfileDetailsPage', [
             'user' => $user,
             'mockups' => $user->mockups
         ]);

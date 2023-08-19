@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight, HiPencilSquare } from "react-icons/hi2";
 import Button from "../ui/Button";
-import ProductReview from "./ProductReview";
+import ProductRating from "./ProductRating";
 import { usePage } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 
-const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
+const ProductRatingsListing = ({ openReviewModal, ratings = [] }) => {
     const { t } = useTranslation();
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const { props } = usePage();
+    console.log(ratings);
 
     const handlePreviousClick = () => {
         if (currentPage === 1) return;
@@ -22,26 +23,26 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
     };
 
     useEffect(() => {
-        if (review.length === 0) setTotalPages(0);
-        else setTotalPages(Math.ceil(review.length / 7));
-    }, [review]);
+        if (ratings.length === 0) setTotalPages(0);
+        else setTotalPages(Math.ceil(ratings.length / 7));
+    }, [ratings]);
 
     const indexOfLastItem = currentPage * 7;
     const indexOfFirstItem = indexOfLastItem - 7;
-    let currentData = review?.slice(indexOfFirstItem, indexOfLastItem);
+    let displayedRatings = ratings?.slice(indexOfFirstItem, indexOfLastItem);
 
-    if (currentPage === totalPages && review?.length % 7 !== 0) {
-        currentData = review?.slice(indexOfFirstItem);
+    if (currentPage === totalPages && ratings?.length % 7 !== 0) {
+        displayedRatings = ratings?.slice(indexOfFirstItem);
     }
 
     const prevBtnDisabled = currentPage === 1;
     const nextBtnDisabled =
-        currentPage === totalPages && review?.length % 7 !== 0;
+        currentPage === totalPages && ratings?.length % 7 !== 0;
 
     return (
         <div>
             <h1 className="text-2xl font-bold mb-6">
-                {t("productDetailsPage.reviews.title")}
+                {t("productDetailsPage.ratings.title")}
             </h1>
 
             <div className="flex items-center justify-between">
@@ -51,16 +52,16 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
                         variant="outlined"
                         className="flex justify-center items-center gap-2"
                     >
-                        {t("productDetailsPage.reviews.writeAReviewBtn")}
+                        {t("productDetailsPage.ratings.writeAReviewBtn")}
                         <HiPencilSquare className="text-xl" />
                     </Button>
                 ) : (
                     <span className="text-slate-500">
-                        {t("productDetailsPage.reviews.notLoggedMsg")}
+                        {t("productDetailsPage.ratings.notLoggedMsg")}
                     </span>
                 )}
 
-                {!!review.length && totalPages > 1 && (
+                {!!ratings.length && totalPages > 1 && (
                     <div className="flex justify-end items-center gap-1">
                         <button
                             onClick={handlePreviousClick}
@@ -81,16 +82,22 @@ const ProductReviewsListing = ({ openReviewModal, review = [] }) => {
                 )}
             </div>
 
-            <div className="max-w-full overflow-auto grid">
-                {currentData.map((review) => (
-                    <ProductReview
-                        key={review.id}
-                        review={review}
-                        className="border-b last:border-b-0 border-slate-100"
-                    />
-                ))}
-            </div>
+            {displayedRatings.length > 0 ? (
+                <div className="max-w-full overflow-auto grid">
+                    {displayedRatings.map((rating) => (
+                        <ProductRating
+                            key={rating.id}
+                            rating={rating}
+                            className="border-b last:border-b-0 border-slate-100"
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="flex w-full py-8 items-center text-slate-500">
+                    No ratings to be displayed
+                </div>
+            )}
         </div>
     );
 };
-export default ProductReviewsListing;
+export default ProductRatingsListing;

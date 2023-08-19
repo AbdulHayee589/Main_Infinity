@@ -14,32 +14,30 @@ const WriteAReviewForm = ({ closeOnSubmit }) => {
   const [formState, setFormState] = useFormState();
   const [rating, setRating] = useState(0);
   const { props } = usePage();
+  console.log(props);
   const { t } = useTranslation();
 
   const onStarClickHandler = (rate) => setRating(rate);
 
   const onFormSubmitHandler = async (values, { setErrors }) => {
-    if (!productId) return;
-
-    router.post(`shop/products/${props.blueprints.id}/rate`, {
+    router.visit(`/shop/products/${props.blueprints.id}/rate`, {
       method: "post",
       preserveState: true,
       data: {
         rating: rating + 1,
         message: values.message,
       },
-      onBefore: () => {
+      onBefore: ({ url }) => {
+        console.log(url);
         setFormState({ ...formState, loading: true });
       },
       onError: (errors) => {
         console.log(errors);
         setErrors(errors);
       },
-      onSuccess: () => {
-        closeOnSubmit();
-      },
       onFinish: () => {
         setFormState({ ...formState, loading: false });
+        closeOnSubmit();
       },
     });
   };
@@ -52,9 +50,9 @@ const WriteAReviewForm = ({ closeOnSubmit }) => {
         }}
         validationSchema={Yup.object().shape({
           message: Yup.string()
-              .required(t("forms.errors.fieldRequired"))
-              .max(100, t("forms.errors.maxSymbolsExceeded")),
-      })}
+            .required(t("forms.errors.fieldRequired"))
+            .max(100, t("forms.errors.maxSymbolsExceeded")),
+        })}
         onSubmit={onFormSubmitHandler}
       >
         <Form>

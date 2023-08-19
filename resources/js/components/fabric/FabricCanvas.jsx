@@ -3,6 +3,17 @@ import { fabric } from "fabric";
 import { HiMinus, HiPaintBrush, HiPlus } from "react-icons/hi2";
 import clsx from "clsx";
 
+const resizeImage = (image, width, height) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0, width, height);
+  const resizedImage = new Image();
+  resizedImage.src = canvas.toDataURL();
+  return resizedImage;
+};
+
 const canvasWidth = 600;
 const canvasHeight = 600;
 const canvasBoundary = 0;
@@ -87,10 +98,15 @@ const fabricCanvas = () => {
         img.src = e.target.result;
 
         img.onload = () => {
-          // Create Fabric.js Image object
+          const scaleX = 300 / img.width;
+          const scaleY = 300 / img.height;
+          const scale = Math.min(scaleX, scaleY);
+
           const fabricImage = new fabric.Image(img, {
-            left: 100, // Initial X position
-            top: 100,  // Initial Y position
+            scaleX: scale,
+            scaleY: scale,
+            left: 100,
+            top: 100,
           });
 
           // Add the image to the fabricCanvas
@@ -182,15 +198,11 @@ const fabricCanvas = () => {
   }, []);
 
   return (
-    <div
-      id="dragContainer"
-      className="w-full h-screen relative overflow-hidden bg-slate-100"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onContextMenu={(e) => e.preventDefault()}
-    >
-      <div className="z-30 absolute flex justify-end items-center gap-4 bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-6 py-4">
+    <div className="relative">
+      <div className="hover:cursor-default z-40 absolute top-0 left-0 right-0 px-6 py-4 border-b border-slate-200 bg-white">
+        adsasdas
+      </div>
+      <div className="hover:cursor-default z-40 absolute flex justify-end items-center gap-4 bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-6 py-4">
         <button
           onClick={toggleDrawingMode}
           className={clsx(
@@ -209,6 +221,15 @@ const fabricCanvas = () => {
         </button>
         <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
+   
+    <div
+      id="dragContainer"
+      className="w-full h-screen overflow-hidden bg-slate-100"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       <div
         style={{
           position: "absolute",
@@ -227,6 +248,7 @@ const fabricCanvas = () => {
           height={canvasHeight}
         />
       </div>
+    </div>
     </div>
   );
 };

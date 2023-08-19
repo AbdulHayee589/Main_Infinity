@@ -3,8 +3,9 @@ import StarRating from "../StarRating";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
-const ProductReview = ({ review, className }) => {
+const ProductRating = ({ rating, className }) => {
   const { t } = useTranslation();
+  console.log(rating);
   
   return (
     <div className={clsx("grid gap-4 py-8", className)}>
@@ -19,7 +20,7 @@ const ProductReview = ({ review, className }) => {
               asdadassd
             </span>
             <StarRating
-              rating={review.star_rating}
+              rating={rating.star_rating}
               className="text-lg"
             />
           </div>
@@ -29,20 +30,18 @@ const ProductReview = ({ review, className }) => {
       </div>
 
       <p className="text-black">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum
-        dignissimos ea, est quas et a consectetur eius labore cumque
-        distinctio!
+        {rating.message}
       </p>
 
-      {review.isApproved && (
+      {rating.isApproved && (
         <div className="max-w-fit p-1.5 border border-slate-200 bg-slate-50 rounded-md flex items-center gap-2">
           <div className="text-xl text-gold-main">
             <HiHandThumbUp />
           </div>
-          <span className="text-sm text-slate-500">{t('productDetailsPage.reviews.approved')}</span>
+          <span className="text-sm text-slate-500">{t('productDetailsPage.ratings.approved')}</span>
         </div>
       )}
     </div>
   );
 };
-export default ProductReview;
+export default ProductRating;

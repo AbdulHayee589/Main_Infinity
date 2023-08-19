@@ -5,24 +5,10 @@ import ProductProvidersListing from "../../components/product/ProductProvidersLi
 import ProductImagesAndDetails from "../../components/product/ProductImagesAndDetails";
 import useOpenState from "../../components/hooks/useOpenState";
 import ProductDescription from "../../components/product/ProductDescription";
-import ProductReviewsListing from "../../components/product/ProductReviewsListing";
+import ProductRatingsListing from "../../components/product/ProductRatingsListing";
 import WriteAReviewModal from "../../components/modals/WriteAReviewModal";
 import VariantsInfoModal from "../../components/modals/VariantsInfoModal";
-import { v4 as uuidv4 } from "uuid";
-
-const rats = Array.from({ length: 11 }, (_) => ({
-  id: uuidv4(),
-  isMockup: 0,
-  star_rating: 3,
-  message: "hello",
-  isApproved: 1,
-  created_at: null,
-  updated_at: null,
-  user: {
-    name: "Admin",
-    email: "test@abv.bg",
-  },
-}));
+import { toast } from "react-toastify";
 
 const ProductDetailsPage = () => {
   const { props } = usePage();
@@ -59,6 +45,8 @@ const ProductDetailsPage = () => {
       />
 
       <Container className="flex flex-col gap-8 py-16 pb-24">
+        <button onClick={() => {
+          toast.success('🦄 Wow so easy!')}}>show toast</button>
         <ProductImagesAndDetails product={product} />
 
         <div className="flex flex-col gap-y-12 mt-12">
@@ -69,9 +57,9 @@ const ProductDetailsPage = () => {
 
           <ProductDescription description={product.description} />
 
-          <ProductReviewsListing
+          <ProductRatingsListing
             openReviewModal={onOpenReviewModalHandler}
-            review={rats}
+            ratings={product.ratings}
           />
         </div>
       </Container>

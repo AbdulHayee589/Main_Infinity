@@ -36,7 +36,7 @@ const ProductsPage = () => {
         onClose={closeFiltersSideBar}
       />
 
-      <Container className="flex flex-col gap-8 py-6 pb-24">
+      <Container className="flex flex-col gap-8 py-12">
         <div className="flex items-center justify-between gap-2 w-full">
           <button
             className="lg:hidden p-2 outline-none text-2xl text-slate-500"
@@ -130,14 +130,14 @@ const ProductsPage = () => {
                 <div className="flex items-center justify-center">
                   <LazyLoadImage
                     src="/no-results.webp"
-                    width={128}
-                    height={128}
+                    width={102}
+                    height={102}
                     alt="no-results.webp"
                     effect="blur"
                   />
                 </div>
 
-                <div className="text-slate-500 font-bold py-6">
+                <div className="text-slate-500 py-12">
                   Nothing to be found here...
                 </div>
               </div>

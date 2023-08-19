@@ -102,7 +102,7 @@
       "about": {
         "title": "About"
       },
-      "reviews": {
+      "ratings": {
         "title": "Reviews",
         "approved": "Approved",
         "notLoggedMsg": "Log in to your account to write a review",
