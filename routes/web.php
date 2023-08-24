@@ -47,10 +47,17 @@ Route::prefix('shop')->group(function() {
 
 //User
 Route::prefix('user')->group(function () {
-    Route::get("/", [\App\Http\Controllers\Users\UserController::class, "index"]);
-    Route::get("/addresses", [\App\Http\Controllers\Users\UserController::class, "addresses"]);
-    Route::post("/addresses", [\App\Http\Controllers\Users\UserController::class, "createAddy"]);
-    Route::delete("/addresses/{id}", [\App\Http\Controllers\Users\UserController::class, "removeAddy"]);
+    Route::inertia('/', 'user/ProfileDetailsPage');
+    Route::inertia("/change-password", 'user/ChangePasswordPage');
+    Route::inertia("/payment-methods", 'user/PaymentMethodsPage');
+    Route::inertia('/purchase-history', 'user/PurchaseHistoryPage');
+    Route::inertia('/referal-links', 'user/ReferalLinksPage');
+    Route::inertia('/shipping-addresses', 'user/ShippingAddressesPage');
+    
+    // Route::get("/", [\App\Http\Controllers\Users\UserController::class, "index"]);
+    // Route::get("/addresses", [\App\Http\Controllers\Users\UserController::class, "addresses"]);
+    // Route::post("/addresses", [\App\Http\Controllers\Users\UserController::class, "createAddy"]);
+    // Route::delete("/addresses/{id}", [\App\Http\Controllers\Users\UserController::class, "removeAddy"]);
 
     Route::post("/addresses/shipping/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainShippingAddy"]);
     Route::post("/addresses/billing/{id}", [\App\Http\Controllers\Users\UserController::class, "changeMainBillingAddy"]);

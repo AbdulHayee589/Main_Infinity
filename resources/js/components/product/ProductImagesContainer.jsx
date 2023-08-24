@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { register } from "swiper/element/bundle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css";
 import clsx from "clsx";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const params = {
   centeredSlides: false,

@@ -35,7 +35,7 @@ const ProductRating = ({ rating, className }) => {
       </p>
 
       {!!rating.isApproved && (
-        <div className="max-w-fit p-1.5 border border-slate-200 bg-slate-50 rounded-md flex items-center gap-2">
+        <div className="max-w-fit p-1.5 border border-slate-200 bg-slate-100 rounded-md flex items-center gap-2">
           <div className="text-xl text-gold-main">
             <HiHandThumbUp />
           </div>

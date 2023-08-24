@@ -3,7 +3,7 @@ import Container from "../../components/ui/Container";
 const PrivacyPage = () => {
     return (
         <Container className="text-slate-600 text px-4 py-16">
-            <h4 className="text-xl font-bold text-center pb-8">
+            <h4 className="text-xl font-semibold text-center pb-8">
                 INFINITY CUSTOMS - PRIVACY POLICY
             </h4>
             <p>Last updated: April 2023</p>
@@ -677,7 +677,7 @@ const PrivacyPage = () => {
 
             <br />
 
-            <h2 className="font-bold">Children’s Privacy</h2>
+            <h2 className="font-semibold">Children’s Privacy</h2>
 
             <br />
 
@@ -700,7 +700,7 @@ const PrivacyPage = () => {
 
             <br />
 
-            <h2 className="font-bold">Links to Other Websites</h2>
+            <h2 className="font-semibold">Links to Other Websites</h2>
 
             <br />
 
@@ -718,7 +718,7 @@ const PrivacyPage = () => {
 
             <br />
 
-            <h2 className="font-bold">Changes to this Privacy Policy</h2>
+            <h2 className="font-semibold">Changes to this Privacy Policy</h2>
 
             <br />
 

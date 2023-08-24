@@ -30,10 +30,10 @@ const HowItWorksPage = () => {
     <div className="bg-blue-50">
       <div className="bg-slate-900 px-4 py-16">
         <div className="mx-auto w-fit text-white text-center grid gap-6">
-          <h1 className="font-bold text-xl md:text-2xl capitalize">
+          <h1 className="font-semibold text-xl md:text-2xl capitalize">
             How customizing works?
           </h1>
-          <h1 className="font-bold text-2xl xs:text-3xl sm:text-4xl capitalize">
+          <h1 className="font-semibold text-2xl xs:text-3xl sm:text-4xl capitalize">
             Get your custom products in 3 ease steps
           </h1>
 
@@ -52,7 +52,7 @@ const HowItWorksPage = () => {
       <Container className="px-4 md:px-6 py-16 flex justify-between items-center flex-col-reverse gap-y-12 text-center lg:flex-row lg:text-left lg:gap-x-12">
         <div className="max-w-4xl">
           <div className="grid justify-center lg:justify-start gap-3 mb-10">
-            <h1 className="text-3xl font-bold capitalize text-center">
+            <h1 className="text-3xl font-semibold capitalize text-center">
               What Meets the Standard?
             </h1>
             <div className="flex lg:hidden justify-center items-center">
@@ -93,7 +93,7 @@ const HowItWorksPage = () => {
 
       <Container className="px-4 py-16">
         <div className="grid justify-center gap-3 mb-10 lg:mb-16">
-          <h1 className="text-3xl font-bold capitalize text-center">
+          <h1 className="text-3xl font-semibold capitalize text-center">
             Our steps for you
           </h1>
           <div className="flex justify-center items-center">
@@ -119,7 +119,7 @@ const HowItWorksPage = () => {
                 />
               </div>
               <div>
-                <h1 className="text-base md:text-lg xl:text-xl font-bold capitalize">
+                <h1 className="text-base md:text-lg xl:text-xl font-semibold capitalize">
                   {title}
                 </h1>
                 <p className="text-sm md:text-base text-slate-500">

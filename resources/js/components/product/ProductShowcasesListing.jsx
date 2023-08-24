@@ -3,17 +3,14 @@ import ProductsPagination from "./ProductsPagination";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductShowcasesListing = ({ products = [], showPagination = true }) => {
-  return products.length > 0 ? (
+  return products.data.length > 0 ? (
     <div className="w-full flex flex-col gap-8">
       <div className="max-w-fit ml-auto grid items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((product) => (
-          <ProductShowcase
-            key={product.id}
-            product={product}
-          />
+        {products.data.map((product) => (
+          <ProductShowcase key={product.id} product={product} />
         ))}
       </div>
-      {showPagination && <ProductsPagination pages={products.links} />}
+      {!!showPagination && <ProductsPagination pages={products.links} />}
     </div>
   ) : (
     <div className="w-full min-h-[400px] lg:min-h-[500px] grid justify-center items-center">

@@ -16,7 +16,7 @@ const ProductProvidersListing = ({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">{t("productDetailsPage.providers.title")}</h1>
+      <h1 className="text-2xl font-semibold mb-6">{t("productDetailsPage.providers.title")}</h1>
       <div className="grid gap-6">
         {providers.map((provider) => (
           <ProductProvider

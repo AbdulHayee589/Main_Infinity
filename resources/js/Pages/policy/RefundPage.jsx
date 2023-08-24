@@ -3,7 +3,7 @@ import Container from "../../components/ui/Container";
 const RefundPage = () => {
     return (
         <Container className="text-slate-600 text px-4 py-16">
-            <h4 className="text-xl font-bold text-center pb-8">
+            <h4 className="text-xl font-semibold text-center pb-8">
                 INFINITY CUSTOMS - REFUND POLICY
             </h4>
             <p>Last updated: April 2023</p>

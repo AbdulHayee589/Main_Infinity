@@ -1,6 +1,6 @@
-const BillingHistoryPage = () => {
+const PurchaseHistoryPage = () => {
   return (
-    <div>BillingHistoryPage</div>
+    <div>PurchaseHistoryPage</div>
   )
 }
-export default BillingHistoryPage
+export default PurchaseHistoryPage

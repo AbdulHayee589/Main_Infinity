@@ -6,7 +6,7 @@ const ProductDescription = ({ description = "" }) => {
 
   return (
     <div id="description">
-      <h1 className="text-2xl font-bold mb-6">
+      <h1 className="text-2xl font-semibold mb-6">
         {t("productDetailsPage.about.title")}
       </h1>
 

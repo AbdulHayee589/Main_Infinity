@@ -2,13 +2,14 @@ import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
-import AccountLayout from "./layouts/AccountLayout";
+import UserLayout from "./layouts/UserLayout";
 import EditorLayout from "./layouts/EditorLayout";
-import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import LandingLayout from "./layouts/LandingLayout";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 createInertiaApp({
   remember: (key, value) => {
@@ -23,11 +24,11 @@ createInertiaApp({
     const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
     let page = pages[`./Pages/${name}.jsx`];
 
-    if (name.startsWith("user/"))
+    if (name.includes("HomePage"))
+      page.default.layout = (page) => <LandingLayout children={page} />;
+    else if (name.startsWith("user/"))
       page.default.layout = (page) => (
-        <AppLayout>
-          <AccountLayout children={page} />
-        </AppLayout>
+        <AppLayout children={<UserLayout children={page} />} />
       );
     else if (name.startsWith("auth/"))
       page.default.layout = (page) => <AuthLayout children={page} />;

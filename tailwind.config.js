@@ -10,7 +10,7 @@ module.exports = {
             center: true,
             padding: {
                 DEFAULT: "1rem",
-                xs: "1.5rem"
+                xs: "1.5rem",
             },
         },
         extend: {
@@ -21,14 +21,14 @@ module.exports = {
             colors: {
                 black: "#17262B",
                 gold: {
-                    light: "#FCDD5D",
-                    main: "#FCD535",
-                    dark: "#F0B90B",
+                    light: "#f5c52d",
+                    main: "#F0B90B",
+                    dark: "#ddab0a",
                 },
                 info: {
                     light: "#55a9e1",
                     main: "#3498db",
-                    dark: "#268fd6"
+                    dark: "#268fd6",
                 },
                 success: {
                     light: "#08e20e",

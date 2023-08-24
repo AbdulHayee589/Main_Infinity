@@ -20,7 +20,7 @@ const LanguageSelectionModal = ({ open, setOpen }) => {
         {langs.map(({ id, name, prefix, src }) => (
           <button
             key={id}
-            className="p-4 flex items-center gap-3  transition-all rounded-md bg-slate-50 hover:bg-slate-100"
+            className="p-4 flex items-center gap-3  transition-all rounded-md bg-slate-100 hover:bg-slate-100"
             onClick={() => changeLanguageHandler(prefix)}
           >
             <LazyLoadImage

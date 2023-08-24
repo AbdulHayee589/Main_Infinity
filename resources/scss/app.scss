@@ -4,7 +4,29 @@
 @tailwind utilities;
 
 body {
-  font-family: "Inter", Helvetica, sans-serif;
-  color: #17262B;
-  scroll-behavior: smooth;
+    font-family: "Inter", Helvetica, sans-serif;
+    color: #17262b;
+    scroll-behavior: smooth;
+}
+
+.landing-page-gr {
+    background: hsla(221, 44%, 60%, 1);
+
+    background: radial-gradient(
+        circle,
+        hsla(221, 44%, 60%, 1) 0%,
+        hsla(221, 44%, 29%, 1) 70%
+    );
+
+    background: -moz-radial-gradient(
+        circle,
+        hsla(221, 44%, 60%, 1) 0%,
+        hsla(221, 44%, 29%, 1) 70%
+    );
+
+    background: -webkit-radial-gradient(
+        circle,
+        hsla(221, 44%, 60%, 1) 0%,
+        hsla(221, 44%, 29%, 1) 70%
+    );
 }
