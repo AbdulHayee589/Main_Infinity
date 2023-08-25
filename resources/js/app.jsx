@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import LandingLayout from "./layouts/LandingLayout";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import Wrapper from "./Wrapper";
 
 createInertiaApp({
   remember: (key, value) => {
@@ -57,8 +58,9 @@ createInertiaApp({
           theme="light"
           className=""
         />
-
-        <App {...props} />
+        <Wrapper>
+          <App {...props} />
+        </Wrapper>
       </I18nextProvider>
     );
   },

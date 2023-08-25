@@ -1,5 +1,5 @@
-import { usePage } from "@inertiajs/react";
-import { useState } from "react";
+import { router, usePage } from "@inertiajs/react";
+import { useContext, useState } from "react";
 import Container from "../../components/ui/Container";
 import ProductProvidersListing from "../../components/product/ProductProvidersListing";
 import ProductImagesAndDetails from "../../components/product/ProductImagesAndDetails";
@@ -8,9 +8,11 @@ import ProductDescription from "../../components/product/ProductDescription";
 import ProductRatingsListing from "../../components/product/ProductRatingsListing";
 import WriteAReviewModal from "../../components/modals/WriteAReviewModal";
 import VariantsInfoModal from "../../components/modals/VariantsInfoModal";
+import { CartContext } from "../../Wrapper";
 
 const ProductDetailsPage = () => {
   const { props } = usePage();
+  const { cart, setCart } = useContext(CartContext);
   const { open: openReviewModal, setOpen: setOpenReviewModal } =
     useOpenState(false);
   const { open: openVariantsModal, setOpen: setOpenVariantsModal } =
@@ -27,8 +29,13 @@ const ProductDetailsPage = () => {
     setOpenReviewModal(true);
   };
 
-  console.log(props);
   const { blueprints: product } = props;
+
+  const addtocard = () => {
+    if (cart.find((p) => p.id === product.id)) return;
+
+    setCart([...cart, { ...product, quantity: 1 }]);
+  };
 
   return (
     <>
@@ -44,6 +51,7 @@ const ProductDetailsPage = () => {
       />
 
       <Container className="flex flex-col gap-8 py-16 pb-24">
+        <button onClick={addtocard}>Add to cart</button>
         <ProductImagesAndDetails product={product} />
 
         <div className="flex flex-col gap-y-12 mt-12">
