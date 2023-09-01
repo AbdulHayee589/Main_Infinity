@@ -44,7 +44,7 @@ const ProductProvider = ({
   }, [provider]);
 
   return (
-    <div className="flex flex-col-reverse lg:flex-col bg-slate-100 rounded-md border border-slate-200">
+    <div className="flex flex-col-reverse lg:flex-col bg-slate-50 rounded-md border border-slate-200">
       <div className="flex flex-col sm:flex-row lg:justify-end gap-2 items-center py-3 px-4 md:px-6 lg:border-b border-slate-200">
         <Button
           onClick={() => onClickHandler(provider)}

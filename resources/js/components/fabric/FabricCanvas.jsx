@@ -1,37 +1,27 @@
 import { useRef, useState, useEffect } from "react";
 import { fabric } from "fabric";
-import { HiMinus, HiPaintBrush, HiPlus } from "react-icons/hi2";
 import clsx from "clsx";
-
-const resizeImage = (image, width, height) => {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(image, 0, 0, width, height);
-  const resizedImage = new Image();
-  resizedImage.src = canvas.toDataURL();
-  return resizedImage;
-};
+import { HiMinus, HiPaintBrush, HiPlus } from "react-icons/hi2";
 
 const canvasWidth = 600;
 const canvasHeight = 600;
 const canvasBoundary = 0;
-const maxScale = 3;
+const maxScale = 2;
 const minScale = 0.5;
 
-const fabricCanvas = () => {
+const FabricCanvas = () => {
   const canvasRef = useRef(null);
   const imgInputRef = useRef(null);
   const selectedObjectRef = useRef(null);
 
   const [fabricCanvas, setFabricCanvas] = useState(null);
   const [windowScale, setWindowScale] = useState(1);
-  const [isDrawingMode, setIsDrawingMode] = useState(false);
+
   const [isDragging, setIsDragging] = useState(false);
-  const [windowPosition, setWindowPosition] = useState({ x: 0, y: 0 });
-  const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
+  const [isDrawingMode, setIsDrawingMode] = useState(false);
+
   const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
+  const [windowPosition, setWindowPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseDown = (event) => {
     if (event.button === 2) {
@@ -71,10 +61,11 @@ const fabricCanvas = () => {
     }
   };
 
+  const toggleDrawingMode = () => setIsDrawingMode(!isDrawingMode);
+
   const handleZoom = (factor) => {
     const newScale = windowScale + factor;
 
-    // Constrain scaling to avoid exceeding reasonable values
     if (newScale > maxScale) {
       setWindowScale(maxScale);
     } else if (newScale < minScale) {
@@ -82,10 +73,6 @@ const fabricCanvas = () => {
     } else {
       setWindowScale(newScale);
     }
-  };
-
-  const toggleDrawingMode = () => {
-    setIsDrawingMode(!isDrawingMode);
   };
 
   const handleImageUpload = (event) => {
@@ -96,6 +83,7 @@ const fabricCanvas = () => {
       reader.onload = (e) => {
         const img = new Image();
         img.src = e.target.result;
+        img.classList.add("z-40");
 
         img.onload = () => {
           const scaleX = 300 / img.width;
@@ -127,129 +115,79 @@ const fabricCanvas = () => {
   }, [fabricCanvas, isDrawingMode]);
 
   useEffect(() => {
-    document.querySelector("#dragContainer").style.cursor = isDragging
-      ? "grab"
-      : "default";
-  }, [isDragging]);
-
-  useEffect(() => {
     const fabricCanvas = new fabric.Canvas(canvasRef.current, {
-      selection: true, 
-  controlsAboveOverlay: true,
+      selection: true,
+      controlsAboveOverlay: true,
+      backgroundColor: "#fff",
     });
 
     fabricCanvas.freeDrawingBrush.width = 1;
     setFabricCanvas(fabricCanvas);
-
-    // fabricCanvas.on("object:moving", (e) => {
-    //   const object = e.target;
-
-    //   // Constrain movement within the fabricCanvas
-    //   const canvasWidth = fabricCanvas.width;
-    //   const canvasHeight = fabricCanvas.height;
-
-    //   const maxX = canvasWidth - object.getScaledWidth();
-    //   const maxY = canvasHeight - object.getScaledHeight();
-
-    //   if (object.left < 0) {
-    //     object.left = 0;
-    //   } else if (object.left > maxX) {
-    //     object.left = maxX;
-    //   }
-
-    //   if (object.top < 0) {
-    //     object.top = 0;
-    //   } else if (object.top > maxY) {
-    //     object.top = maxY;
-    //   }
-    // });
-
-    // fabricCanvas.on("object:selected", (e) => {
-    //   e.target.set({
-    //     lockMovementX: false,
-    //     lockMovementY: false,
-    //   });
-    // });
-
-    // fabricCanvas.on("selection:cleared", () => {
-    //   fabricCanvas.getObjects().forEach((obj) => {
-    //     obj.set({
-    //       lockMovementX: false,
-    //       lockMovementY: false,
-    //     });
-    //   });
-    // });
 
     return () => {
       fabricCanvas.dispose();
     };
   }, []);
 
-  useEffect(() => {
-    // Calculate initial window position to center the fabricCanvas
-    const centerX = (window.innerWidth - canvasBoundary) / 2;
-    const centerY = (window.innerHeight - canvasBoundary) / 2;
-    setWindowPosition({ x: centerX, y: centerY });
-
-    // Calculate initial fabricCanvas position to center it inside the window
-    const canvasX = (canvasBoundary - canvasWidth * windowScale) / 2;
-    const canvasY = (canvasBoundary - canvasHeight * windowScale) / 2;
-    setCanvasPosition({ x: canvasX, y: canvasY });
-  }, []);
-
   return (
-    <div className="relative">
-      <div className="hover:cursor-default z-40 absolute top-0 left-0 right-0 px-6 py-4 border-b border-slate-200 bg-white">
-        adsasdas
-      </div>
-      <div className="hover:cursor-default z-40 absolute flex justify-end items-center gap-4 bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-6 py-4">
-        <button
-          onClick={toggleDrawingMode}
-          className={clsx(
-            "text-3xl",
-            isDrawingMode && "text-gold-main"
-          )}
-        >
-          <HiPaintBrush />
-        </button>
-
-        <button onClick={() => handleZoom(-0.25)} className="text-3xl">
-          <HiMinus />
-        </button>
-        <button onClick={() => handleZoom(0.25)} className="text-3xl">
-          <HiPlus />
-        </button>
-        <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageUpload} />
-      </div>
-   
     <div
-      id="dragContainer"
-      className="w-full h-screen overflow-hidden bg-slate-100"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
+      className="w-full h-full grid grid-cols-5"
       onContextMenu={(e) => e.preventDefault()}
     >
-      <div
-        style={{
-          position: "absolute",
-          left: canvasPosition.x,
-          top: canvasPosition.y,
-          width: canvasWidth,
-          height: canvasHeight,
-          transform: `translate(${windowPosition.x}px, ${windowPosition.y}px) scale(${windowScale})`,
-          transition: isDragging ? "none" : "transform 0.2s",
-        }}
-      >
-        <canvas
-          className="border-dashed border-4 border-black"
-          ref={canvasRef}
-          width={canvasWidth}
-          height={canvasHeight}
-        />
+      <div className="relative col-span-4 bg-slate-100">
+        <div className="min-w-full min-h-screen grid items-center justify-center overflow-auto">
+          <div className="absolute flex gap-4 bottom-6 right-4 z-20 bg-white shadow-xl p-2">
+            <input
+              ref={imgInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+            <button
+              onClick={() => {
+                fabricCanvas.setBackgroundColor("#232323");
+              }}
+            >
+              asda
+            </button>
+            <button
+              onClick={() => handleZoom(-0.25)}
+              className="text-2xl"
+            >
+              <HiMinus />
+            </button>
+            <span>{windowScale}%</span>
+            <button
+              onClick={() => handleZoom(0.25)}
+              className="text-2xl"
+            >
+              <HiPlus />
+            </button>
+          </div>
+
+          <div
+            className="transition-all"
+            style={{
+              transform: `scale(${windowScale})`,
+              transformOrigin: "center",
+            }}
+          >
+            <canvas
+              className="border-dashed border-4 border-black"
+              ref={canvasRef}
+              width={canvasWidth}
+              height={canvasHeight}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+      <div
+        id="sidebar"
+        className="h-screen col-span-1 border-4 border-red-500"
+      >
+        asdada
+      </div>
     </div>
   );
 };
-export default fabricCanvas;
+export default FabricCanvas;
