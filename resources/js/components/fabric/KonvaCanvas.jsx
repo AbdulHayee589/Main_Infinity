@@ -3,6 +3,7 @@ import { Stage, Layer, Image } from "react-konva";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 import KonvaShape from "./KonvaShape";
 import { v4 as uuidv4 } from "uuid";
+import KonvaImage from "./KonvaImage";
 
 const canvasWidth = 600;
 const canvasHeight = 600;
@@ -15,7 +16,7 @@ const initialRectangles = [
     y: 10,
     width: 100,
     height: 100,
-    fill: 'red',
+    fill: "red",
     id: uuidv4(),
   },
   {
@@ -23,7 +24,7 @@ const initialRectangles = [
     y: 150,
     width: 100,
     height: 100,
-    fill: 'green',
+    fill: "green",
     id: uuidv4(),
   },
 ];
@@ -161,7 +162,9 @@ const KonvaCanvas = () => {
                     onChange={(newAttrs) => {
                       console.log(newAttrs);
                       const shapesCopy = shapes;
-                      const objIndex = shapes.findIndex(o => o.id === shape.id);
+                      const objIndex = shapes.findIndex(
+                        (o) => o.id === shape.id
+                      );
                       shapesCopy[objIndex] = newAttrs;
                       setShapes(shapesCopy);
                     }}
@@ -169,17 +172,22 @@ const KonvaCanvas = () => {
                 ))}
 
                 {images.map((img) => (
-                  <Image
+                  <KonvaImage
                     key={img.id}
-                    image={img.src}
-                    width={img.width}
-                    height={img.height}
-                    draggable
-                    onClick={() => {
-                      alert(img.id);
+                    shapeProps={img}
+                    isSelected={img.id === selectedObject}
+                    onSelect={() => {
+                      setSelectedObject(img.id);
                     }}
-                    x={0}
-                    y={0}
+                    onChange={(newAttrs) => {
+                      console.log(newAttrs);
+                      const imagesCopy = images;
+                      const objIndex = images.findIndex(
+                        (o) => o.id === img.id
+                      );
+                      imagesCopy[objIndex] = newAttrs;
+                      setImages(imagesCopy);
+                    }}
                   />
                 ))}
               </Layer>

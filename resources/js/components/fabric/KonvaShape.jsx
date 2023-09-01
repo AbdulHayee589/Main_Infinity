@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import { Rect, Transformer } from "react-konva";
 
 const KonvaShape = ({ shapeProps, isSelected, onSelect, onChange }) => {
-  const shapeRef = useRef();
-  const trRef = useRef();
+  const shapeRef = useRef(null);
+  const trRef = useRef(null);
 
   useEffect(() => {
     if (isSelected) {
+      shapeRef.current.moveToTop();
       trRef.current.nodes([shapeRef.current]);
       trRef.current.getLayer().batchDraw();
     }
@@ -16,11 +17,11 @@ const KonvaShape = ({ shapeProps, isSelected, onSelect, onChange }) => {
     <>
       <Rect
         id={shapeProps.id}
+        ref={shapeRef}
         width={shapeProps.width}
         height={shapeProps.height}
         onClick={onSelect}
         onTap={onSelect}
-        ref={shapeRef}
         {...shapeProps}
         draggable
         onDragEnd={(e) => {
@@ -55,13 +56,7 @@ const KonvaShape = ({ shapeProps, isSelected, onSelect, onChange }) => {
       {isSelected && (
         <Transformer
           ref={trRef}
-          boundBoxFunc={(oldBox, newBox) => {
-            // limit resize
-            // if (newBox.width < 5 || newBox.height < 5) {
-            //   return oldBox;
-            // }
-            return newBox;
-          }}
+          boundBoxFunc={(oldBox, newBox) => newBox}
           rotateEnabled
           enabledAnchors={[
             "top-left",

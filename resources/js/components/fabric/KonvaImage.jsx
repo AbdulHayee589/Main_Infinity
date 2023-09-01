@@ -1,0 +1,74 @@
+import { useEffect, useRef } from "react";
+import { Image, Transformer } from "react-konva";
+
+const KonvaImage = ({ shapeProps, isSelected, onSelect, onChange }) => {
+  const shapeRef = useRef(null);
+  const trRef = useRef(null);
+
+  useEffect(() => {
+    if (isSelected) {
+      shapeRef.current.moveToTop();
+      trRef.current.nodes([shapeRef.current]);
+      trRef.current.getLayer().batchDraw();
+    }
+  }, [isSelected]);
+
+  return (
+    <>
+      <Image
+        id={shapeProps.id}
+        ref={shapeRef}
+        draggable
+        x={0}
+        y={0}
+        image={shapeProps.src}
+        width={shapeProps.width}
+        height={shapeProps.height}
+        onClick={onSelect}
+        onTap={onSelect}
+        onDragEnd={(e) => {
+          onChange({
+            ...shapeProps,
+            x: e.target.x(),
+            y: e.target.y(),
+          });
+        }}
+        onTransformEnd={(e) => {
+          // transformer is changing scale of the node
+          // and NOT its width or height
+          // but in the store we have only width and height
+          // to match the data better we will reset scale on transform end
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
+
+          // // we will reset it back
+          // node.scaleX(1);
+          // node.scaleY(1);
+          onChange({
+            ...shapeProps,
+            x: node.x(),
+            y: node.y(),
+            // set minimal value
+            width: Math.max(5, node.width() * scaleX),
+            height: Math.max(node.height() * scaleY),
+          });
+        }}
+      />
+      {isSelected && (
+        <Transformer
+          ref={trRef}
+          boundBoxFunc={(oldBox, newBox) => newBox}
+          rotateEnabled
+          enabledAnchors={[
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right",
+          ]}
+        />
+      )}
+    </>
+  );
+};
+export default KonvaImage;
