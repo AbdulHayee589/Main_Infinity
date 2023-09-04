@@ -1,5 +1,4 @@
-import FabricCanvas from "../../../components/fabric/FabricCanvas";
-import KonvaCanvas from "../../../components/fabric/KonvaCanvas";
+import KonvaCanvas from "../../../components/konva/KonvaCanvas";
 
 const ProductEditorPage = ({ children }) => {
   return (

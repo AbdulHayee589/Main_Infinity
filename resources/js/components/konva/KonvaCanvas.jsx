@@ -1,37 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { Stage, Layer, Image } from "react-konva";
-import { HiMinus, HiPlus } from "react-icons/hi2";
-import KonvaShape from "./KonvaShape";
-import { v4 as uuidv4 } from "uuid";
-import KonvaImage from "./KonvaImage";
+import { Stage, Layer } from "react-konva";
+import { HiMinus, HiPlus, HiTrash } from "react-icons/hi2";
+import {
+  addNewCircle,
+  addNewImage,
+  addNewLine,
+  addNewRect,
+} from "./elements/elements";
+import { BiRectangle, BiCircle } from "react-icons/bi";
+import KonvaObjectsMap from "./KonvaObjectsMap";
+import { FaFileExport } from "react-icons/fa";
+import { AiOutlineEnter } from "react-icons/ai";
 
 const canvasWidth = 600;
 const canvasHeight = 600;
 const maxScale = 2;
 const minScale = 0.5;
 
-const initialRectangles = [
-  {
-    x: 10,
-    y: 10,
-    width: 100,
-    height: 100,
-    fill: "red",
-    id: uuidv4(),
-  },
-  {
-    x: 150,
-    y: 150,
-    width: 100,
-    height: 100,
-    fill: "green",
-    id: uuidv4(),
-  },
-];
-
 const KonvaCanvas = () => {
   const imgInputRef = useRef(null);
-  const trRef = useRef(null);
+  const stageRef = useRef(null);
 
   const [canvas, setCanvas] = useState({
     bgColor: "#fff",
@@ -40,17 +28,45 @@ const KonvaCanvas = () => {
     scale: 1,
   });
 
-  const [images, setImages] = useState([]);
-  const [shapes, setShapes] = useState(initialRectangles);
-  const [texts, setTexts] = useState([]);
+  const [konvaObjects, setKonvaObjects] = useState([]);
+  const [selectedKonvaObject, setSelectedKonvaObject] = useState(null);
 
-  const [selectedObject, setSelectedObject] = useState(null);
+  const handleExport = () => {
+    setSelectedKonvaObject(null);
+
+    setTimeout(() => {
+      const uri = stageRef.current.toDataURL();
+      console.log(uri);
+
+      var link = document.createElement("a");
+      link.download = "konva-canvas.png";
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 1);
+  };
+
+  const handleDeleteSelectedObject = () => {
+    setKonvaObjects(
+      konvaObjects.filter((o) => o.id != selectedKonvaObject)
+    );
+    setSelectedKonvaObject(null);
+  };
+
+  const handleKonvaObjectChange = (obj, newAttrs) => {
+    console.log(newAttrs);
+    const objsCopy = konvaObjects;
+    const objIndex = konvaObjects.findIndex((o) => o.id === obj.id);
+    objsCopy[objIndex] = newAttrs;
+    setKonvaObjects(objsCopy);
+  };
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
-      setSelectedObject(null);
+      setSelectedKonvaObject(null);
     }
   };
 
@@ -65,6 +81,19 @@ const KonvaCanvas = () => {
     });
   };
 
+  const handleAddNewRect = () => {
+    const rect = addNewRect();
+    setKonvaObjects([...konvaObjects, rect]);
+  };
+  const handleAddNewCircle = () => {
+    const circle = addNewCircle();
+    setKonvaObjects([...konvaObjects, circle]);
+  };
+  const handleAddNewLine = () => {
+    const line = addNewLine();
+    setKonvaObjects([...konvaObjects, line]);
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
@@ -76,15 +105,8 @@ const KonvaCanvas = () => {
         image.src = e.target.result;
 
         image.onload = () => {
-          setImages([
-            ...images,
-            {
-              id: uuidv4(),
-              src: image,
-              width: image.width,
-              height: image.height,
-            },
-          ]);
+          const img = addNewImage(image);
+          setKonvaObjects([...konvaObjects, img]);
         };
       };
 
@@ -96,6 +118,10 @@ const KonvaCanvas = () => {
   useEffect(() => {
     console.log(canvas);
   }, [canvas]);
+
+  useEffect(() => {
+    console.log(konvaObjects);
+  }, [konvaObjects]);
 
   return (
     <div
@@ -112,12 +138,33 @@ const KonvaCanvas = () => {
               onChange={handleImageUpload}
             />
             <button
+              onClick={handleDeleteSelectedObject}
+              disabled={!!!selectedKonvaObject}
+            >
+              <HiTrash />
+            </button>
+            <button onClick={handleExport}>
+              <FaFileExport />
+            </button>
+            <button onClick={handleAddNewRect}>
+              <BiRectangle />
+            </button>
+
+            <button onClick={handleAddNewCircle}>
+              <BiCircle />
+            </button>
+            <button onClick={handleAddNewLine}>
+              <AiOutlineEnter />
+            </button>
+
+            <button
               onClick={() => {
                 setCanvas({ ...canvas, bgColor: "#232323" });
               }}
             >
               asda
             </button>
+
             <button
               onClick={() => handleZoom(-0.25)}
               className="text-2xl"
@@ -141,6 +188,7 @@ const KonvaCanvas = () => {
             }}
           >
             <Stage
+              ref={stageRef}
               width={canvas.width}
               height={canvas.height}
               style={{
@@ -151,45 +199,16 @@ const KonvaCanvas = () => {
               onTouchStart={checkDeselect}
             >
               <Layer>
-                {shapes.map((shape) => (
-                  <KonvaShape
-                    key={shape.id}
-                    shapeProps={shape}
-                    isSelected={shape.id === selectedObject}
-                    onSelect={() => {
-                      setSelectedObject(shape.id);
-                    }}
-                    onChange={(newAttrs) => {
-                      console.log(newAttrs);
-                      const shapesCopy = shapes;
-                      const objIndex = shapes.findIndex(
-                        (o) => o.id === shape.id
-                      );
-                      shapesCopy[objIndex] = newAttrs;
-                      setShapes(shapesCopy);
-                    }}
-                  />
-                ))}
-
-                {images.map((img) => (
-                  <KonvaImage
-                    key={img.id}
-                    shapeProps={img}
-                    isSelected={img.id === selectedObject}
-                    onSelect={() => {
-                      setSelectedObject(img.id);
-                    }}
-                    onChange={(newAttrs) => {
-                      console.log(newAttrs);
-                      const imagesCopy = images;
-                      const objIndex = images.findIndex(
-                        (o) => o.id === img.id
-                      );
-                      imagesCopy[objIndex] = newAttrs;
-                      setImages(imagesCopy);
-                    }}
-                  />
-                ))}
+                <KonvaObjectsMap
+                  konvaObjects={konvaObjects}
+                  selectedKonvaObject={selectedKonvaObject}
+                  setSelectedKonvaObject={
+                    setSelectedKonvaObject
+                  }
+                  handleKonvaObjectChange={
+                    handleKonvaObjectChange
+                  }
+                />
               </Layer>
             </Stage>
           </div>
