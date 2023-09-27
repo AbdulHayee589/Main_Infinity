@@ -16,6 +16,7 @@ composer install
 ./vendor/bin/sail php artisan migrate:fresh
 ./vendor/bin/sail php artisan db:seed
 ./vendor/bin/sail php artisan app:fresh-blueprints
+./vendor/bin/sail php artisan app:fresh-providers
 ```
 
 ```bash
